@@ -54,6 +54,18 @@ body
   border-right 1px solid $borderColor
   overflow-y auto
 
+.sidebar::-webkit-scrollbar {
+  display: none;
+  width: 5px;
+}
+.sidebar:hover::-webkit-scrollbar {
+  display: block;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background-color: #ddd;
+}
+
 .content:not(.custom)
   @extend $wrapper
   > *:first-child

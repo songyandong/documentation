@@ -46,6 +46,11 @@ module.exports = {
      '/Cli_Reference',
      '/PPIO_SDK',
     ],
-    sidebarDepth: 0
+    sidebarDepth: 0,
+    lastUpdated: 'last modified',
+    repo: 'PPIO/documentation',
+    repoLabel: 'github',
+    editLinks: true,
+    editLinkText: 'Edit this page on GitHub'
   }
 }
