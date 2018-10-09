@@ -7,9 +7,9 @@ In order to better understand PPIO, you better know that PPIO is similar to the 
 
 PPIO's unique decentralized file system prevents unauthorized access and ensures that all the data can be stored in a secure and private manner.
 
-PPIO is designed from the ground up to perform efficiently on a global scale, by leveraging the [founding team](./Extra/About_PPLabs.md)'s experience from designing and running decentralized network with hundreds of millions of users. PPIO meets the storage needs of both today's Internet businesses and services, and the emerging decentralized applications (DApps).
+PPIO is designed from the ground up to perform efficiently on a global scale, by leveraging the [founding team](./Others/About_PPLabs.md)'s experience from designing and running decentralized network with hundreds of millions of users. PPIO meets the storage needs of both today's Internet businesses and services, and the emerging decentralized applications (DApps).
 
-If you are interested in why we want to design PPIO, check out the [Why Do We Design PPIO](./Extra/Why_Do_Want_To_Design_PPIO.md)
+If you are interested in why we want to design PPIO, check out the [Why Do We Design PPIO](./Others/Why_Do_Want_To_Design_PPIO.md)
 
 ## Installation
 
