@@ -1,6 +1,6 @@
 {
   "language": "en",
-  "plugins": ["mathjax", "expandable-chapters", "-sharing", "-fontsettings", "search"],
+  "plugins": ["mathjax", "expandable-chapters", "theme-vuejs-2", "-sharing", "-fontsettings", "search"],
   "styles": {
     "website": "styles/website.css"
   }
