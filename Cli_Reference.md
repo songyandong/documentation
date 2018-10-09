@@ -99,7 +99,6 @@ GLOBAL OPTIONS:
    --help, -h  show help
 ```
 
----------------
 ## ppio config
 
 - **Description**:
