@@ -18,8 +18,8 @@
     - [Incentive Layer](./System_Design/Architecture/5_Incentive_Layer.md)
     - [Interface Layer](./System_Design/Architecture/6_Interface_Layer.md)
     - [Application Layer](./System_Design/Architecture/7_Application_Layer.md)
-- [Command Line Tool]()
-- [API Reference]()
+- Command Line Tool
+- API Reference
 - Extra
  - [About PPLabs](./Extra/About_PPLabs.md)
  - [Why Do We Design PPIO](./Extra/Why_Do_Want_To_Design_PPIO.md)

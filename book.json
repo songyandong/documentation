@@ -1,7 +1,0 @@
-{
-  "language": "en",
-  "plugins": ["mathjax", "expandable-chapters", "-sharing", "-fontsettings", "search"],
-  "styles": {
-    "website": "styles/website.css"
-  }
-}

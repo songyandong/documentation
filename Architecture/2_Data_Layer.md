@@ -2,7 +2,7 @@
 
 The next above the physical layer is the data layer. As shown below, there are three types of data structures used in PPIO’s storage network:
 
-![The data structures in the Data layer](../../Images/datalayer.png)
+![The data structures in the Data layer](../Images/datalayer.png)
 <p style="font-size:14px; text-align:center;">The data structures in the Data layer</p>
 
 - **Plot/Tile: the storage capacity unit**

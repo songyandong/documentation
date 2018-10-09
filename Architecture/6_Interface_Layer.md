@@ -19,7 +19,7 @@ PPIO can support a large number of applications running concurrently in its stor
 	- Public, all users can access the object.
 - App developers are responsible of the content of the files in their applications.
 
-![Diagram of App sandbox](../../Images/object_encrypt.png)
+![Diagram of App sandbox](../Images/object_encrypt.png)
 <p style="font-size:14px; text-align:center;">Diagram of App sandbox</p>
 
 ## API

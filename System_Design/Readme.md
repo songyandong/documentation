@@ -1,4 +1,4 @@
-# Introduction of PPIO
+# System Design of PPIO
 
 After a preliminary understanding of PPIO, the technologies and implementation behind PPIO's decentralized file system will be discussed in the following.
 

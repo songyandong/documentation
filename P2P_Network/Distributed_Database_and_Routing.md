@@ -6,7 +6,7 @@ In a DHT, each piece of data is bundled with a unique key into a key-value pair.
 There are many different implementations of DHT, some of the commonly used are Chord, Pastry, Tapestry, Dynamo, and Kademlia. PPIO uses Kademlia, so do many other well known P2P projects like PPLive, BitTorrent, eMule, etc.
 
 Kademlia algorithm assigns a unique ID to each participating node. The node ID is also used to calculate distance between nodes and locate key-value pairs. To look up a specific key-value pair in the network, the algorithm steps through the network path and finds nodes closer to the key on every step, until it reaches the node that stores the key-pair. In order to support the lookup, each node needs to store information of a group of other nodes based their distance to it. Such distance is calculated by taking an XOR operation on two Node IDs. Node IDs have the same bit length as the keys used in key-value pairs. Therefore, the distance between node IDs and keys can be calculated in the same way. Since the XOR distance does not take actual geographic distance into account, it is possible for two nodes to reside next to one another in the network even though one of them may be in the United Kingdom, while the other is in the United States.
-![Lookup in Kademlia DHT](../../Images/kad_find_example.png)
+![Lookup in Kademlia DHT](../Images/kad_find_example.png)
 <p style="font-size:14px; text-align:center;">Lookup in Kademlia DHT</p>
 
 PPIO also adopts an extension of Kademlia - S/Kademlia to improve the security of the network. Via parallel lookup over disjoint paths, the network can sustain attacks even when a large number of nodes are compromised.

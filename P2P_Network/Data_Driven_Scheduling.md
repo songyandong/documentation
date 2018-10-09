@@ -83,7 +83,7 @@ end
 connRequestQueues <- conns[].queue;
 return connRequestQueues
 ```
-![Illustration of pre-allocation](../../Images/pre-schedule.png)
+![Illustration of pre-allocation](../Images/pre-schedule.png)
 <p style="font-size:14px; text-align:center;">Illustration of pre-allocation</p>
 
 PPIO's P2P transmission network is fully dynamic. Each peer responds to multiple download requests, and potentially to multiple downloading nodes. Each downloading node sends download requests to multiple peers, manages downloaded pieces and deals with potential timeouts and failures from the peers. At the same time, the downloading node itself can be serving download requests, working as a peer to other nodes. By utilizing the two data-driven scheduling algorithms, PPIO's dynamic P2P network is able to handle extremely high volume of concurrent data transmission efficiently.

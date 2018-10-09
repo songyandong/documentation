@@ -6,7 +6,7 @@ To further improve its performance and scalability, PPIO also adopts a layered a
 
 The figure below shows an example of the layered consensus. Nodes in the P2P are grouped into 3 groups, the master group, the black side chain group and the white side chain group. The details of the design is presented below.
 
-![Groups of P2P nodes](../../Images/consensus.png)
+![Groups of P2P nodes](../Images/consensus.png)
 <p style="font-size:14px; text-align:center;">Groups of P2P nodes</p>
 
 

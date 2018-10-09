@@ -20,7 +20,7 @@ Lessor nodes that store large amount of popular content are likely to receive mo
 
 To avoid these problems, the scheduler in the network employs an adjusted scheduling service based on the popularity of the content. Lessors that request to store the most popular content need to pay the scheduler before receiving the resources. The Lessor nodes with higher bandwidth and larger storage still have enough incentives to do so, but they won’t download too much such content, otherwise they can no longer achieve a surplus by providing download service that their bandwidth allow them to.
 
-![Dispatch of Popular Content](../../Images/hot_download.png)
+![Dispatch of Popular Content](../Images/hot_download.png)
 <p style="font-size:14px; text-align:center;">Dispatch of Popular Content</p>
 
 As shown in the figure above, multiple Lessors store copies of the same data, they need to compete to provide download services to the user. The user always prefers the ones that provide higher download speed. If a Lessor does not have enough bandwidth, users will switch to others. The amount of data it uploads to the users will decrease, which in turn decreases the reward it receives. Therefore, Lessors with lower bandwidth will not be incentivized to store popular content. As a result, popular content are mostly stored on Lessors with higher bandwidth, which in turn improves the speed and experience when user downloads such content.

@@ -1,10 +1,11 @@
 # P2P Self-organizing Overlay networks
 Today’s well established storage services, such as Amazon S3, Dropbox, Google Drive, iCloud, etc., store customer data in large-scale data centers. Under cost constraints, each of the services can only deploy a limited number of data centers around the world.The deployment of Amazon AWS data centers is shown in the figure below. Due to the ad hoc nature of the Internet, it is extremely difficult to guarantee fast data transfer everywhere in the world by relying on a handful of data centers. Users in the same region have to compete for the available bandwidth from the data centers. As the number of users grow, their transfer speed and user experience will likely degrade.
 
-![AWS global infastructure](../../Images/AWS.png)
+![AWS global infastructure](../Images/AWS.png)
 <p style="font-size:14px; text-align:center;">AWS global infastructure</p>
 
-PPIO’s distributed storage is a self-organizing, unstructured overlay network, that encourages connection among local peers. Nearby storage Lessors are more likely to be selected to store the data. Similarly, data distribution and retrieval is mostly handled by nearby peers as well. As a result, data transfer can be maintained at much higher speed by fully utilizing local network bandwidth.
+PPIO’s distributed storage is a self-org
+anizing, unstructured overlay network, that encourages connection among local peers. Nearby storage Lessors are more likely to be selected to store the data. Similarly, data distribution and retrieval is mostly handled by nearby peers as well. As a result, data transfer can be maintained at much higher speed by fully utilizing local network bandwidth.
 
 With more nodes joining PPIO’s storage network, it becomes easier to each node to find nearby peers with faster connection, for both storage and retrieval. Server bandwidth is no longer a bottleneck, and user growth leads to better speed and experience.
 

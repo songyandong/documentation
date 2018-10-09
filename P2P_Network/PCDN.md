@@ -3,7 +3,7 @@ PCDN stands for CDN acceleration with P2P, it utilizes the abundant bandwidth an
 
 To start distributing a piece of content, it is published on the source node first. As long as the source node is online, user can download the from it. However, as the number of users downloading from the same source node increases, its available bandwidth gets quickly exhausted and the downloads will slow down. With PCDN, when other Lessor nodes start to store and provide download services for the same piece of content, users will be able to download from multiple peers in the network and enjoy much better user experience.
 
-![PCDN Data Flow](../../Images/PCDN.png)
+![PCDN Data Flow](../Images/PCDN.png)
 <p style="font-size:14px; text-align:center;">PCDN Data Flow</p>
 
 There are two ways for applications to leverage PCDN in PPIO’s storage network.
