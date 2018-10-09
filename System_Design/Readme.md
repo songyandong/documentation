@@ -24,7 +24,7 @@ PPIO follows a layered system design, to facilitate future expansion, and make i
 <p style="font-size:14px; text-align:center;">The 7 layer architecture of PPIO</p>
 
 1. **Physical Layer:** the hardware layer, that provides underlying storage and bandwidth resources
-2. **Data Layer: basic data units and structures
+2. **Data Layer:** basic data units and structures
 3. **Network Layer:** P2P network protocol and algorithms for connection, data transfer, load balancing and encryption
 4. **Consensus Layer:** PPIO’s consensus scheme and its implementation
 5. **Incentive Layer:** manages incentives and rewards based on the role of each node in the network
