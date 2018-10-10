@@ -8,7 +8,7 @@ And certainly PPLabs' founding team has deep technical accumulation in the field
 
 At present, PPlabs has absorbed members from Alibaba, IBM, Huawei and security companies, located in Silicon Valley, Singapore, Shanghai, China and other places.
 
-## reference
+### reference
 [1] Yan Huang, Tom Z.J. Fu, Dah-Ming Gasu, John C.S. Lui, Cheng Huang, "Challenges, design and analysis of a large-scale p2p-vod system",ACM Sigcomm 2008
 
 [2] XU Ke, Haitao Li, Jiangchuan Liu, Wei Zhu, Wenyu Wang, "PPVA: A Universal and Transparent Peer-to-Peer Accelerator for Interactive Online Video Sharing," IEEE IWQoS 2010.

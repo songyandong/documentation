@@ -1,11 +1,11 @@
 # Why Do We Want to Design PPIO
 
-## Problems with centralized storage
+### Problems with centralized storage
 The global cloud storage market has grown enormously in recent years and will continue to grow at a faster pace. However, the existing centralized solutions have many problems. Data breach has become a frequently repeated scene, with ever growing scale and impact. For example, the Dropbox hacking in 2016 leaked 68 million user accounts.
 
 These incidents pose a grave threat to not just the privacy of individual users, but the security and integrity of the entire Internet. At the same time, high bandwidth and storage cost is another inherent problem of the centralized storage systems.
 
-## Attempt to decentralize storage
+### Attempt to decentralize storage
 There have been many attempts to build decentralized storage systems. However, these attempt were not successful.
 
 For example:
@@ -18,7 +18,7 @@ For example:
 
 - **IPFS:**  The emerging FileCoin under development by Protocol Labs adds an incentive layer on top of the Inter-planetary File System (IPFS), with the goal to build a storage infrastructure and protocol to replace HTTP. For that purpose, its file index is made public in order to facilitate features like Web access, but it poses a challenge to preserving user privacy and data security in a storage network. In addition, some of its storage proofs are too complex, and likely to hold the system back from running efficiently at large scale.
 
-## PPIO comes into being
+### PPIO comes into being
 From the discussions above, it is clear that a complete decentralized storage solution is yet to be built to support large-scale and real-world use cases. This is what PPIO attempts to accomplish.
 PPIO's founding team successfully designed, developed and maintained PPLive, a peer to peer streaming system that serves hundreds of millions of users on a daily basis. Such experiences allow the team to make systematic design choices and develop efficient and practical solutions to achieve the following design goals.
 

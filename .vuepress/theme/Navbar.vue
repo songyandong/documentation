@@ -19,9 +19,6 @@
         :class="{ 'can-hide': $site.themeConfig.logo }"
       >{{ $siteTitle }}</span>
     </router-link>
-    <div class="links">
-      <NavLinks class="can-hide"/>
-    </div>
 
     <div
       class="links"
