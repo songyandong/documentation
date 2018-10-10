@@ -1,7 +1,9 @@
+---
+sidebarDepth: 2
+---
+
 # Command Line Reference
-
 ## Overview
-
 除了 "daemon start", "init", "help", "version" ，其他命令或者子命令都是通过RPC调用，访问或者控制该用户节点，故除非特别说明，它们都有相同的选项 rpchost 和 rpcport
 
 "ppio daemon start" 也有选项 "rpchost 和 rpcport"，是用来临时覆盖默认配置文件中的RPC服务监听地址和端口
@@ -106,7 +108,7 @@
   |--|--|
   | [`ppio config show`](#ppio-config-show) |列出当前用户节点的配置信息|
 
-## ppio config show
+### ppio config show
 - **Description**:  
   列出当前用户节点的配置信息
 - **Usage**:  
@@ -159,7 +161,7 @@
   | [`ppio daemon start`](#ppio-daemon-start) |启动用户节点服务|
   | [`ppio daemon stop`](#ppio-daemon-stop) |关闭用户节点服务|
 
-## ppio daemon start
+### ppio daemon start
 - **Description**:  
   启动 ppio 用户节点服务，和其他节点间建立连接并进行通信，同时暴露相应端口以提供 RPC 服务同时会生成配置文件
 
@@ -184,7 +186,7 @@
 
   ```
 
-## ppio daemon stop
+### ppio daemon stop
 - **Description**:  
   关闭用户节点服务
 - **Usage**:  
@@ -256,7 +258,7 @@
   |[`ppio metadata put`](#ppio-metadata-put)|向 Indexer 上传用户 的 MetaData 信息|
   |[`ppio metadata get`](#ppio-metadata-get)|向 Indexer 下载用户的 MetaData 信息|
 
-## ppio metadata put
+### ppio metadata put
 - **Description**:  
   向 Indexer 上传用户的 MetaData 信息，限制该信息的最大占用空间为 1M；
   MetaData 用于存储用户相关的基本信息，使用场景不限
@@ -276,7 +278,7 @@
   Succeed!
   ```
 
-## ppio metadata get
+### ppio metadata get
 - **Description**:  
   向 Indexer 下载用户的 MetaData 信息
 - **Usage**:
@@ -307,7 +309,7 @@
   | [`ppio net peers`](#ppio-net-peers) |显示当前已连接的 peer 信息列表|
   | [`ppio net servers`](#ppio-net-servers) |显示当前已连接的 Servers 信息列表|
 
-## ppio net id
+### ppio net id
 - **Description**:  
   显示当前节点的网络地址
 - **Usage**:
@@ -326,7 +328,7 @@
   080a6fdb95cee6f852cb4b061525c866cbbe2c0a
   ```
 
-## ppio net ping
+### ppio net ping
 - **Description**:  
   检测与其他节点之间的连接情况
 - **Usage**:
@@ -346,7 +348,7 @@
   080a6fdb95cee6f852cb4b061525c866cbbe2c0a 20ms 20ms
   ```
 
-## ppio net peers
+### ppio net peers
 - **Description**:  
   显示当前已连接的 Peer 信息列表
 - **Usage**:
@@ -362,7 +364,7 @@
   080a6fdb95cee6f852cb4b061525c866cbbe2c0a 101.200.0.3:5100 v1.1 10ms 20ms
   ```
 
-## ppio net servers
+### ppio net servers
 - **Description**:  
   显示当前已连接的 Servers 信息列表
 - **Usage**:
@@ -403,7 +405,7 @@
   |[`ppio object updateacl`](#ppio-object-updateacl)|更新某个 Object 的 ACL 信息|
   |[`ppio object auth`](#ppio-object-auth)|将本地存储空间里面的 Object 授权给其他用户|
 
-## ppio object import
+### ppio object import
 - **Description**:  
   从本地文件系统或者管道读入一个文件，对文件进行处理后将其存放到本地存储空间，最终存放到本地存储空间里的文件我们称之为 Object 。  
 
@@ -457,7 +459,7 @@
 
   ```
 
-## ppio object export
+### ppio object export
 - **Description**:  
   从本地存储空间导出一个 Object 到本地文件系统  
   **具体流程:**  
@@ -495,7 +497,7 @@
 
   ```
 
-## ppio object put
+### ppio object put
 - **Description**:  
   发布一个用于上传 Object 的合约
 - **Usage**:
@@ -528,7 +530,7 @@
 
   ```
 
-## ppio object get
+### ppio object get
 - **Description**:  
   下载一个 Object 的所有内容到本地存储空间。当 Object 为其他人所拥有时，有如下两种情况:
   - 如果 Object 的 ACL 设置为 public，则可以直接通过 object get 来下载该 Object
@@ -569,7 +571,7 @@
   Succeed!
   ```
 
-## ppio object copy
+### ppio object copy
 - **Description**:  
   发起一个 Object 的拷贝合约，用来将某个 Object 拷贝到自己名下
 - **Usage**:
@@ -606,7 +608,7 @@
 
   ```
 
-## ppio object status
+### ppio object status
 - **Description**:  
   获取某个 Object 相关的合约信息及执行状况，只能用于查看自己的 Object
 - **Usage**:
@@ -650,7 +652,7 @@
   ]
   ```
 
-## ppio object list
+### ppio object list
 - **Description**:  
   分页获取所有 Object 。和object status不同的是，object list 只是 Object 的列表，没有相对应的合约的执行情况等信息
 - **Usage**:
@@ -688,7 +690,7 @@
   ]
   ```
 
-## ppio object delete
+### ppio object delete
 - **Description**:  
   删除某个 Object 对应的合约
 - **Usage**:
@@ -706,7 +708,7 @@
   Succeed!
   ```
 
-## ppio object renew
+### ppio object renew
 - **Description**:  
   重新发布某个 Object 对应的合约
 - **Usage**:
@@ -736,7 +738,7 @@
   Succeed!
   ```
 
-## ppio object updateacl
+### ppio object updateacl
 - **Description**:  
   更新某个 Object 的 ACL 信息
 - **Usage**:
@@ -761,7 +763,7 @@
 
   ```
 
-## ppio object auth
+### ppio object auth
 - **Description**:  
   将本地存储空间里面的 Object 授权给其他用户，如果该 Object 的 ACL 为 public，则该命令执行无实际效果。
   授权时长不能超过该用户拥有该文件的剩余时长。
@@ -825,7 +827,7 @@
   |[`ppio storage usage`](#ppio-storage-usage)|查看本地存储空间的使用情况|
   |[`ppio storage gc`](#ppio-storage-gc)|清理掉本地存储空间中没有被保持的 Object|
 
-## ppio storage object
+### ppio storage object
 - **Description**:  
   显示当前节点指定object的信息
 - **Usage**:
@@ -846,7 +848,7 @@
   Segment 0 : 6ad3e2278e1251c1a1ebf3f842dcff2caf21d24b94148a8649896f915e574c1e 7547df322cbaf84fd02248133bf5a1c2fae7296960eced0ef6bde2ff3ef37cf8
   ```
 
-## ppio storage objects
+### ppio storage objects
 - **Description**:  
   显示当前节点所有objects的信息
 - **Usage**:
@@ -868,7 +870,7 @@
   Hash=C7E5A790B4D232C5BB7FF5F4618A2A0D1EBF7A96ACD08F57564BAA471E5671CD    Length=33554432
   ```
 
-## ppio storage segments
+### ppio storage segments
 - **Description**:  
   显示当前节点所有segments的信息
 - **Usage**:
@@ -893,7 +895,7 @@
   Id=4b5053da3189dc72a60ab4232a13d76f187227a12cbbd2e749c8f9785f05eb2d Hash=4a5577926eb696943ce694ca52d57a62588a3867535dadf23d2afa2863b67a36    Length=3
   ```
 
-## ppio storage keep
+### ppio storage keep
 - **Description**:  
   将某个 Object 保持在本地存储空间中
 - **Usage**:
@@ -911,7 +913,7 @@
   Succeed!
   ```
 
-## ppio storage usage
+### ppio storage usage
 - **Description**:  
   查看本地存储空间的使用情况
 - **Usage**:
@@ -928,7 +930,7 @@
   KeptCount: 3        // Count of kept objects
   ```
 
-## ppio storage gc
+### ppio storage gc
 - **Description**:  
   清理掉本地存储空间中没有被保持的 Object
 - **Usage**:
@@ -955,7 +957,7 @@
   |[`ppio wallet address`](#ppio-wallet-address)|显示当前钱包地址，十六进制字符串|
   |[`ppio wallet balance`](#ppio-wallet-balance)|显示当前钱包地址的余额|
 
-## ppio wallet address
+### ppio wallet address
 - **Description**:  
   显示当前钱包地址
 - **Usage**:
@@ -973,7 +975,7 @@
   080a6fdb95cee6f852cb4b061525c866cbbe2c0a
   ```
 
-## ppio wallet balance
+### ppio wallet balance
 - **Description**:  
   显示当前钱包地址的余额
 - **Usage**:

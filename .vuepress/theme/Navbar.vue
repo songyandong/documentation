@@ -3,7 +3,7 @@
     <SidebarButton @toggle-sidebar="$emit('toggle-sidebar')"/>
 
     <router-link
-      :to="$localePath"
+      :to="$localePath + 'guide/'"
       class="home-link"
     >
       <img
@@ -19,6 +19,9 @@
         :class="{ 'can-hide': $site.themeConfig.logo }"
       >{{ $siteTitle }}</span>
     </router-link>
+    <div class="links">
+      <NavLinks class="can-hide"/>
+    </div>
 
     <div
       class="links"

@@ -11,7 +11,7 @@ Definition of terms in the section：
 ## Proof-of-Replication (PoRep)
 Proof of Replication (PoRep) provides a way to verify that Lessor $L$ correctly replicates Data $D$ from User $U$ and stores it in its storage. The process also provides an indirect proof of the bandwidth available to $L$. The procedure of PoRep is described below.
 
-![Proof-of-Replication](./Images/PoRep.png)
+![Proof-of-Replication](../images/guide/PoRep.png)
 <p style="font-size:14px; text-align:center;">Proof-of-Replication</p>
 
 **Proof-of-Replication**
@@ -26,7 +26,7 @@ Proof of Replication (PoRep) provides a way to verify that Lessor $L$ correctly 
 ## Proof-of-Download (PoD)
 Proof-of-Download (PoD) provides a way to verify that Data $D$ has been correctly downloaded from Lessor $L$ to User $U$. The procedure of PoD is described below.
 
-![Proof-of-Download](./Images/PoD.png)
+![Proof-of-Download](../images/guide/PoD.png)
 <p style="font-size:14px; text-align:center;">Proof-of-Download</p>
 
 
@@ -56,7 +56,7 @@ Proof-of-Download (PoD) provides a way to verify that Data $D$ has been correctl
 ## Proof-of-Spacetime (PoSt)
 Proof of Spacetime (PoSt) provides a way to verify that Lessor $L$ has stored Data $D$ for a given period of time. The process also provides an indirect proof of the storage capacity of $L$. The procedure of PoSt is described below.
 
-![Proof-of-Spacetime](./Images/PoSt.png)
+![Proof-of-Spacetime](../images/guide/PoSt.png)
 <p style="font-size:14px; text-align:center;">Proof-of-Spacetime</p>
 
 **Proof of Spacetime**
@@ -76,7 +76,7 @@ Light Proof of Capacity (LPoC) provides a way to verify the available storage ca
 
 ### Initialization Phase
 
-![Initialization Phase of Light-Proof-of-Capacity](./Images/PoLCInit.png)
+![Initialization Phase of Light-Proof-of-Capacity](../images/guide/PoLCInit.png)
 <p style="font-size:14px; text-align:center;">Initialization Phase of Light-Proof-of-Capacity</p>
 
 1. $V$ generates a unique Directed Acyclic Graph (DAG) $G=(N, E)$ for a specific Lessor $L$, in which N is the set of nodes in G, and E is the set of edges that connect different nodes in G.
@@ -87,7 +87,7 @@ Light Proof of Capacity (LPoC) provides a way to verify the available storage ca
 
 ### Verification Phase
 
-![Verification Phase of Light-Proof-of-Capacity](./Images/PoLCVerify.png)
+![Verification Phase of Light-Proof-of-Capacity](../images/guide/PoLCVerify.png)
 <p style="font-size:14px; text-align:center;">Verification Phase of Light-Proof-of-Capacity</p>
 
 1. At a given time $T$, $L$ requests PoLC challenge from $V$.

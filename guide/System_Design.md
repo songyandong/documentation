@@ -20,7 +20,7 @@ However, greedy and malicious nodes may attempt to fool the network and get rewa
 
 PPIO follows a layered system design, to facilitate future expansion, and make it more friendly to developers. As shown in the figure below, PPIO is consisted of seven layers, which are:
 
-![](./Images/layers.png)
+![](../images/guide/layers.png)
 <p style="font-size:14px; text-align:center;">The 7 layer architecture of PPIO</p>
 
 1. **Physical Layer:** the hardware layer, that provides underlying storage and bandwidth resources

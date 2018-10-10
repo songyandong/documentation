@@ -12,11 +12,11 @@ Disk storage and network bandwidth are the core components of PPIO’s physical 
 
 The next above the physical layer is the data layer. As shown below, there are three types of data structures used in PPIO’s storage network:
 
-![The data structures in the Data layer](./Images/datalayer.png)
+![The data structures in the Data layer](../images/guide/datalayer.png)
 <p style="font-size:14px; text-align:center;">The data structures in the Data layer</p>
 
 - **Plot/Tile: the storage capacity unit**
-	- Plot can be considered as a virtual drive in PPIO’s storage network, it is initialized when the miner joins the network. Without any data stored, it's the basic unit used in capacity proof - [LPoC](). With data stored, it is the base unit of spacetime proof - [PoSt]().
+	- Plot can be considered as a virtual drive in PPIO’s storage network, it is initialized when the miner joins the network. Without any data stored, it's the basic unit used in capacity proof - [LPoC](Four_Proof_Algorithms.html#proof-of-spacetime-post). With data stored, it is the base unit of spacetime proof - [PoSt](Four_Proof_Algorithms.html#proof-of-spacetime-post).
 	- Tile is the smallest unit of verifiable storage in the plot. Its size is 128KB. In PoRep, PoD and PoSt, Tile is used as the basic unit in the verification.
 
 - **Segment: the storage data unit**
@@ -59,7 +59,7 @@ To further improve its performance and scalability, PPIO also adopts a layered a
 
 The figure below shows an example of the layered consensus. Nodes in the P2P are grouped into 3 groups, the master group, the black side chain group and the white side chain group. The details of the design is presented below.
 
-![Groups of P2P nodes](./Images/consensus.png)
+![Groups of P2P nodes](../images/guide/consensus.png)
 <p style="font-size:14px; text-align:center;">Groups of P2P nodes</p>
 
 
@@ -87,7 +87,7 @@ The figure below shows an example of the layered consensus. Nodes in the P2P are
 
 ## Incentive Layer
 
-The foundation of PPIO’s incentive mechanism is formed by the various proofs described before, including [PoRep](), [PoD](), [PoSt]() and [LPoC](). These proofs are strictly derived and rigorously tested, to enable reliable verification of different types of work done by the nodes in the network, so that the right amount of reward can be given to different parties, to maintain a healthy economy and keep it growing.
+The foundation of PPIO’s incentive mechanism is formed by the various proofs described before, including [PoRep](Four_Proof_Algorithms.html#proof-of-replication-porep), [PoD](Four_Proof_Algorithms.html#proof-of-download-pod), [PoSt](Four_Proof_Algorithms.html#proof-of-spacetime-post) and [LPoC](Four_Proof_Algorithms.html#light-proof-of-capacity-lpoc). These proofs are strictly derived and rigorously tested, to enable reliable verification of different types of work done by the nodes in the network, so that the right amount of reward can be given to different parties, to maintain a healthy economy and keep it growing.
 
 Smart contract is the basis of PPIO’s reward mechanism:
 - **Storage Contract:**
@@ -126,11 +126,11 @@ PPIO can support a large number of applications running concurrently in its stor
 	- Public, all users can access the object.
 - App developers are responsible of the content of the files in their applications.
 
-![Diagram of App sandbox](./Images/object_encrypt.png)
+![Diagram of App sandbox](../images/guide/object_encrypt.png)
 <p style="font-size:14px; text-align:center;">Diagram of App sandbox</p>
 
 ### API
-More details in [API Reference]()
+More details in [API Reference](/api/)
 
 ## Application Layer
 

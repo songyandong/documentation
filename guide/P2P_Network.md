@@ -85,7 +85,7 @@ end
 connRequestQueues <- conns[].queue;
 return connRequestQueues
 ```
-![Illustration of pre-allocation](./Images/pre-schedule.png)
+![Illustration of pre-allocation](../images/guide/pre-schedule.png)
 <p style="font-size:14px; text-align:center;">Illustration of pre-allocation</p>
 
 PPIO's P2P transmission network is fully dynamic. Each peer responds to multiple download requests, and potentially to multiple downloading nodes. Each downloading node sends download requests to multiple peers, manages downloaded pieces and deals with potential timeouts and failures from the peers. At the same time, the downloading node itself can be serving download requests, working as a peer to other nodes. By utilizing the two data-driven scheduling algorithms, PPIO's dynamic P2P network is able to handle extremely high volume of concurrent data transmission efficiently.
@@ -98,7 +98,7 @@ In a DHT, each piece of data is bundled with a unique key into a key-value pair.
 There are many different implementations of DHT, some of the commonly used are Chord, Pastry, Tapestry, Dynamo, and Kademlia. PPIO uses Kademlia, so do many other well known P2P projects like PPLive, BitTorrent, eMule, etc.
 
 Kademlia algorithm assigns a unique ID to each participating node. The node ID is also used to calculate distance between nodes and locate key-value pairs. To look up a specific key-value pair in the network, the algorithm steps through the network path and finds nodes closer to the key on every step, until it reaches the node that stores the key-pair. In order to support the lookup, each node needs to store information of a group of other nodes based their distance to it. Such distance is calculated by taking an XOR operation on two Node IDs. Node IDs have the same bit length as the keys used in key-value pairs. Therefore, the distance between node IDs and keys can be calculated in the same way. Since the XOR distance does not take actual geographic distance into account, it is possible for two nodes to reside next to one another in the network even though one of them may be in the United Kingdom, while the other is in the United States.
-![Lookup in Kademlia DHT](./Images/kad_find_example.png)
+![Lookup in Kademlia DHT](../images/guide/kad_find_example.png)
 <p style="font-size:14px; text-align:center;">Lookup in Kademlia DHT</p>
 
 PPIO also adopts an extension of Kademlia - S/Kademlia to improve the security of the network. Via parallel lookup over disjoint paths, the network can sustain attacks even when a large number of nodes are compromised.
@@ -108,7 +108,7 @@ With the DHT implementation above, structured data such as file index, statistic
 ## P2P Self-organizing Overlay networks
 Today’s well established storage services, such as Amazon S3, Dropbox, Google Drive, iCloud, etc., store customer data in large-scale data centers. Under cost constraints, each of the services can only deploy a limited number of data centers around the world.The deployment of Amazon AWS data centers is shown in the figure below. Due to the ad hoc nature of the Internet, it is extremely difficult to guarantee fast data transfer everywhere in the world by relying on a handful of data centers. Users in the same region have to compete for the available bandwidth from the data centers. As the number of users grow, their transfer speed and user experience will likely degrade.
 
-![AWS global infastructure](./Images/AWS.png)
+![AWS global infastructure](../images/guide/AWS.png)
 <p style="font-size:14px; text-align:center;">AWS global infastructure</p>
 
 PPIO’s distributed storage is a self-org
@@ -163,7 +163,7 @@ Lessor nodes that store large amount of popular content are likely to receive mo
 
 To avoid these problems, the scheduler in the network employs an adjusted scheduling service based on the popularity of the content. Lessors that request to store the most popular content need to pay the scheduler before receiving the resources. The Lessor nodes with higher bandwidth and larger storage still have enough incentives to do so, but they won’t download too much such content, otherwise they can no longer achieve a surplus by providing download service that their bandwidth allow them to.
 
-![Dispatch of Popular Content](./Images/hot_download.png)
+![Dispatch of Popular Content](../images/guide/hot_download.png)
 <p style="font-size:14px; text-align:center;">Dispatch of Popular Content</p>
 
 As shown in the figure above, multiple Lessors store copies of the same data, they need to compete to provide download services to the user. The user always prefers the ones that provide higher download speed. If a Lessor does not have enough bandwidth, users will switch to others. The amount of data it uploads to the users will decrease, which in turn decreases the reward it receives. Therefore, Lessors with lower bandwidth will not be incentivized to store popular content. As a result, popular content are mostly stored on Lessors with higher bandwidth, which in turn improves the speed and experience when user downloads such content.
@@ -200,7 +200,7 @@ message P4PPeerInfo {
 
 When selecting data connections from a given node, the indexing and scheduling node (IndexScheduler) in PPIO’s network checks whether the node can be queried from the iP4P interface:  
 
-- If so, a peer lookup in the node’s ISP network will be conducted first, followed by a lookup in the friendly ISPs, and finally among all other peers. The final peer decision will still be decided based on connection speed as described in [P2P Self-Organizing Overlay Networks](./P2P_Self_Organizing_Overlay_Networks.md). In this way, peers with shorter p4p distances to the node are more likely to be selected to upload or download its data. At the same time, nodes in slower ISPs can still connect to faster outside peers. As a result, unnecessary traffic between different network providers is significantly reduced, and user experience across the entire network is maintained at a high level.
+- If so, a peer lookup in the node’s ISP network will be conducted first, followed by a lookup in the friendly ISPs, and finally among all other peers. The final peer decision will still be decided based on connection speed as described in [P2P Self-Organizing Overlay Networks](#p2p-self-organizing-overlay-networks). In this way, peers with shorter p4p distances to the node are more likely to be selected to upload or download its data. At the same time, nodes in slower ISPs can still connect to faster outside peers. As a result, unnecessary traffic between different network providers is significantly reduced, and user experience across the entire network is maintained at a high level.
 
 - If not, the p4p distance calculated from global IP database is used in the pre-selection of peers. Similarly the final selection will still be based connection speed.
 
@@ -209,10 +209,10 @@ PCDN stands for CDN acceleration with P2P, it utilizes the abundant bandwidth an
 
 To start distributing a piece of content, it is published on the source node first. As long as the source node is online, user can download the from it. However, as the number of users downloading from the same source node increases, its available bandwidth gets quickly exhausted and the downloads will slow down. With PCDN, when other Lessor nodes start to store and provide download services for the same piece of content, users will be able to download from multiple peers in the network and enjoy much better user experience.
 
-![PCDN Data Flow](./Images/PCDN.png)
+![PCDN Data Flow](../images/guide/PCDN.png)
 <p style="font-size:14px; text-align:center;">PCDN Data Flow</p>
 
 There are two ways for applications to leverage PCDN in PPIO’s storage network.
 
-1. Take advantage of content scheduling described in [Optimized Distribution of Popular Content](./Optimized_Distribution_of_Popular_Content.md).As PPIO embeds optimized scheduling of popular content in its overlay network, Lessors will proactively download and store popular data, and provide download services. As a result, data gets copied and distributed across the network where the data is deemed popular. It improves download experience as the number of copies increase. Under this scenario, the Lessors voluntarily distribute the data, therefore there is no need for the application to compensate these Lessors.
+1. Take advantage of content scheduling described in [Optimized Distribution of Popular Content](#optimized-distribution-of-popular-content).As PPIO embeds optimized scheduling of popular content in its overlay network, Lessors will proactively download and store popular data, and provide download services. As a result, data gets copied and distributed across the network where the data is deemed popular. It improves download experience as the number of copies increase. Under this scenario, the Lessors voluntarily distribute the data, therefore there is no need for the application to compensate these Lessors.
 2. Enable and configure PCDN directly. PPIO provides a set of APIs to allow DApps to set up PCDN for their content. The applications can specify the number of copies to be maintained in specific parts of the network, or specifc geographic location in terms of country, ISP, state and city, as defined in the P4P database. PPIO will find Lessor nodes in the specified area to store the copies, and provide download services. As the scheduling is specified by the application, it needs to compensate the Lessors’ cost in storage spacetime, scheduling and conducting storage proofs.
