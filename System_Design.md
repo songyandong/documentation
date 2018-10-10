@@ -12,15 +12,15 @@ PPIO's P2P network design will be explained in details, including its intelligen
 ## Attacks and Proofs
 Traditional P2P network does not offer enough incentives for its nodes to stay in the network. As nodes come and go, it is difficult to maintain the stability of the network. PPIO injects attractive incentives to the network by rewarding the participating nodes based on its storage and bandwidth contribution, and encourage the nodes to stay and keep contributing to the network.
 
-However, greedy and malicious nodes may attempt to fool the network and get rewarded without making proportional contribution, through various types of attacks like Sybil Attack, Outsourcing Attack, Generation Attack, Distributed Denial of Service Attack and Eclipse Attack. These attacks will be explained in details in the [Five Kinds of Attack](../Five_Kinds_of_Attacks.md).
+However, greedy and malicious nodes may attempt to fool the network and get rewarded without making proportional contribution, through various types of attacks like Sybil Attack, Outsourcing Attack, Generation Attack, Distributed Denial of Service Attack and Eclipse Attack. These attacks will be explained in details in the [Five Kinds of Attack](./Five_Kinds_of_Attacks.md).
 
-[Four Proof Algorithms](../Four_Proof_Algorithms.md) explains PPIO's Proof of Replication (PoRep), Proof of Download (PoD), Proof of Spacetime (PoSt), and Light Proof of Capacity (LPoC) that are designed to defend the network against all these attacks and maintain the integrity of the system.The optimized implementation of the proofs allow them to be deployed and function efficiently at large scale, that enables the incentives system to operate in a secure manner, and help establish a healthy storage market and economy.
+[Four Proof Algorithms](./Four_Proof_Algorithms.md) explains PPIO's Proof of Replication (PoRep), Proof of Download (PoD), Proof of Spacetime (PoSt), and Light Proof of Capacity (LPoC) that are designed to defend the network against all these attacks and maintain the integrity of the system.The optimized implementation of the proofs allow them to be deployed and function efficiently at large scale, that enables the incentives system to operate in a secure manner, and help establish a healthy storage market and economy.
 
-## Seven Layer Architecture of PPIO
+## Architecture
 
 PPIO follows a layered system design, to facilitate future expansion, and make it more friendly to developers. As shown in the figure below, PPIO is consisted of seven layers, which are:
 
-![](../Images/layers.png)
+![](./Images/layers.png)
 <p style="font-size:14px; text-align:center;">The 7 layer architecture of PPIO</p>
 
 1. **Physical Layer:** the hardware layer, that provides underlying storage and bandwidth resources
