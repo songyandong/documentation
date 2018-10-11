@@ -16,6 +16,7 @@ body
   -moz-osx-font-smoothing grayscale
   font-size 16px
   color $textColor
+  letter-spacing 0.02em
 
 .page
   padding-left $sidebarWidth
@@ -48,7 +49,7 @@ body
   z-index 10
   margin 0
   top $navbarHeight
-  left 0
+  left (100vw - $themeContainerWidth)/2
   bottom 0
   box-sizing border-box
   border-right 1px solid $borderColor
@@ -179,6 +180,10 @@ th, td
   padding-top $navbarHeight
 
 .theme-container
+  max-width $themeContainerWidth
+  margin 0 auto
+  min-height: 100%
+  position: relative;
   &.sidebar-open
     .sidebar-mask
       display: block

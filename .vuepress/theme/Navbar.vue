@@ -1,37 +1,36 @@
 <template>
   <header class="navbar">
-    <SidebarButton @toggle-sidebar="$emit('toggle-sidebar')"/>
+    <div class="navbar-container">
+      <SidebarButton @toggle-sidebar="$emit('toggle-sidebar')"/>
 
-    <router-link
-      :to="$localePath + 'guide/'"
-      class="home-link"
-    >
-      <img
-        class="logo"
-        v-if="$site.themeConfig.logo"
-        :src="$withBase($site.themeConfig.logo)"
-        :alt="$siteTitle"
+      <a href="https://pp.io" class="home-link">
+        <img
+          class="logo"
+          v-if="$site.themeConfig.logo"
+          :src="$withBase($site.themeConfig.logo)"
+          :alt="$siteTitle"
+        >
+        <span
+          ref="siteName"
+          class="site-name"
+          v-if="$siteTitle"
+          :class="{ 'can-hide': $site.themeConfig.logo }"
+        >{{ $siteTitle }}</span>
+      </a>
+
+      <div
+        class="links"
+        :style="{
+          'max-width': linksWrapMaxWidth + 'px'
+        }"
       >
-      <span
-        ref="siteName"
-        class="site-name"
-        v-if="$siteTitle"
-        :class="{ 'can-hide': $site.themeConfig.logo }"
-      >{{ $siteTitle }}</span>
-    </router-link>
-
-    <div
-      class="links"
-      :style="{
-        'max-width': linksWrapMaxWidth + 'px'
-      }"
-    >
-      <AlgoliaSearchBox
-        v-if="isAlgoliaSearch"
-        :options="algolia"
-      />
-      <SearchBox v-else-if="$site.themeConfig.search !== false"/>
-      <NavLinks class="can-hide"/>
+        <AlgoliaSearchBox
+          v-if="isAlgoliaSearch"
+          :options="algolia"
+        />
+        <SearchBox v-else-if="$site.themeConfig.search !== false"/>
+        <NavLinks class="can-hide"/>
+      </div>
     </div>
   </header>
 </template>
@@ -91,6 +90,11 @@ function css (el, property) {
 $navbar-vertical-padding = 0.7rem
 $navbar-horizontal-padding = 1.5rem
 
+.navbar-container
+  position relative
+  max-width $themeContainerWidth
+  margin 0 auto
+
 .navbar
   padding $navbar-vertical-padding $navbar-horizontal-padding
   line-height $navbarHeight - 1.4rem
@@ -115,8 +119,10 @@ $navbar-horizontal-padding = 1.5rem
     white-space nowrap
     font-size 0.9rem
     position absolute
-    right $navbar-horizontal-padding
-    top $navbar-vertical-padding
+    /* right $navbar-horizontal-padding */
+    /* top $navbar-vertical-padding */
+    top 0
+    right 0
     display flex
     .search-box
       flex: 0 0 auto

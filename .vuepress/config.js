@@ -19,14 +19,15 @@ module.exports = {
   },
   themeConfig: {
     logo: '/logo.png',
-    displayAllHeaders: true,
+    search: true,
+    displayAllHeaders: false,
     activeHeaderLinks: true,
     nav: [
       { text: 'Guide', link: '/guide/' },
-      { text: 'API Reference', link: '/api/' },
-      { text: 'CLI Reference', link: '/cli/' },
+      { text: 'API', link: '/api/' },
       { text: 'Projects', link: 'https://pp.io' },
       { text: 'Blog', link: 'https://blog.pp.io' },
+      { text: 'Github', link: 'https://github.com/ppio' },
     ],
     sidebar: {
       '/guide/': [

@@ -226,7 +226,7 @@ function find (page, items, offset) {
 @require './styles/wrapper.styl'
 
 .page
-  padding-bottom 2rem
+  padding-bottom 1.5rem
 
 .page-edit
   @extend $wrapper
@@ -264,7 +264,7 @@ function find (page, items, offset) {
 .page-footer
   max-width: 740px
   margin: 0 auto
-  padding-top 30px
+  padding-top 1.5rem
   padding-bottom 0px
   border-top 1px solid #eee
   .page-footer-content
@@ -296,7 +296,7 @@ function find (page, items, offset) {
     a
       margin-left 16px;
       &:hover svg
-        fill $accentColor
+        fill #666
     svg
       height 1.4rem
       fill #999
@@ -311,5 +311,18 @@ function find (page, items, offset) {
       font-size .8em
       float none
       text-align left
+@media (max-width: $MQNarrow)
+  .page-footer
+    text-align center
+    .line-sep
+      display none
+    .page-footer-copyright
+      display block
+      margin-top 15px;
+      margin-bottom 15px;
+    .page-footer-content
+      display block
+    .page-footer-nav
+      display block
 
 </style>
