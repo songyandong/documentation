@@ -12,7 +12,10 @@ module.exports = {
    config: md => {
      md.set({ breaks: true })
      md.use(require('markdown-it-katex'))
-   }
+   },
+   anchor: {
+     permalinkSymbol: '¶'
+   },
   },
   themeConfig: {
     logo: '/logo.png',
@@ -33,6 +36,7 @@ module.exports = {
        'Four_Proof_Algorithms',
        'Five_Kinds_of_Attacks',
        'Architecture',
+       'Command_Line_Tool',
        'PPIO_SDK',
        {
           title: 'Others',
@@ -52,8 +56,7 @@ module.exports = {
     },
     sidebarDepth: 1,
     lastUpdated: 'last modified',
-    repo: 'PPIO/documentation',
-    repoLabel: 'github',
+    docsRepo: 'PPIO/documentation',
     editLinks: true,
     editLinkText: 'Edit this page on GitHub'
   }
