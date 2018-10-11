@@ -19,10 +19,10 @@ module.exports = {
     displayAllHeaders: true,
     activeHeaderLinks: true,
     nav: [
-      { text: 'Home', link: 'https://pp.io' },
       { text: 'Guide', link: '/guide/' },
-      { text: 'API', link: '/api/' },
-      { text: 'CLI', link: '/cli/' },
+      { text: 'API Reference', link: '/api/' },
+      { text: 'CLI Reference', link: '/cli/' },
+      { text: 'Projects', link: 'https://pp.io' },
       { text: 'Blog', link: 'https://blog.pp.io' },
     ],
     sidebar: {
