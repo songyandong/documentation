@@ -4,9 +4,11 @@ sidebarDepth: 2
 
 # Command Line Reference
 ## Overview
-除了 "daemon start", "init", "help", "version" ，其他命令或者子命令都是通过RPC调用，访问或者控制该用户节点，故除非特别说明，它们都有相同的选项 rpchost 和 rpcport
+`ppio`, `ppio daemon`, `ppio daemon start` will start a PPIO user node.
 
-"ppio daemon start" 也有选项 "rpchost 和 rpcport"，是用来临时覆盖默认配置文件中的RPC服务监听地址和端口
+In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, other commands or subcommands are invoked through RPC. So unless specify otherwise, they all have the same options "rpchost" and "rpcport".
+
+`ppio daemon start` also has options "rpchost" and "rpcport", which are used to temporarily override the RPC service listening address and port in the default configuration file.
 - **Usage**:  
   ```bash
   # 对于daemon启动命令
@@ -19,23 +21,23 @@ sidebarDepth: 2
       [--rpchost=<rpchost>]
       [--rpcport=<rpcport>]
   ```
-- **Options**:  
-  | 选项, 简写 | 默认值 | 描述 |
+- **Options**:
+  | options| default | description |
   |--|--|--|
-  |--rpchost, -d|"127.0.0.1"|RPC 服务地址|
-  |--rpcport, -c|18060|RPC 端口|
+  |--rpchost|"127.0.0.1"|RPC service adress|
+  |--rpcport|18060|RPC port|
 - **Example**:  
   ``` bash
-  # 启动用户节点，监听18061端口
+  # start the user node and listen to port 18061
   > ppio --rpcport=18061
 
-  # 进行一个RCP调用，连接18060端口
+  # make an RCP call to connect port 18060
   > ppio config --rpcport=18060
 
   > ppio config show --rpcport=18060
   ```
 ::: warning WARNING
-命令行中的选项配置会覆盖配置文件中的配置
+  The options configuration on the command line overrides the configuration in the configuration file.
 :::
 
 ## ppio help
@@ -98,30 +100,30 @@ sidebarDepth: 2
 
 ## ppio config
 - **Description**:  
-  管理用户节点的配置信息
+  Manage user node configuration information.
 - **Usage**:  
   ```bash
   ppio config [SUB-COMMAND]
   ```
-- **子命令**:  
-  | 子命令 | 描述 |
+- **subcommand**:
+  | subcommand | description |
   |--|--|
-  | [`ppio config show`](#ppio-config-show) |列出当前用户节点的配置信息|
+  | [`ppio config show`](#ppio-config-show) |List the configuration information of the current user node|
 
 ### ppio config show
 - **Description**:  
-  列出当前用户节点的配置信息
+  List the configuration information of the current user node
 - **Usage**:  
   ```bash
   ppio config show
       [--rpchost=<rpchost>]
       [--rpcport=<rpcport>]
   ```
-- **Options**:  
-  | 选项, 简写 | 默认值 | 描述 |
+- **Options**:
+  | options| default | description |
   |--|--|--|
-  |--rpchost, -d|"127.0.0.1"|RPC 服务地址|
-  |--rpcport, -c|18060|RPC 端口|
+  |--rpchost|"127.0.0.1"|RPC service address|
+  |--rpcport|18060|RPC port|
 - **Example**:  
   ```bash
   > ppio config show
@@ -150,35 +152,35 @@ sidebarDepth: 2
 
 ## ppio daemon
 - **Description**:  
-  管理用户节点服务
+  Manage PPIO user node service
 - **Usage**:  
   ```bash
   ppio daemon SUB-COMMAND
   ```
-- **子命令**:  
-  | 子命令 | 描述 |
+- **subcommand**:
+  | subcommand | description |
   |--|--|
-  | [`ppio daemon start`](#ppio-daemon-start) |启动用户节点服务|
-  | [`ppio daemon stop`](#ppio-daemon-stop) |关闭用户节点服务|
+  | [`ppio daemon start`](#ppio-daemon-start) | start PPIO user node service |
+  | [`ppio daemon stop`](#ppio-daemon-stop) | stop PPIO user node service |
 
 ### ppio daemon start
 - **Description**:  
-  启动 ppio 用户节点服务，和其他节点间建立连接并进行通信，同时暴露相应端口以提供 RPC 服务同时会生成配置文件
+  Start PPIO user node service, establishes a connection and communicates with other user nodes, and exposes the corresponding port to provide RPC services and generates configuration files.
 
   ::: warning WARNING
-  只有此命令启动服务节点，其他命令(version和help除外)都是通过RPC和该服务节点通信完成任务
+  Only this command starts the service node, and other commands (except `ppio version` and `ppio help`) communicate with the service node through RPC.
   :::
 - **Usage**:  
   ```bash
   ppio daemon start
   ```
-- **Options**:  
-  | 选项, 简写 | 默认值 | 描述 |
+- **Options**:
+  | options| default | description |
   |--|--|--|
-  |--datadir |用户主目录下的".ppio"子目录|用户节点的数据目录|
-  |--config |数据目录下的"ppio.conf"文件|指定配置文件|
-  |--rpchost, -d|"127.0.0.1"|RPC 服务地址，会覆盖|
-  |--rpcport, -c|18060|RPC 端口|
+  |--datadir |".ppio" subdirectory under the user's home directory|user node's data directory|
+  |--config |"ppio.conf" file in the data directory|specify configuration file|
+  |--rpchost|"127.0.0.1"|RPC service address(can be overrided)|
+  |--rpcport|18060|RPC port|
 - **Example**:  
   ```bash
   > ppio daemon start
@@ -188,56 +190,58 @@ sidebarDepth: 2
 
 ### ppio daemon stop
 - **Description**:  
-  关闭用户节点服务
+  Stop PPIO user node service.
 - **Usage**:  
   ```bash
   ppio daemon stop
   ```
 - **Example**:  
   ```bash
-  # 返回成功标识或失败标识及原因
+  # Return the success or failure signal and reason
   > ppio daemon stop
   Succeed!
   ```
 
 ## ppio init
-- **Description**:  
-  初始化 ppio 节点，创建 ppio 数据目录和对应的配置文件。如果数据目录或者配置文件已经存在，则什么都不干；如果配置文件格式异常，则更新其内容为默认。  
+- **Description**:
+  Initialize the PPIO user node and create the PPIO data directory and configuration file.  
+  - If the data directory or configuration file already exists, nothing is done;
+  - If the configuration file format is unexpected, the content will be updated to the default.  
 - **Usage**:  
   ```bash
-  ppfs init
+  ppio init
       [--datadir=<data-dir>]
       [--config=<config-file-path>]
       [--max-storage=<max-storage>]
       [--gc-threshold=<gc-threshold>]
   ```
-- **Options**:  
-  | 选项, 简写 | 默认值 | 描述 |
+- **Options**:
+  | options| default | description |
   |--|--|--|
-  |--datadir, -d|/home/u/.ppio/|指定用户节点数据的存放目录|
-  |--config, -c|/home/u/.ppio/ppio.config|指定 ppio 节点的配置文件|
-  |--max-storage, -m| 10G | 指定用户节点可使用的本地空间大小，单位可以是: B,b,M,m,G,g,T,t|
-  |--gc-threshold, -t| 0.8 |当用户已使用的空间大小超过这个值时，ppio 节点会开始清理未保持的文件该配置项的值要小于用户通过 `--max-storage` 设置的空间大小值|
+  |--datadir|/home/u/.ppio/|specify PPIO user node data directory|
+  |--config|/home/u/.ppio/ppio.config|specify PPIO user node configuration file|
+  |--max-storage| 10G | Specify the size of the local space that the user node can use. The unit can be: B,b,M,m,G,g,T,t|
+  |--gc-threshold| 0.8 |When the size of the space used by the user exceeds this value, the node will start cleaning up the unkept files.(The value is less than the size of the space set by the user through `--max-storage`)|
 - **Example**:
   ```bash
-  # 创建数据目录 "/home/u/.ppio"，创建默认配置文件 "/home/u/.ppio/ppio.conf"
-  > ppfs init
+  # Create a data directory "/home/u/.ppio", create default configuration file "/home/u/.ppio/ppio.conf"
+  > ppio init
   Succeed!
 
-  # 创建数据目录 "/home/u/ppio"，创建默认配置文件 "/home/u/ppio/ppio.conf"
+  # Create a data directory "/home/u/ppio", create default configuration file "/home/u/ppio/ppio.conf"
   > ppio init --datadir=/home/u/ppio
   Succeed!
 
-  # 创建数据目录 "/home/u/.ppio"，并根据所给配置文件，创建默认配置文件 "/home/u/.ppio/ppio.conf"
+  # Create a data directory "/home/u/.ppio", create default configuration file "/home/u/.ppio/ppio.conf" based on the given file path
   > ppio init --config=/home/u/ppio/ppio.conf
   Succeed!
 
-  # 创建数据目录 "/home/u/ppio_a"，并根据所给配置文件，创建默认配置文件 "/home/u/ppio_a/ppio.conf"
+  # Create a data directory "/home/u/ppio_a", create default configuration file "/home/u/ppio_a/ppio.conf" based on the given file path
   > ppio init --datadir=/home/u/ppio_a --config=/home/u/ppio_b/ppio.conf
   Succeed!
 
-  # 创建数据目录 "/home/u/ppio_a"，并根据所给配置文件，创建默认配置文件 "/home/u/ppio_a/ppio.conf"
-  # 默认配置文件中的max-storage配置项会被命令行中的参数覆盖掉
+  # Create a data directory "/home/u/ppio_a", create default configuration file "/home/u/ppio_a/ppio.conf" based on the given file path
+  # The max-storage configuration item in the default configuration file will be overrided by the parameters in the command line.
   > ppio init --datadir=/home/u/ppio_a --config=/home/u/ppio_b/ppio.conf --max-storage=8G
   Succeed!
 
@@ -247,48 +251,44 @@ sidebarDepth: 2
 
 ## ppio metadata
 - **Description**:  
-  管理用户的元数据
+  Manage user metadata
 - **Usage**:  
   ```bash
   ppio metadata SUB-COMMAND
   ```
-- **子命令**:  
-  | 子命令 | 描述 |
+- **subcommand**:
+  | subcommand | description |
   |--|--|
-  |[`ppio metadata put`](#ppio-metadata-put)|向 Indexer 上传用户 的 MetaData 信息|
-  |[`ppio metadata get`](#ppio-metadata-get)|向 Indexer 下载用户的 MetaData 信息|
+  |[`ppio metadata put`](#ppio-metadata-put)|Upload the user's MetaData information to the Indexer node|
+  |[`ppio metadata get`](#ppio-metadata-get)|Download the user's MetaData information to the Indexer node|
 
 ### ppio metadata put
 - **Description**:  
-  向 Indexer 上传用户的 MetaData 信息，限制该信息的最大占用空间为 1M；
-  MetaData 用于存储用户相关的基本信息，使用场景不限
+  Upload the user's MetaData information to the Indexer node, and limit the maximum occupied space of the information to 1M; MetaData is used to store basic information about users, and the usage scenarios are not limited.
 - **Usage**:  
   ```bash
   ppio metadata put <meta-data>
   ```
 - **Arguments**:
   ```bash
-  <meta-data>: 待上传的 MetaData 内容，文本形式
+  <meta-data>: MetaData content to be uploaded, text form.
   ```
 - **Example**:  
   ```bash
-  # 返回成功或失败的标识
-
+  # Return a success or failure signal.
   > ppio metadata put "Test MetaData"
   Succeed!
   ```
 
 ### ppio metadata get
 - **Description**:  
-  向 Indexer 下载用户的 MetaData 信息
+  Download the user's MetaData information from the Indexer node.
 - **Usage**:
   ```
   ppio metadata get
   ```
 - **Example**:
   ```
-  # 命令执行成功后可获得用户 MetaData 的十六进制形式的字符串
-
   > ppio metadata get
   "Test MetaData"
 
@@ -296,68 +296,61 @@ sidebarDepth: 2
 
 ## ppio net
 - **Description**:  
-  管理用户节点的网络信息
+  Manage network information of PPIO user node
 - **Usage**:
   ```
   ppio net SUB-COMMAND
   ```
 - **Subcommand**:
-  | 子命令 | 描述 |
+  | subcommand | description |
   |--|--|
-  | [`ppio net id`](#ppio-net-id) |显示当前节点的网络地址，十六进制字符串|
-  | [`ppio net ping`](#ppio-net-ping) |检测与其他节点之间的连接情况|
-  | [`ppio net peers`](#ppio-net-peers) |显示当前已连接的 peer 信息列表|
-  | [`ppio net servers`](#ppio-net-servers) |显示当前已连接的 Servers 信息列表|
+  | [`ppio net id`](#ppio-net-id) |Display the current user node's network address, hex string|
+  | [`ppio net ping`](#ppio-net-ping) |Detect connections to other user nodes|
+  | [`ppio net peers`](#ppio-net-peers) |Display the list of currently connected peer information|
+  | [`ppio net servers`](#ppio-net-servers) |Display the list of currently connected server information|
 
 ### ppio net id
 - **Description**:  
-  显示当前节点的网络地址
+  Display the current node's network address, hex string
 - **Usage**:
   ```
   ppio net id
   ```
-- **Arguments**:
-
-  ```
-  无
-  ```
 - **Example**:
   ```bash
-  # 命令返回
   > ppio net id
   080a6fdb95cee6f852cb4b061525c866cbbe2c0a
   ```
 
-### ppio net ping
+### ppio net ping <Badge text="todo" type="warn"/>
 - **Description**:  
-  检测与其他节点之间的连接情况
+  Detect connections to other user nodes
 - **Usage**:
   ```bash
   ppio net ping <target-peer-id>
   ```
 - **Arguments**:
-
   ```bash
-  <target-peer-id>: 待检测的目标 peer ID 值
+  <target-peer-id>: The ID of the target peer to be detected
   ```
 - **Example**:
   ```bash
-  # 命令返回内容格式:
+  # The content format returned by the command:
   # <target-peer-id> <out-latency> <in-latency>
   > ppio net ping 080a6fdb95cee6f852cb4b061525c866cbbe2c0a
   080a6fdb95cee6f852cb4b061525c866cbbe2c0a 20ms 20ms
   ```
 
-### ppio net peers
+### ppio net peers <Badge text="todo" type="warn"/>
 - **Description**:  
-  显示当前已连接的 Peer 信息列表
+  Display the list of currently connected peer information
 - **Usage**:
   ```
   ppio net peers
   ```
 - **Example**:
   ```bash
-  # 返回的记录格式
+  # The content format returned by the command:
   # <peer-id> <ip:port> <software-version> <in-latency> <out-latency>
   > ppio net peers
   080a6fdb95cee6f852cb4b061525c866cbbe2c0a 101.200.0.1:5000 v1.1 10ms 20ms
@@ -366,14 +359,14 @@ sidebarDepth: 2
 
 ### ppio net servers
 - **Description**:  
-  显示当前已连接的 Servers 信息列表
+  Display the list of currently connected server information
 - **Usage**:
   ```bash
   ppio net servers
   ```
 - **Example**:
   ```bash
-  # 返回的记录格式
+  # the content format returned by the command
   # <index> [indexer | verifier] <ip>:<tcpport>:<udpport>
   > ppio net servers
   Indexers count: 1
@@ -385,48 +378,48 @@ sidebarDepth: 2
 
 ## ppio object
 - **Description**:  
-  管理用户的 Object
+  Manage the Object of the PPIO user node
 - **Usage**:
   ```bash
   ppio object SUB-COMMAND
   ```
 - **Subcommand**:
-  | 子命令 | 描述 |
+  | subcommand | description |
   |--|--|
-  |[`ppio object import`](#ppio-object-import)| 从本地文件系统或者管道导入一个文件到存储空间|
-  |[`ppio object export`](#ppio-object-export)|从本地存储空间导出一个 Object 到本地文件系统|
-  |[`ppio object put`](#ppio-object-put)|发布一个用于上传 Object 的合约|
-  |[`ppio object get`](#ppio-object-get)|下载一个 Object 的所有内容到本地存储空间|
-  |[`ppio object copy`](#ppio-object-copy)|发起一个 Object 的拷贝合约，用来将某个 Object 拷贝到自己名下|
-  |[`ppio object status`](#ppio-object-status)|获取某个 Object 相关的合约信息及执行情况，只能用于查看用户自己的 Object|
-  |[`ppio object list`](#ppio-object-list)|分页获取所有 Object 的合约执行情况|
-  |[`ppio object delete`](#ppio-object-delete)|删除某个 Object 对应的合约|
-  |[`ppio object renew`](#ppio-object-renew)|重新发布某个 Object 对应的合约|
-  |[`ppio object updateacl`](#ppio-object-updateacl)|更新某个 Object 的 ACL 信息|
-  |[`ppio object auth`](#ppio-object-auth)|将本地存储空间里面的 Object 授权给其他用户|
+  |[`ppio object import`](#ppio-object-import)| Import a file from a local file system or pipe into storage|
+  |[`ppio object export`](#ppio-object-export)|Export an Object from the local storage to the local file system|
+  |[`ppio object put`](#ppio-object-put)|Publish a contract to upload an Object|
+  |[`ppio object get`](#ppio-object-get)|Download all the contents of an Object to the local storage|
+  |[`ppio object copy`](#ppio-object-copy)|Initiate a copy contract of Object and copy an Object to yourself|
+  |[`ppio object status`](#ppio-object-status)|Obtain the contract information and execution status of an Object, which can only be used to view the user's own Object.|
+  |[`ppio object list`](#ppio-object-list)|Get contract execution for all Objects|
+  |[`ppio object delete`](#ppio-object-delete)|Delete the contract for an Object|
+  |[`ppio object renew`](#ppio-object-renew)|Republish the contract for an Object|
+  |[`ppio object updateacl`](#ppio-object-updateacl)|Update ACL information for an Object|
+  |[`ppio object auth`](#ppio-object-auth)|Authorize Objects in local storage to other users|
 
 ### ppio object import
 - **Description**:  
-  从本地文件系统或者管道读入一个文件，对文件进行处理后将其存放到本地存储空间，最终存放到本地存储空间里的文件我们称之为 Object 。  
+  Import a file from the local file system or pipeline, process the file and store it in the local storage space. The file that is finally stored in the local storage space is called "Object".  
 
-  **文件处理的详细过程:**
-  1. 先对该文件进行加密
-  2. 对加密后的文件进行切片以将其切成多个文件（称之为 Segment），Segment 的文件名为其内容的 Hash 值
-  3. 将所有 Segment 内容的 Hash 值进行拼接后，对拼接后的内容进行 Hash 以生成 Object 的 Hash 值
+  **Detailed process of file processing:**
+  1. Encrypt the file first
+  2. The encrypted file is sliced to cut it into multiple files (called Segment), and the file name of the Segment is the Hash value of its content.
+  3. After splicing the Hash values of all Segment contents, Hash the spliced content to generate the Hash value of the Object.
 
-  **Segment 在本地存储空间的位置如下所示:**
+  **The location of the Segment in the local storage space is as follows:**
   ```bash
   <datadir>/storage/<object-hash>/<object-hash>.desc
   <datadir>/storage/<object-hash>/<segment1-id>.dat
   <datadir>/storage/<object-hash>/<segment2-id>.dat
 
   # <object-hash> = HASH(<segment1-hash><segment2-hash>)
-  # <object-hash>.desc 的文件内容:
+  # the content of "<object-hash>.desc":
   # <object-hash> <object-hash>   <segment-count>  <object-length>
   # <segment1-id> <segment1-hash> <segment1-index> <segment1-length>
   # <segment1-id> <segment2-hash> <segment2-index> <segment2-length>
   ```  
-  文件成功导入后，可以通过 `storage object` 或者 `storage objects` 命令查看该 object 的信息
+  After the file is successfully imported, you can view the object information through the `ppio storage object` or `ppio storage objects` command.
 - **Usage**:
   ```bash
   ppio object import
@@ -436,17 +429,17 @@ sidebarDepth: 2
   ```
 - **Arguments**:
   ```bash
-  <local-file-path>:  待导入的本地文件路径
-  -: 表示可通过管道传输文件数据
+  <local-file-path>:  local file path to be imported
+  -: file data can be piped
   ```
 - **Options**:
-  | 选项, 简写 | 默认值 | 描述 |
+  | options| default | description |
   |--|--|--|
-  |--encrypt, -a| "AES" | 设置用于加密原始文件内容的加密算法，当前可选择的加密算法有: AES|
-  |--key, -k|""|指定用于加密原始文件内容的密钥|
+  |--encrypt| "AES" | Set the encryption algorithm used to encrypt the contents of the original file. The currently selectable encryption algorithms are: AES|
+  |--key|""|Specify the key used to encrypt the contents of the original file|
 - **Example**:
   ```bash
-  # 如果导入成功，命令返回的是 Object 的 Hash 值；否则返回错误标识及错误原因
+  # If the import is successful, the command returns the Hash value of the Object; otherwise, it returns the error ID and the cause of the error.
 
   > ppio object import /home/u/1.txt
   98715955d14b4ea129fed7efd1ffdd2ba7a0cc4a2e46160058a740893bbaf2d1
@@ -461,10 +454,10 @@ sidebarDepth: 2
 
 ### ppio object export
 - **Description**:  
-  从本地存储空间导出一个 Object 到本地文件系统  
-  **具体流程:**  
-  1. 如果本地存储空间中没有指定的 Object，则会先从 ppfs 网络中请求下载到空间；
-  2. 准备好 Object 后，对 Object 中的 Segment 进行拼接、解密，然后将最终生成的文件存入本地文件系统
+  Export an Object from the local storage to the local file system
+  **Detailed process:**  
+  1. If there is no specified Object in the local storage space, the download to the space is requested from the PPIO network first;
+  2. Once the Object is ready, splicing, decrypting the Segments in the Object, and then saving the resulting file to the local file system
 
 - **Usage**:
   ```bash
@@ -476,17 +469,17 @@ sidebarDepth: 2
   ```
 - **Arguments**:
   ```bash
-  <object-hash>: 待导出的 Object 的 Hash 值
+  <object-hash>: The hash value of the Object to be exported.
   ```
 - **Options**:
-  | 选项, 简写 | 默认值 | 描述 |
+  | options| default | description |
   |--|--|--|
-  |--encrypt, -a| "AES" | 设置用于解密原始文件内容的加密算法，和加密算法相对应|
-  |--key, -k|""|指定用于解密 Object 中内容的密钥|
-  |--output, -o|当前目录|本地文件的路径，如果不指定，则以 \<object-hash\> 为文件名写入当前目录|
+  |--encrypt| "AES" | Set the encryption algorithm used to decrypt the contents of the original file, corresponding to the encryption algorithm|
+  |--key|""|Specify the key used to decrypt the content in the Object|
+  |--output|current directory|The path to the local file, if not specified, write the current directory with \<object-hash\> as the file name|
 - **Example**:
   ```bash
-  # 命令执行成功后，返回导出文件的所在路径；否则返回错误码及错误原因
+  # If the command is successfully executed, the path of the exported file is returned; otherwise, the error code and the cause of the error are returned.
   > pwd
   /home/u/a/b/c/
   > ppio object export 98715955d14b4ea129fed7efd1ffdd2ba7a0cc4a2e46160058a740893bbaf2d1
@@ -499,7 +492,7 @@ sidebarDepth: 2
 
 ### ppio object put
 - **Description**:  
-  发布一个用于上传 Object 的合约
+  Publish a contract to upload an Object
 - **Usage**:
   ```bash
   ppio object put
@@ -511,19 +504,19 @@ sidebarDepth: 2
   ```
 - **Arguments**:
   ```bash
-  <object-hash>: 目标 Object 的 Hash 值
+  <object-hash>: The hash value of the target Object
   ```
 - **Options**:
-  | 选项, 简写 | 默认值 | 描述 |
+  | options| default | description |
   |--|--|--|
-  |--copies, -c|5|存储的副本个数，至少为 5 个|
-  |--duration, -d|8640000，即100天|Object 的存放时间，以 s（秒）为单位|
-  |--gasprice, -g|无|Gas 单价，以 wei 为单位|
-  |--acl, -a|public|Object 的访问权限: 设置为 public 代表该 Object 可以被任何人访问；设置为 private 代表该 Object 是私密的，需要被授权才能访问|
+  |--copies|5|The number of copies stored, at least 5|
+  |--duration|8640000(equals 100 days)|The storage time of the object, unit in s (second)|
+  |--gasprice| Null |Gas 单价，以 wei 为单位|
+  |--acl|public|Access to Object: Set to public to mean that the Object can be accessed by anyone; set to private to mean that the Object is private and needs to be authorized to access|
 - **Example**:
   ```bash
-  # 合约发布成功，不代表 Indexer 一定会调度或 Object 已上传成功，可以通过 `ppio object status` 命令来查询该 Object 是否被成功上传
-  # 如果合约发布失败，会返回错误标识及错误原因
+  # If the contract is successfully published, it does not mean that the Indexer node will be scheduled or the Object has been uploaded successfully. You can use the `ppio object status` command to query whether the Object is successfully uploaded.
+  # If the contract publishing is unsuccessful, it will return an error code and the cause of the error.
 
   > ppio object put --copies=3 --duration=864000 --gasprice=10000 --acl=public 98715955d14b4ea129fed7efd1ffdd2ba7a0cc4a2e46160058a740893bbaf2d1
   Succeed!
@@ -532,9 +525,9 @@ sidebarDepth: 2
 
 ### ppio object get
 - **Description**:  
-  下载一个 Object 的所有内容到本地存储空间。当 Object 为其他人所拥有时，有如下两种情况:
-  - 如果 Object 的 ACL 设置为 public，则可以直接通过 object get 来下载该 Object
-  - 如果 Object 的 ACL 设置为 private，则必须先拥有该 Object 的签名授权（通过 object auth命令），且在该签名有效期内，用户才能通过 object get 下载该 Object
+  Download the contents of an Object to your local storage. When Object is owned by someone else, there are two situations:
+  - If the ACL of the Object is set to public, you can download the Object directly via `ppio object get`
+  - If the ACL of the Object is set to private, you must first have the signature authorization for the Object (via the `ppio object auth` command), and the user can download the object via `ppio object get` during the validity period of the signature.
 
 - **Usage**:
   ```bash
@@ -546,34 +539,34 @@ sidebarDepth: 2
   ```
 - **Arguments**:
   ```bash
-  <object-hash>: Object 的 Hash 值（可以是其他人的 Object）
+  <object-hash>: The Hash value of the Object (can be another user\'s Object)
   ```
 - **Options**:
-  | 选项, 简写 | 默认值 | 描述 |
+  | options| default | description |
   |--|--|--|
-  |--gasprice, -g|无|Gas 单价，以 wei 为单位当 Object 为其他人所拥有时，需要设置该字段|
-  |--owner, -o|无|当 Object 为其他人所拥有时，该字段表示其他人的 user-id|
-  |--auth|无|当 Object 为其他人所拥有且 Object 的 ACL 设置为 private 时，需要其他人提供该 Object 的签名用以授权|
+  |--gasprice|无|Gas 单价，以 wei 为单位 (This field needs to be set when the Object is owned by someone else)|
+  |--owner|无|user-id (This field needs to be set when the Object is owned by someone else)|
+  |--auth|无|Signature of Object (When Object is owned by someone else and the ACL of the Object is set to private)|
 - **Example**:
   ```bash
-  # 命令执行成功后则返回 Object 在本地存储空间中的目录信息，否则返回错误标识和错误信息
+  # If the command is successfully executed, it returns the directory information of the Object in the local storage space. Otherwise it returns the error code and error message.
 
-  # 用户080a6fdb95cee6f852cb4b061525c866cbbe2c0a下自己的或者是Public的Object
+  # User's own or Public object
   > ppio object get --gasprice=1000 98715955d14b4ea129fed7efd1ffdd2ba7a0cc4a2e46160058a740893bbaf2d1
   Succeed!
 
-  # 用户080a6fdb95cee6f852cb4b061525c866cbbe2c0a给用户080a6fdb95cee6f852cb4b061525c866cbbe2c0a授权
+  # Authorize user "fffffff95cee6f852cb4b061525c866cbbe2c0a"
   > ppio object auth --accessor=fffffff95cee6f852cb4b061525c866cbbe2c0a --duration=86400 98715955d14b4ea129fed7efd1ffdd2ba7a0cc4a2e46160058a740893bbaf2d1
   Auth Info: 667b0377...
 
-  # 用户fffffff95cee6f852cb4b061525c866cbbe2c0a通过授权下载文件
+  # User "fffffff95cee6f852cb4b061525c866cbbe2c0a" downloads file by authorization
   > ppio object get --gasprice=1000 --auth=667b0377... --owner=080a6fdb95cee6f852cb4b061525c866cbbe2cff 98715955d14b4ea129fed7efd1ffdd2ba7a0cc4a2e46160058a740893bbaf2d1
   Succeed!
   ```
 
 ### ppio object copy
 - **Description**:  
-  发起一个 Object 的拷贝合约，用来将某个 Object 拷贝到自己名下
+  Initiate a copy contract of Object to copy an Object to your own
 - **Usage**:
   ```bash
   ppio object copy
@@ -587,21 +580,21 @@ sidebarDepth: 2
   ```
 - **Arguments**:
   ```bash
-  <object-hash>: 待拷贝的 Object 的 Hash 值
+  <object-hash>: The hash value of the Object to be copied
   ```
 - **Options**:
-  | 选项, 简写 | 默认值 | 描述 |
+  | options| default | description |
   |--|--|--|
-  |--copies, -c|5|存储的副本个数，至少为 5 个|
-  |--duration, -d|100天，即8640000|Object 的存放时间，以 s（秒）为单位|
-  |--gasprice, -g|无|Gas 单价，以 wei 为单位|
-  |--acl, -a|public|Object 的访问权限，设置为 public 代表该 Object 可以被任何人访问；设置为 private 代表该 Object 是私密的，需要被授权才能访问|
-  |--owner, -o|无|文件拥有者的id|
-  |--auth, -s|无|拷贝其他人的 Object 时所需，需要其他人提供的 Object 签名用以授权|
+  |--copies|5|The number of copies stored, at least 5|
+  |--duration|8640000(equals 100 days)|The storage time of the Object, unit in s (second)|
+  |--gasprice| Null |Gas 单价，以 wei 为单位|
+  |--acl|public|The access permission of Object, set to public means that the Object can be accessed by anyone; set to private means that the Object is private and needs to be authorized to access|
+  |--owner| Null |User ID of the Object owner|
+  |--auth| Null | Required to copy other people's Objects, need an Object signature provided by others to authorize|
 - **Example**:
   ```bash
-  # 合约 Copy 成功后则直接返回成功标识，不代表 Indexer 一定会调度或 Object 已拷贝成功，可以通过 `object status` 命令来查询该 Object 是否被成功拷贝
-  # 合约 Copy 失败则返回错误标识及错误原因
+  # After the contract is successfully copied, it directly returns the success signal. It does not mean that the Indexer will be scheduled or the Object has been successfully copied. You can use the `ppio object status` command to query whether the Object is successfully copied.
+  # If the contract Copy fails, it will return the error code and the cause of the error.
 
   > ppio object copy --copies=5 --duration=86400 --gasprice=100 --auth=0x1234 --owner=080a6fdb95cee6f852cb4b061525c866cbbe2cff 98715955d14b4ea129fed7efd1ffdd2ba7a0cc4a2e46160058a740893bbaf2d1
   Succeed!
@@ -610,18 +603,18 @@ sidebarDepth: 2
 
 ### ppio object status
 - **Description**:  
-  获取某个 Object 相关的合约信息及执行状况，只能用于查看自己的 Object
+  Get the contract information and execution status of an Object, which can only be used to view your own Object.
 - **Usage**:
   ```bash
   ppio object status <object-hash>
   ```
 - **Arguments**:
   ```bash
-  <object-hash>: 待查询的 Object 的 Hash 值
+  <object-hash>: The hash value of the Object to be queried
   ```
 - **Example**:
   ```bash
-  # 命令执行成功，返回示例:
+  # The content format returned by the command:
   > ppio object status 98715955d14b4ea129fed7efd1ffdd2ba7a0cc4a2e46160058a740893bbaf2d1
   Object Hash: [98715955d14b4ea129fed7efd1ffdd2ba7a0cc4a2e46160058a740893bbaf2d1]
   Storage Contracts:
@@ -654,7 +647,7 @@ sidebarDepth: 2
 
 ### ppio object list
 - **Description**:  
-  分页获取所有 Object 。和object status不同的是，object list 只是 Object 的列表，没有相对应的合约的执行情况等信息
+  Paginate all Objects. Unlike `ppio object status`, `ppio object list` is just a list of Objects, and there is no information about the execution of the corresponding contract.
 - **Usage**:
   ```bash
   ppio object list
@@ -662,13 +655,13 @@ sidebarDepth: 2
       [--page-size=<page-size>]
   ```
 - **Options**:
-  | 选项, 简写 | 默认值 | 描述 |
+  | options| default | description |
   |--|--|--|
-  |--start-page, -s|1|开始页，需大于等于 1|
-  |--page-size, -p|10|每页最多包含的 Object 记录数|
+  |--start-page|1|Start page, need to be greater than or equal to 1|
+  |--page-size|10|Maximum number of Object records per page|
 - **Example**:
   ```bash
-  # 命令输出格式:
+  # The content format returned by the command:
   > ppio object list
   [
     {
@@ -692,25 +685,25 @@ sidebarDepth: 2
 
 ### ppio object delete
 - **Description**:  
-  删除某个 Object 对应的合约
+  Delete the contract of an Object
 - **Usage**:
   ```bash
   ppio object delete <object-hash>
   ```
 - **Arguments**:
   ```bash
-  <object-hash>: 待删除的 Object 的 Hash 值
+  <object-hash>: The hash value of the Object to be deleted
   ```
 - **Example**:
   ```bash
-  # 删除合约成功后会返回成功标识，否则返回错误标识和原因
+  # The success signal will be returned after the contract is successfully deleted, otherwise the error code and reason will be returned.
   > ppio object delete 98715955d14b4ea129fed7efd1ffdd2ba7a0cc4a2e46160058a740893bbaf2d1
   Succeed!
   ```
 
 ### ppio object renew
 - **Description**:  
-  重新发布某个 Object 对应的合约
+  Republish the contract for an Object
 - **Usage**:
   ```bash
   ppio object renew
@@ -722,25 +715,25 @@ sidebarDepth: 2
   ```
 - **Arguments**:
   ```bash
-  <object-hash>: 待重新发布合约的 Object 的 Hash 值
+  <object-hash>: The hash value of the Object to be republished
   ```
 - **Options**:
-  | 选项, 简写 | 默认值 | 描述 |
+  | options| default | description |
   |--|--|--|
-  |--copies, -c|5|存储副本的个数，不小于 5|
-  |--duration, -d|100天，即8640000|Object 的存放时间，以 s（秒）为单位|
-  |--gasprice, -g|无|Gas 单价，以 wei 为单位|
-  |--acl, -a|public|Object 的访问权限，设置为 public 代表该 Object 可以被任何人访问；设置为 private 代表该 Object 是私密的，需要被授权才能访问|
+  |--copies|5|The number of stored copies, not less than 5|
+  |--duration|8640000(equals 100 days)|The storage time of the object, unit in s (seconds)|
+  |--gasprice| Null |Gas 单价，以 wei 为单位|
+  |--acl|public|The access permission of Object, set to public means that the Object can be accessed by anyone; set to private means that the Object is private and needs to be authorized to access|
 - **Example**:
   ```bash
-  # 发布合约成功会返回成功标识，否则会返回失败标识及原因另外，发布合约成功，并不代表 Indexer 一定会调度
+  # The successful completion of the contract will return the success signal, otherwise it will return the error code and the reason. In addition, the release of the contract is successful, it does not mean that the Indexer node will be scheduled.
   > ppio object renew --duration=864000 --gasprice=100 --copies=5 --acl=public 98715955d14b4ea129fed7efd1ffdd2ba7a0cc4a2e46160058a740893bbaf2d1
   Succeed!
   ```
 
 ### ppio object updateacl
 - **Description**:  
-  更新某个 Object 的 ACL 信息
+  Update ACL information for an Object
 - **Usage**:
   ```bash
   ppio object updateacl
@@ -749,15 +742,15 @@ sidebarDepth: 2
   ```
 - **Arguments**:
   ```bash
-  <object-hash>: 待更新 ACL 信息的 Object 的 Hash 值
+  <object-hash>: The hash value of the Object to be updated with ACL information
   ```
 - **Options**:
-  | 选项, 简写 | 默认值 | 描述 |
+  | options| default | description |
   |--|--|--|
-  |--acl, -a|public|Object 的访问权限，设置为 public 代表该 Object 可以被任何人访问；设置为 private 代表该 Object 是私密的，需要被授权才能访问|
+  |--acl|public|The access permission of Object, set to public means that the Object can be accessed by anyone; set to private means that the Object is private and needs to be authorized to access|
 - **Example**:
   ```bash
-  # 更新成功会返回成功标识，否则返回失败标识及原因
+  # The successful update will return the success signal, otherwise it will return the error code and the reason.
   > ppio object updateacl --acl=public 98715955d14b4ea129fed7efd1ffdd2ba7a0cc4a2e46160058a740893bbaf2d1
   Succeed!
 
@@ -765,8 +758,8 @@ sidebarDepth: 2
 
 ### ppio object auth
 - **Description**:  
-  将本地存储空间里面的 Object 授权给其他用户，如果该 Object 的 ACL 为 public，则该命令执行无实际效果。
-  授权时长不能超过该用户拥有该文件的剩余时长。
+  Authorize the Object in the local storage space to other users. If the ACL of the Object is public, the command has no effect.
+  The authorization duration cannot exceed the length of time the user has the file.
 - **Usage**:
   ```bash
   ppio object auth
@@ -776,23 +769,23 @@ sidebarDepth: 2
   ```
 - **Arguments**:
   ```bash
-  <object-hash>: 待授权的 Object 的 Hash 值
+  <object-hash>: The hash value of the Object to be authorized
   ```
 - **Options**:
-  | 选项, 简写 | 默认值 | 描述 |
+  | options| default | description |
   |--|--|--|
-  |--accessor, -u|无|被授权用户的id|
-  |--duration, -d|1天，即86400|授权有效持续时间，单位为 s（秒）|
+  |--accessor| null |Authorized user's id|
+  |--duration|86400(equals a day)|Authorized effective duration, unit in s (second)|
 - **Example**:
   ```bash
-  # 授权成功，则返回授权的签名信息，用于被授权用户来获取 Object，否则返回错误标识和信息
+  # If the authorization is successful, the authorized signature information is returned for the authorized user to obtain the Object, otherwise the error code and information are returned.
   > ppio object auth --accessor=080a6fdb95cee6f852cb4b061525c866cbbe2c0a --duration=86400 98715955d14b4ea129fed7efd1ffdd2ba7a0cc4a2e46160058a740893bbaf2d1
   Auth Info: 667b0377565b0bde135abca46dc724f1e7db610e0d849e06b34d5110d72f427f26ec6250d10f02c46a6fc3c339f0985cc8dd3ace423302bae2d77a4e656f79420198715955d14b4ea129fed7efd1ffdd2ba7a0cc4a2e46160058a740893bbaf2d127000000002508021221033fb36e1471d2153d0759e14386c6c294b1ad09244841ee8d043eadd1bfe7baaa14000000080a6fdb95cee6f852cb4b061525c866cbbe2c0a63f3b65b00000000
   ```
 
 ## ppio status
 - **Description**:  
-  显示当前 ppio 节点运行时的详细信息
+  Display details of the current PPIO user node runtime
 - **Usage**:
   ```bash
   ppio status
@@ -810,37 +803,36 @@ sidebarDepth: 2
 
 ## ppio storage
 - **Description**:  
-  管理本地存储空间
+  Manage local storage
 - **Usage**:
   ```bash
   ppio storage SUB-COMMAND
   ```
 
-  子命令:
-
-  | 子命令 | 描述 |
+  subcommand:
+  | subcommand | description |
   |--|--|
-  |[`ppio storage object`](#ppio-storage-object)|显示当前节点指定object的信息|
-  |[`ppio storage objects`](#ppio-storage-objects)|显示当前节点所有objects的信息|
-  |[`ppio storage segments`](#ppio-storage-segments)|显示当前节点所有segments的信息|
-  |[`ppio storage keep`](#ppio-storage-keep)|将 Object 保持在本地存储空间中|
-  |[`ppio storage usage`](#ppio-storage-usage)|查看本地存储空间的使用情况|
-  |[`ppio storage gc`](#ppio-storage-gc)|清理掉本地存储空间中没有被保持的 Object|
+  |[`ppio storage object`](#ppio-storage-object)|Display information about the specified Object of the current node|
+  |[`ppio storage objects`](#ppio-storage-objects)|Display information about all Objects of the current node|
+  |[`ppio storage segments`](#ppio-storage-segments)|Display information about all segments of the current node|
+  |[`ppio storage keep`](#ppio-storage-keep)|Keep Object in local storage|
+  |[`ppio storage usage`](#ppio-storage-usage)|View usage of local storage|
+  |[`ppio storage gc`](#ppio-storage-gc)|Clean up objects that are not kept in the local storage space|
 
 ### ppio storage object
 - **Description**:  
-  显示当前节点指定object的信息
+  Display information about the specified Object of the current node
 - **Usage**:
   ```bash
   ppio storage object <object-hash>
   ```
 - **Arguments**:
   ```bash
-  <object-hash>: 待显示的 Object 的 Hash 值，十六进制字符串
+  <object-hash>: Hash value of the Object to be displayed, hex string
   ```
 - **Example**:
   ```bash
-  # 显示当前节点指定object的信息，包括其大小，segment的个数，以及各个segment的id和hash值
+  # Display information about the specified Object of the current node, including its size, the number of segments, and the id and hash values of each segment.
   > ppio storage keep 7547df322cbaf84fd02248133bf5a1c2fae7296960eced0ef6bde2ff3ef37cf8
   Hash: 7547df322cbaf84fd02248133bf5a1c2fae7296960eced0ef6bde2ff3ef37cf8
   Length: 87041
@@ -850,18 +842,14 @@ sidebarDepth: 2
 
 ### ppio storage objects
 - **Description**:  
-  显示当前节点所有objects的信息
+  Display information about all Objects of the current node
 - **Usage**:
   ```bash
   ppio storage objects
   ```
-- **Arguments**:
-  ```
-  无
-  ```
 - **Example**:
   ```bash
-  # 显示当前节点所有objects的信息，包括每个 object 的hash值和大小
+  # Display information about all objects of the current node, including the hash value and size of each object
   > ppio storage objects
   Hash=C9B351CA25F45D9A1D3830F16D987EEEB90668466768A03A38DC592FCA9937EC    Length=16777216
   Hash=E949A1CC67C268D7E5294183B9A57B63BC00A0CC8A22909E83D2AAC181A4A9D6    Length=33554435
@@ -872,18 +860,14 @@ sidebarDepth: 2
 
 ### ppio storage segments
 - **Description**:  
-  显示当前节点所有segments的信息
+  Display information about all segments of the current node
 - **Usage**:
   ```bash
   ppio storage segments
   ```
-- **Arguments**:
-  ```
-  无
-  ```
 - **Example**:
   ```bash
-  # 显示当前节点所有segments的信息，包括每个segment的id，hash，和大小
+  # Display information about all segments of the current node, including id, hash, and size of each segment
   > ppio storage segments
   Id=6ad3e2278e1251c1a1ebf3f842dcff2caf21d24b94148a8649896f915e574c1e Hash=7547df322cbaf84fd02248133bf5a1c2fae7296960eced0ef6bde2ff3ef37cf8    Length=87041
   Id=cc28362ef3b1102b7be2aacc4d98783b87f1bbfaa26f602fff53cbd62ef70632 Hash=bfa15dd67653a6c20a871d8f94e2136a4d053e587cf9cd1d5cf88b96c9370e28    Length=132098
@@ -895,27 +879,31 @@ sidebarDepth: 2
   Id=4b5053da3189dc72a60ab4232a13d76f187227a12cbbd2e749c8f9785f05eb2d Hash=4a5577926eb696943ce694ca52d57a62588a3867535dadf23d2afa2863b67a36    Length=3
   ```
 
-### ppio storage keep
+### ppio storage keep <Badge text="todo" type="warn"/>
 - **Description**:  
-  将某个 Object 保持在本地存储空间中
-- **Usage**:
+  Keep an Object in local storage.
+
+  ::: warning WARNING
+  The user's own Objects are automatically kept to local storage space. Files copied from other users require to be kept to local storage space manually.
+  :::
+
   ```bash
   ppio storage keep <object-hash>
   ```
 - **Arguments**:
   ```bash
-  <object-hash>: 待设置的 Object 的 Hash 值
+  <object-hash>: The hash value of the Object to be set
   ```
 - **Example**:
   ```bash
-  # 返回成功或失败标识
+  # Return success or failure signal
   > ppio storage keep 98715955d14b4ea129fed7efd1ffdd2ba7a0cc4a2e46160058a740893bbaf2d1
   Succeed!
   ```
 
-### ppio storage usage
+### ppio storage usage <Badge text="todo" type="warn"/>
 - **Description**:  
-  查看本地存储空间的使用情况
+  View usage of local storage
 - **Usage**:
   ```
   ppio storage usage
@@ -930,61 +918,57 @@ sidebarDepth: 2
   KeptCount: 3        // Count of kept objects
   ```
 
-### ppio storage gc
+### ppio storage gc <Badge text="todo" type="warn"/>
 - **Description**:  
-  清理掉本地存储空间中没有被保持的 Object
+  Clean up objects that are not kept in the local storage space
 - **Usage**:
   ```bash
   ppio storage gc
   ```
 - **Example**:
   ```bash
-  # 返回成功或失败标识
+  # Return success or failure signal
   > ppio storage gc
   Succeed!
   ```
 
 ## ppio wallet
 - **Description**:  
-  管理用户的钱包
+  Manage user's wallet
 - **Usage**:
   ```bash
   ppio wallet SUB-COMMAND
   ```
 - **Subcommand**:
-  | 子命令 | 描述 |
+  | subcommand | description |
   |--|--|
-  |[`ppio wallet address`](#ppio-wallet-address)|显示当前钱包地址，十六进制字符串|
-  |[`ppio wallet balance`](#ppio-wallet-balance)|显示当前钱包地址的余额|
+  |[`ppio wallet address`](#ppio-wallet-address)|Display current wallet address, hex string|
+  |[`ppio wallet balance`](#ppio-wallet-balance)|Show the balance of the current wallet address|
 
 ### ppio wallet address
 - **Description**:  
-  显示当前钱包地址
+  Show current wallet address
 - **Usage**:
   ```bash
   ppio wallet address
   ```
-- **Arguments**:
-  ```
-  无
-  ```
 - **Example**:
   ```bash
-  # 返回当前钱包地址
+  # Return current wallet address
   > ppio wallet address
   080a6fdb95cee6f852cb4b061525c866cbbe2c0a
   ```
 
 ### ppio wallet balance
 - **Description**:  
-  显示当前钱包地址的余额
+  Show the balance of the current wallet address
 - **Usage**:
   ```bash
   ppio metadata get
   ```
 - **Example**:
   ```bash
-  # 返回当前钱包地址的余额
+  # Returns the balance of the current wallet address
   > ppio wallet balance
   1000000000
   ```

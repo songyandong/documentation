@@ -25,7 +25,7 @@ module.exports = {
     nav: [
       { text: 'Guide', link: '/guide/' },
       { text: 'API', link: '/api/' },
-      { text: 'Projects', internal: true, link: 'https://pp.io' },
+      { text: 'Projects', internal: true, link: 'https://pp.io/projects.html' },
       { text: 'Blog', link: 'https://blog.pp.io' },
       { text: 'Github', link: 'https://github.com/ppio' },
     ],
