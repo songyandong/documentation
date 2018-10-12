@@ -9,7 +9,9 @@ sidebarDepth: 2
 除了 `daemon start` , `init` , `help` , `version` , 其他命令或者子命令都是通过RPC调用，访问或者控制该用户节点，故除非特别说明，它们都有相同的选项 rpchost 和 rpcport
 
 `ppio daemon start` 也有选项 "rpchost 和 rpcport"，是用来临时覆盖默认配置文件中的RPC服务监听地址和端口
+
 - **Usage**:
+
   ```
   # 对于daemon启动命令
   ppio daemon start [--rpchost=<rpchost>] [--rpcport=<rpcport>]
@@ -19,12 +21,16 @@ sidebarDepth: 2
       [--rpchost=<rpchost>]
       [--rpcport=<rpcport>]
   ```
+
 - **Options**:
+
   | 选项    | 默认值      | 描述         |
   | --------- | ----------- | ------------ |
   | --rpchost | "127.0.0.1" | RPC 服务地址 |
   | --rpcport | 18060       | RPC 端口     |
+
 - **Example**:
+
   ```bash
   # 启动用户节点，监听18061端口
   > ppio --rpcport=18061
@@ -36,22 +42,32 @@ sidebarDepth: 2
   ```
 
 ## ppio\_config
+
 - **Description**:
+
   管理用户节点的配置信息
+
 - **Subcommand**:
+
   | 子命令                                  | 描述                       |
   | --------------------------------------- | -------------------------- |
   | [`ppio_config_show`](#ppio-config-show) | 列出当前用户节点的配置信息 |
 
 ## ppio_config\_show
-- **Description**:  
+
+- **Description**:
+
   列出当前用户节点的配置信息
+
 - **Options**:
+
   | 选项    | 默认值      | 描述         |
   | --------- | ----------- | ------------ |
   | --rpchost | "127.0.0.1" | RPC 服务地址 |
   | --rpcport | 18060       | RPC 端口     |
+
 - **Example**:
+
   ```bash
   // Request
   curl -X POST --data '{"jsonrpc":"2.0","method":"ppio_config_show","params":[],"id":3}'
@@ -85,17 +101,25 @@ sidebarDepth: 2
   ```
 
 ## ppio\_daemon
+
 - **Description**:
+
   管理用户节点服务
+
 - **Subcommand**:
+
   | 子命令                                  | 描述             |
   | --------------------------------------- | ---------------- |
   | [`ppio_daemon_stop`](#ppio-daemon-stop) | 关闭用户节点服务 |
 
 ### ppio\_daemon\_stop
+
 - **Description**:
+
   关闭用户节点服务
+
 - **Example**:
+
   ```bash
   # 返回成功标识或失败标识及原因
 
@@ -111,23 +135,33 @@ sidebarDepth: 2
   ```
 
 ## ppio\_metadata
+
 - **Description**:
+
   管理用户的元数据
+
 - **Subcommand**:
+
   | 子命令                                    | 描述                                 |
   | ----------------------------------------- | ------------------------------------ |
   | [`ppio_metadata_put`](#ppio-metadata-put) | 向 Indexer 上传用户 的 MetaData 信息 |
   | [`ppio_metadata_get`](#ppio-metadata-get) | 向 Indexer 下载用户的 MetaData 信息  |
 
 ### ppio\_metadata\_put
+
 - **Description**:
+
   向 Indexer 上传用户的 MetaData 信息，限制该信息的最大占用空间为 1M
   MetaData 用于存储用户相关的基本信息，使用场景不限
+
 - **Arguments**:
+
   ```bash
   <meta-data>：待上传的 MetaData 内容，文本形式
   ```
+
 - **Example**:
+
   ```bash
   # 返回成功或失败的标识
 
@@ -143,9 +177,13 @@ sidebarDepth: 2
   ```
 
 ### ppio\_metadata\_get
+
 - **Description**:
+
   向 Indexer 下载用户的 MetaData 信息
+
 - **Example**:
+
   ```bash
   # 命令执行成功后可获得用户 MetaData 的十六进制形式的字符串
 
@@ -161,9 +199,13 @@ sidebarDepth: 2
   ```
 
 ## ppio\_net
+
 - **Description**:
+
   管理用户节点的网络信息
+
 - **Subcommand**:
+
   | 子命令                                  | 描述                                   |
   | --------------------------------------- | -------------------------------------- |
   | [`ppio_net_id`](#ppio-net-id)           | 显示当前节点的网络地址，十六进制字符串 |
@@ -172,9 +214,13 @@ sidebarDepth: 2
   | [`ppio_net_servers`](#ppio-net-servers) | 显示当前已连接的 Servers 信息列表      |
 
 ### ppio\_net\_id
+
 - **Description**:
+
   显示当前节点的网络地址
+
 - **Example**:
+
   ```bash
   # 命令返回
 
@@ -190,13 +236,19 @@ sidebarDepth: 2
   ```
 
 ### ppio\_net\_ping
+
 - **Description**:
+
   检测与其他节点之间的连接情况
+
 - **Arguments**:
+
   ```bash
   <target-peer-id>：待检测的目标 peer ID 值
   ```
+
 - **Example**:
+
   ```bash
   # 命令返回内容格式：
   # <target-peer-id> <out-latency> <in-latency>
@@ -213,9 +265,13 @@ sidebarDepth: 2
   ```
 
 ### ppio\_net\_peers
+
 - **Description**:
+
   显示当前已连接的 Peer 信息列表
+
 - **Example**:
+
   ```bash
   # 返回的记录格式
   # <peer-id> <ip:port> <software-version> <in-latency> <out-latency>
@@ -232,9 +288,13 @@ sidebarDepth: 2
   ```
 
 ### ppio\_net\_servers
+
 - **Description**:
+
   显示当前已连接的 Servers 信息列表
+
 - **Example**:
+
   ```bash
   # 返回的记录格式
   # <index> [indexer | verifier] <ip>:<tcpport>:<udpport>
@@ -254,9 +314,13 @@ sidebarDepth: 2
   ```
 
 ## ppio\_object
+
 - **Description**:
+
   管理用户的 Object
+
 - **Subcommand**:
+
   | 子命令                                            | 描述                                                                    |
   | ------------------------------------------------- | ----------------------------------------------------------------------- |
   | [`ppio_object_import`](#ppio-object-import)       | 从本地文件系统或者管道导入一个文件到存储空间                            |
@@ -272,7 +336,9 @@ sidebarDepth: 2
   | [`ppio_object_auth`](#ppio-object-auth)           | 将本地存储空间里面的 Object 授权给其他用户                              |
 
 ### ppio\_object\_import
+
 - **Description**:
+
   ```bash
   从本地文件系统或者管道读入一个文件，对文件进行处理后将其存放到本地存储空间，最终存放到本地存储空间里的文件我们称之为 Object
   文件处理的详细过程：
@@ -291,17 +357,23 @@ sidebarDepth: 2
 
   文件成功导入后，可以通过 storage object 或者 storage objects 命令查看该 object 的信息
   ```
+
 - **Arguments**:
+
   ```bash
   <local-file-path>： 待导入的本地文件路径
   -：表示可通过管道传输文件数据
   ```
+
 - **Options**:
+
   | 选项    | 默认值 | 描述                                                         |
   | --------- | ------ | ------------------------------------------------------------ |
   | --encrypt | "AES"  | 设置用于加密原始文件内容的加密算法，当前可选择的加密算法有：AES |
   | --key     | ""     | 指定用于加密原始文件内容的密钥                                  |
+
 - **Example**:
+
   ```bash
   # 如果导入成功，命令返回的是 Object 的 Hash 值；否则返回错误标识及错误原因
 
@@ -344,22 +416,30 @@ sidebarDepth: 2
   ```
 
 ### ppio\_object\_export
+
 - **Description**:
+
   从本地存储空间导出一个 Object 到本地文件系统
   **具体流程：**
   1. 如果本地存储空间中没有指定的 Object，则会先从 ppfs 网络中请求下载到空间；
   2. 准备好 Object 后，对 Object 中的 Segment 进行拼接、解密，然后将最终生成的文件存入本地文件系统
+
 - **Arguments**:
+
   ```bash
   <object-hash>：待导出的 Object 的 Hash 值
   ```
+
 - **Options**:
+
   | 选项    | 默认值   | 描述                                                         |
   | --------- | -------- | ------------------------------------------------------------ |
   | --encrypt | "AES"    | 设置用于解密原始文件内容的加密算法，和加密算法相对应         |
   | --key     | ""       | 指定用于解密 Object 中内容的密钥                             |
   | --output  | 当前目录 | 本地文件的路径，如果不指定，则以 \<object-hash\> 为文件名写入当前目录 |
+
 - **Example**:
+
   ```bash
   # 命令执行成功后，返回导出文件的所在路径；否则返回错误码及错误原因
   > pwd
@@ -388,20 +468,28 @@ sidebarDepth: 2
   ```
 
 ### ppio\_object\_put
+
 - **Description**:
+
   发布一个用于上传 Object 的合约
+
 - **Arguments**:
+
   ```bash
   <object-hash>：目标 Object 的 Hash 值
   ```
+
 - **Options**:
+
   | 选项     | 默认值           | 描述                                                         |
   | ---------- | ---------------- | ------------------------------------------------------------ |
   | --copies   | 5                | 存储的副本个数，至少为 5 个                                  |
   | --duration | 8640000，即100天 | Object 的存放时间，以 s（秒）为单位                          |
   | --gasprice | 无               | Gas 单价，以 wei 为单位                                      |
   | --acl      | public           | Object 的访问权限：设置为 public 代表该 Object 可以被任何人访问；设置为 private 代表该 Object 是私密的，需要被授权才能访问 |
+
 - **Example**:
+
   ```bash
   # 合约发布成功，不代表 Indexer 一定会调度或 Object 已上传成功，可以通过 `ppio object status` 命令来查询该 Object 是否被成功上传
   # 如果合约发布失败，会返回错误标识及错误原因
@@ -418,21 +506,29 @@ sidebarDepth: 2
   ```
 
 ### ppio\_object\_get
+
 - **Description**:
+
   下载一个 Object 的所有内容到本地存储空间,当 Object 为其他人所拥有时，有如下两种情况：
     - 如果 Object 的 ACL 设置为 public，则可以直接通过 object get 来下载该 Object
     - 如果 Object 的 ACL 设置为 private，则必须先拥有该 Object 的签名授权（通过 object auth命令），且在该签名有效期内，用户才能通过 object get 下载该 Object
+
 - **Arguments**:
+
   ```bash
   <object-hash>：Object 的 Hash 值（可以是其他人的 Object）
   ```
+
 - **Options**:
+
   | 选项     | 默认值 | 描述                                                         |
   | ---------- | ------ | ------------------------------------------------------------ |
   | --gasprice | 无     | Gas 单价，以 wei 为单位当 Object 为其他人所拥有时，需要设置该字段 |
   | --owner    | 无     | 当 Object 为其他人所拥有时，该字段表示其他人的 user-id       |
   | --auth     | 无     | 当 Object 为其他人所拥有且 Object 的 ACL 设置为 private 时，需要其他人提供该 Object 的签名用以授权 |
+
 - **Example**:
+
   ```bash
   # 命令执行成功后则返回 Object 在本地存储空间中的目录信息，否则返回错误标识和错误信息
 
@@ -471,13 +567,19 @@ sidebarDepth: 2
   ```
 
 ### ppio\_object\_copy
+
 - **Description**:
+
   发起一个 Object 的拷贝合约，用来将某个 Object 拷贝到自己名下
+
 - **Arguments**:
+
   ```bash
   <object-hash>：待拷贝的 Object 的 Hash 值
   ```
+
 - **Options**:
+
   | 选项     | 默认值           | 描述                                                         |
   | ---------- | ---------------- | ------------------------------------------------------------ |
   | --copies   | 5                | 存储的副本个数，至少为 5 个                                  |
@@ -486,7 +588,9 @@ sidebarDepth: 2
   | --acl      | public           | Object 的访问权限，设置为 public 代表该 Object 可以被任何人访问；设置为 private 代表该 Object 是私密的，需要被授权才能访问 |
   | --owner    | 无               | 文件拥有者的id                                                                                                             |
   | --auth     | 无               | 拷贝其他人的 Object 时所需，需要其他人提供的 Object 签名用以授权                                                           |
+
 - **Example**:
+
   ```bash
   # 合约 Copy 成功后则直接返回成功标识，不代表 Indexer 一定会调度或 Object 已拷贝成功，可以通过 `object status` 命令来查询该 Object 是否被成功拷贝
   # 合约 Copy 失败则返回错误标识及错误原因
@@ -503,13 +607,19 @@ sidebarDepth: 2
   ```
 
 ### ppio\_object\_status
+
 - **Description**:
+
   获取某个 Object 相关的合约信息及执行状况，只能用于查看自己的 Object
+
 - **Arguments**:
+
   ```bash
   <object-hash>：待查询的 Object 的 Hash 值
   ```
+
 - **Example**:
+
   ```bash
   # 命令执行成功，返回示例：
   // Request
@@ -553,14 +663,20 @@ sidebarDepth: 2
   ```
 
 ### ppio\_object\_list
+
 - **Description**:
+
   分页获取所有 object 。和object status不同的是，object list 只是 Object 的列表，没有相对应的合约的执行情况等信息
+
 - **Options**:
+
   | 选项       | 默认值 | 描述                         |
   | ------------ | ------ | ---------------------------- |
   | --start-page | 1      | 开始页，需大于等于 1         |
   | --page-size  | 10     | 每页最多包含的 Object 记录数 |
+
 - **Example**:
+
   ```bash
   # 命令输出格式：
   // Request
@@ -594,13 +710,19 @@ sidebarDepth: 2
   ```
 
 ### ppio\_object\_delete
+
 - **Description**:
+
   删除某个 Object 对应的合约
+
 - **Arguments**:
+
   ```bash
   <object-hash>：待删除的 Object 的 Hash 值
   ```
+
 - **Example**:
+
   ```bash
   # 删除合约成功后会返回成功标识，否则返回错误标识和原因
   // Request
@@ -615,20 +737,28 @@ sidebarDepth: 2
   ```
 
 ### ppio\_object\_renew
+
 - **Description**:
+
   重新发布某个 Object 对应的合约
+
 - **Arguments**:
+
   ```bash
   <object-hash>：待重新发布合约的 Object 的 Hash 值
   ```
+
 - **Options**:
+
   | 选项     | 默认值           | 描述                                                         |
   | ---------- | ---------------- | ------------------------------------------------------------ |
   | --copies   | 5                | 存储副本的个数，不小于 5                                     |
   | --duration | 100天，即8640000 | Object 的存放时间，以 s（秒）为单位                          |
   | --gasprice | 无               | Gas 单价，以 wei 为单位                                      |
   | --acl      | public           | Object 的访问权限，设置为 public 代表该 Object 可以被任何人访问；设置为 private 代表该 Object 是私密的，需要被授权才能访问 |
+
 - **Example**:
+
   ```bash
   # 发布合约成功会返回成功标识，否则会返回失败标识及原因另外，发布合约成功，并不代表 Indexer 一定会调度
   // Request
@@ -643,17 +773,25 @@ sidebarDepth: 2
   ```
 
 ### ppio\_object\_updateacl
+
 - **Description**:
+
   更新某个 Object 的 ACL 信息
+
 - **Arguments**:
+
   ```bash
   <object-hash>：待更新 ACL 信息的 Object 的 Hash 值
   ```
+
 - **Options**:
+
   | 选项  | 默认值 | 描述                                                                                                                       |
   | ----- | ------ | -------------------------------------------------------------------------------------------------------------------------- |
   | --acl | public | Object 的访问权限，设置为 public 代表该 Object 可以被任何人访问；设置为 private 代表该 Object 是私密的，需要被授权才能访问 |
+
 - **Example**:
+
   ```bash
   # 更新成功会返回成功标识，否则返回失败标识及原因
   // Request
@@ -668,19 +806,27 @@ sidebarDepth: 2
   ```
 
 ### ppio\_object\_auth
+
 - **Description**:
+
   将本地存储空间里面的 Object 授权给其他用户，如果该 Object 的 ACL 为 public，则该命令执行无实际效果。
   授权时长不能超过该用户拥有该文件的剩余时长。
+
 - **Arguments**:
+
   ```bash
   <object-hash>：待授权的 Object 的 Hash 值
   ```
+
 - **Options**:
+
   | 选项       | 默认值       | 描述                             |
   | ---------- | ------------ | -------------------------------- |
   | --accessor | 无           | 被授权用户的id                   |
   | --duration | 1天，即86400 | 授权有效持续时间，单位为 s（秒） |
+
 - **Example**:
+
   ```bash
   # 授权成功，则返回授权的签名信息，用于被授权用户来获取 Object，否则返回错误标识和信息
   // Request
@@ -695,9 +841,13 @@ sidebarDepth: 2
   ```
 
 ## ppio\_status
+
 - **Description**:
+
   显示当前 ppio 节点运行时的详细信息
+
 - **Example**:
+
   ```bash
   // Request
   curl -X POST --data '{"jsonrpc":"2.0","method":"ppio_status","params":[],"id":3}'
@@ -717,9 +867,13 @@ sidebarDepth: 2
   ```
 
 ## ppio\_storage
+
 - **Description**:
+
   管理本地存储空间
+
 - **Subcommand**:
+
   | 子命令                                            | 描述                                    |
   | ------------------------------------------------- | --------------------------------------- |
   | [`ppio_storage_object`](#ppio-storage-object)     | 显示当前节点指定object的信息            |
@@ -730,13 +884,19 @@ sidebarDepth: 2
   | [`ppio_storage_gc`](#ppio-storage-gc)             | 清理掉本地存储空间中没有被保持的 Object |
 
 ### ppio\_storage\_object
+
 - **Description**:
+
   显示当前节点指定object的信息
+
 - **Arguments**:
+
   ```bash
   <object-hash>：待显示的 Object 的 Hash 值，十六进制字符串
   ```
+
 - **Example**:
+
   ```bash
   # 显示当前节点指定object的信息，包括其大小，segment的个数，以及各个segment的id和hash值
 
@@ -757,9 +917,13 @@ sidebarDepth: 2
   ```
 
 ### ppio\_storage\_objects
+
 - **Description**:
+
   显示当前节点所有objects的信息
+
 - **Example**:
+
   ```bash
   # 显示当前节点所有objects的信息，包括每个 object 的hash值和大小
 
@@ -796,9 +960,13 @@ sidebarDepth: 2
   ```
 
 ### ppio\_storage\_segments
+
 - **Description**:
+
   显示当前节点所有segments的信息
+
 - **Example**:
+
   ```bash
   # 显示当前节点所有segments的信息，包括每个segment的id，hash，和大小
 
@@ -855,13 +1023,19 @@ sidebarDepth: 2
   ```
 
 ### ppio\_storage\_keep
+
 - **Description**:
+
   将某个 Object 保持在本地存储空间中
+
 - **Arguments**:
+
   ```bash
   <object-hash>：待设置的 Object 的 Hash 值
   ```
+
 - **Example**:
+
   ```bash
   # 返回成功或失败标识
 
@@ -877,9 +1051,13 @@ sidebarDepth: 2
   ```
 
 ### ppio\_storage\_usage
+
 - **Description**:
+
   查看本地存储空间的使用情况
+
 - **Example**:
+
   ```bash
   // Request
   curl -X POST --data '{"jsonrpc":"2.0","method":"ppio_storage_usage","params":[],"id":3}'
@@ -899,9 +1077,13 @@ sidebarDepth: 2
   ```
 
 ### ppio\_storage\_gc
+
 - **Description**:
+
   清理掉本地存储空间中没有被保持的 Object
+
 - **Example**:
+
   ```bash
   # 返回成功或失败标识
 
@@ -917,18 +1099,26 @@ sidebarDepth: 2
   ```
 
 ## ppio\_wallet
+
 - **Description**:
+
   管理用户的钱包
+
 - **Subcommand**:
+
   | 子命令                                        | 描述                             |
   | --------------------------------------------- | -------------------------------- |
   | [`ppio_wallet_address`](#ppio-wallet-address) | 显示当前钱包地址，十六进制字符串 |
   | [`ppio_wallet_balance`](#ppio-wallet-balance) | 显示当前钱包地址的余额           |
 
 ### ppio\_wallet\_address
+
 - **Description**:
+
   显示当前钱包地址
+
 - **Example**:
+
   ```bash
   # 返回当前钱包地址
 
@@ -944,9 +1134,13 @@ sidebarDepth: 2
   ```
 
 ### ppio\_wallet\_balance
+
 - **Description**:
+
   显示当前钱包地址的余额
+
 - **Example**:
+
   ```bash
   # 返回当前钱包地址的余额
 
