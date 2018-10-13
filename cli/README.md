@@ -10,8 +10,7 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
 
 `ppio daemon start` also has options "rpchost" and "rpcport", which are used to temporarily override the RPC service listening address and port in the default configuration file.
 
-- **Options**:
-
+- **Usage**:
   ```bash
   # 对于daemon启动命令
   ppio [--rpchost=<rpchost>] [--rpcport=<rpcport>]
@@ -23,7 +22,6 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
       [--rpchost=<rpchost>]
       [--rpcport=<rpcport>]
   ```
-
 - **Options**:
 
   | options| default | description |
@@ -45,13 +43,9 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
   :::
 
 ## ppio help
-
-- **Options**:
-
+- **Description**:  
   display help for commands or subcommands
-
 - **Options**:
-
   ```bash
   ppio [COMMAND] help
   ```
@@ -107,17 +101,12 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
   ```
 
 ## ppio config
-
-- **Options**:
-
+- **Description**:  
   Manage user node configuration information.
-
-- **Options**:
-
+- **Usage**:
   ```bash
   ppio config [SUB-COMMAND]
   ```
-
 - **Options**:
 
   | subcommand | description |
@@ -125,19 +114,14 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
   | [`ppio config show`](#ppio-config-show) |List the configuration information of the current user node|
 
 ### ppio config show
-
-- **Options**:
-
+- **Description**:  
   List the configuration information of the current user node
-
-- **Options**:
-
+- **Usage**:
   ```bash
   ppio config show
       [--rpchost=<rpchost>]
       [--rpcport=<rpcport>]
   ```
-
 - **Options**:
 
   | options| default | description |
@@ -171,17 +155,12 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
   ```
 
 ## ppio daemon
-
-- **Options**:
-
+- **Description**:  
   Manage PPIO user node service
-
-- **Options**:
-
+- **Usage**:
   ```bash
   ppio daemon SUB-COMMAND
   ```
-
 - **Options**:
 
   | subcommand | description |
@@ -190,21 +169,16 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
   | [`ppio daemon stop`](#ppio-daemon-stop) | stop PPIO user node service |
 
 ### ppio daemon start
-
-- **Options**:
-
+- **Description**:  
   Start PPIO user node service, establishes a connection and communicates with other user nodes, and exposes the corresponding port to provide RPC services and generates configuration files.
 
   ::: warning WARNING
   Only this command starts the service node, and other commands (except `ppio version` and `ppio help`) communicate with the service node through RPC.
   :::
-
-- **Options**:
-
+- **Usage**:
   ```bash
   ppio daemon start
   ```
-
 - **Options**:
 
   | options| default | description |
@@ -221,13 +195,9 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
   ```
 
 ### ppio daemon stop
-
-- **Options**:
-
+- **Description**:  
   Stop PPIO user node service.
-
-- **Options**:
-
+- **Usage**:
   ```bash
   ppio daemon stop
   ```
@@ -239,15 +209,11 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
   ```
 
 ## ppio init
-
-- **Options**:
-
+- **Description**:  
   Initialize the PPIO user node and create the PPIO data directory and configuration file.  
   - If the data directory or configuration file already exists, nothing is done;
   - If the configuration file format is unexpected, the content will be updated to the default.  
-
-- **Options**:
-
+- **Usage**:
   ```bash
   ppio init
       [--datadir=<data-dir>]
@@ -255,7 +221,6 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
       [--max-storage=<max-storage>]
       [--gc-threshold=<gc-threshold>]
   ```
-
 - **Options**:
 
   | options| default | description |
@@ -292,17 +257,12 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
   ```
 
 ## ppio metadata
-
-- **Options**:
-
+- **Description**:  
   Manage user metadata
-
-- **Options**:
-
+- **Usage**:
   ```bash
   ppio metadata SUB-COMMAND
   ```
-
 - **Options**:
 
   | subcommand | description |
@@ -311,19 +271,13 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
   |[`ppio metadata get`](#ppio-metadata-get)|Download the user's MetaData information to the Indexer node|
 
 ### ppio metadata put
-
-- **Options**:
-
+- **Description**:  
   Upload the user's MetaData information to the Indexer node, and limit the maximum occupied space of the information to 1M; MetaData is used to store basic information about users, and the usage scenarios are not limited.
-
-- **Options**:
-
+- **Usage**:
   ```bash
   ppio metadata put <meta-data>
   ```
-
 - **Options**:
-
   ```bash
   <meta-data>: MetaData content to be uploaded, text form.
   ```
@@ -335,13 +289,9 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
   ```
 
 ### ppio metadata get
-
-- **Options**:
-
+- **Description**:  
   Download the user's MetaData information from the Indexer node.
-
-- **Options**:
-
+- **Usage**:
   ```
   ppio metadata get
   ```
@@ -353,17 +303,12 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
   ```
 
 ## ppio net
-
-- **Options**:
-
+- **Description**:  
   Manage network information of PPIO user node
-
-- **Options**:
-
+- **Usage**:
   ```
   ppio net SUB-COMMAND
   ```
-
 - **Options**:
 
   | subcommand | description |
@@ -374,13 +319,9 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
   | [`ppio net servers`](#ppio-net-servers) |Display the list of currently connected server information|
 
 ### ppio net id
-
-- **Options**:
-
+- **Description**:  
   Display the current node's network address, hex string
-
-- **Options**:
-
+- **Usage**:
   ```
   ppio net id
   ```
@@ -391,19 +332,13 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
   ```
 
 ### ppio net ping <Badge text="todo" type="warn" vertical="middle"/>
-
-- **Options**:
-
+- **Description**:  
   Detect connections to other user nodes
-
-- **Options**:
-
+- **Usage**:
   ```bash
   ppio net <target-peer-id>
   ```
-
 - **Options**:
-
   ```bash
   <target-peer-id>: The ID of the target peer to be detected
   ```
@@ -416,13 +351,9 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
   ```
 
 ### ppio net peers <Badge text="todo" type="warn" vertical="middle"/>
-
-- **Options**:
-
+- **Description**:  
   Display the list of currently connected peer information
-
-- **Options**:
-
+- **Usage**:
   ```
   ppio net peers
   ```
@@ -436,13 +367,9 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
   ```
 
 ### ppio net servers
-
-- **Options**:
-
+- **Description**:  
   Display the list of currently connected server information
-
-- **Options**:
-
+- **Usage**:
   ```bash
   ppio net servers
   ```
@@ -459,17 +386,12 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
   ```
 
 ## ppio object
-
-- **Options**:
-
+- **Description**:  
   Manage the Object of the PPIO user node
-
-- **Options**:
-
+- **Usage**:
   ```bash
   ppio object SUB-COMMAND
   ```
-
 - **Options**:
 
   | subcommand | description |
@@ -487,9 +409,7 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
   |[`ppio object auth`](#ppio-object-auth)|Authorize Objects in local storage to other users|
 
 ### ppio object import
-
-- **Options**:
-
+- **Description**:  
   Import a file from the local file system or pipeline, process the file and store it in the local storage space. The file that is finally stored in the local storage space is called "Object".  
 
   **Detailed process of file processing:**
@@ -510,23 +430,18 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
   # <segment1-id> <segment2-hash> <segment2-index> <segment2-length>
   ```  
   After the file is successfully imported, you can view the object information through the `ppio storage object` or `ppio storage objects` command.
-
-- **Options**:
-
+- **Usage**:
   ```bash
   ppio object import
       [--encrypt=<encrypt-algorithm>]
       [--key=<key>]
       <local-file-path> | -
   ```
-
 - **Options**:
-
   ```bash
   <local-file-path>:  local file path to be imported
   -: file data can be piped
   ```
-
 - **Options**:
 
   | options| default | description |
@@ -549,16 +464,12 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
   ```
 
 ### ppio object export
-
-- **Options**:
-
+- **Description**:  
   Export an Object from the local storage to the local file system
   **Detailed process:**  
   1. If there is no specified Object in the local storage space, the download to the space is requested from the PPIO network first;
   2. Once the Object is ready, splicing, decrypting the Segments in the Object, and then saving the resulting file to the local file system
-
-
-- **Options**:
+- **Usage**:
 
   ```bash
   ppio object export
@@ -567,13 +478,10 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
       [--output=<output-file-path>]
       <object-hash>
   ```
-
-- **Options**:
-
+- **Arguments**:
   ```bash
   <object-hash>: The hash value of the Object to be exported.
   ```
-
 - **Options**:
 
   | options| default | description |
@@ -595,13 +503,9 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
   ```
 
 ### ppio object put
-
-- **Options**:
-
+- **Description**:  
   Publish a contract to upload an Object
-
-- **Options**:
-
+- **Usage**:
   ```bash
   ppio object put
       [--copies=<copy-num>]
@@ -610,20 +514,17 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
       [--acl=<acl>]
       <object-hash>
   ```
-
-- **Options**:
-
+- **Arguments**:
   ```bash
   <object-hash>: The hash value of the target Object
   ```
-
 - **Options**:
 
   | options| default | description |
   |--|--|--|
   |--copies|5|The number of copies stored, at least 5|
   |--duration|8640000(equals 100 days)|The storage time of the object, unit in s (second)|
-  |--gasprice| Null |Gas 单价，以 wei 为单位|
+  |--gasprice| none |Gas 单价，以 wei 为单位|
   |--acl|public|Access to Object: Set to public to mean that the Object can be accessed by anyone; set to private to mean that the Object is private and needs to be authorized to access|
 - **Example**:
   ```bash
@@ -636,15 +537,11 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
   ```
 
 ### ppio object get
-
-- **Options**:
-
+- **Description**:  
   Download the contents of an Object to your local storage. When Object is owned by someone else, there are two situations:
   - If the ACL of the Object is set to public, you can download the Object directly via `ppio object get`
   - If the ACL of the Object is set to private, you must first have the signature authorization for the Object (via the `ppio object auth` command), and the user can download the object via `ppio object get` during the validity period of the signature.
-
-
-- **Options**:
+- **Usage**:
 
   ```bash
   ppio object get
@@ -653,13 +550,10 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
       [--auth=<auth>]
       <object-hash>
   ```
-
-- **Options**:
-
+- **Arguments**:
   ```bash
   <object-hash>: The Hash value of the Object (can be another user\'s Object)
   ```
-
 - **Options**:
 
   | options| default | description |
@@ -685,13 +579,9 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
   ```
 
 ### ppio object copy
-
-- **Options**:
-
+- **Description**:  
   Initiate a copy contract of Object to copy an Object to your own
-
-- **Options**:
-
+- **Usage**:
   ```bash
   ppio object copy
       [--copies=<copy-num>]
@@ -702,23 +592,20 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
       [--owner=<owner-id>]
       <object-hash>
   ```
-
-- **Options**:
-
+- **Arguments**:
   ```bash
   <object-hash>: The hash value of the Object to be copied
   ```
-
 - **Options**:
 
   | options| default | description |
   |--|--|--|
   |--copies|5|The number of copies stored, at least 5|
   |--duration|8640000(equals 100 days)|The storage time of the Object, unit in s (second)|
-  |--gasprice| Null |Gas 单价，以 wei 为单位|
+  |--gasprice| none |Gas 单价，以 wei 为单位|
   |--acl|public|The access permission of Object, set to public means that the Object can be accessed by anyone; set to private means that the Object is private and needs to be authorized to access|
-  |--owner| Null |User ID of the Object owner|
-  |--auth| Null | Required to copy other people's Objects, need an Object signature provided by others to authorize|
+  |--owner| none |User ID of the Object owner|
+  |--auth| none | Required to copy other people's Objects, need an Object signature provided by others to authorize|
 - **Example**:
   ```bash
   # After the contract is successfully copied, it directly returns the success signal. It does not mean that the Indexer will be scheduled or the Object has been successfully copied. You can use the `ppio object status` command to query whether the Object is successfully copied.
@@ -730,19 +617,13 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
   ```
 
 ### ppio object status
-
-- **Options**:
-
+- **Description**:  
   Get the contract information and execution status of an Object, which can only be used to view your own Object.
-
-- **Options**:
-
+- **Usage**:
   ```bash
   ppio object status <object-hash>
   ```
-
-- **Options**:
-
+- **Arguments**:
   ```bash
   <object-hash>: The hash value of the Object to be queried
   ```
@@ -780,19 +661,15 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
   ```
 
 ### ppio object list
-
-- **Options**:
-
+- **Description**:  
   Paginate all Objects. Unlike `ppio object status`, `ppio object list` is just a list of Objects, and there is no information about the execution of the corresponding contract.
-
-- **Options**:
+- **Usage**:
 
   ```bash
   ppio object list
       [--start-page=<start-page>]
       [--page-size=<page-size>]
   ```
-
 - **Options**:
 
   | options| default | description |
@@ -824,19 +701,13 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
   ```
 
 ### ppio object delete
-
-- **Options**:
-
+- **Description**:  
   Delete the contract of an Object
-
-- **Options**:
-
+- **Usage**:
   ```bash
   ppio object delete <object-hash>
   ```
-
-- **Options**:
-
+- **Arguments**:
   ```bash
   <object-hash>: The hash value of the Object to be deleted
   ```
@@ -848,13 +719,9 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
   ```
 
 ### ppio object renew
-
-- **Options**:
-
+- **Description**:  
   Republish the contract for an Object
-
-- **Options**:
-
+- **Usage**:
   ```bash
   ppio object renew
       [--copies=<copy-num>]
@@ -863,20 +730,17 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
       [--acl=<acl>]
       <object-hash>
   ```
-
 - **Options**:
-
   ```bash
   <object-hash>: The hash value of the Object to be republished
   ```
-
 - **Options**:
 
   | options| default | description |
   |--|--|--|
   |--copies|5|The number of stored copies, not less than 5|
   |--duration|8640000(equals 100 days)|The storage time of the object, unit in s (seconds)|
-  |--gasprice| Null |Gas 单价，以 wei 为单位|
+  |--gasprice| none |Gas 单价，以 wei 为单位|
   |--acl|public|The access permission of Object, set to public means that the Object can be accessed by anyone; set to private means that the Object is private and needs to be authorized to access|
 - **Example**:
   ```bash
@@ -886,25 +750,18 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
   ```
 
 ### ppio object updateacl
-
-- **Options**:
-
+- **Description**:  
   Update ACL information for an Object
-
-- **Options**:
-
+- **Usage**:
   ```bash
   ppio object updateacl
       [--acl=<acl>]
       <object-hash>
   ```
-
-- **Options**:
-
+- **Arguments**:
   ```bash
   <object-hash>: The hash value of the Object to be updated with ACL information
   ```
-
 - **Options**:
 
   | options| default | description |
@@ -919,32 +776,26 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
   ```
 
 ### ppio object auth
-
-- **Options**:
-
+- **Description**:  
   Authorize the Object in the local storage space to other users. If the ACL of the Object is public, the command has no effect.
   The authorization duration cannot exceed the length of time the user has the file.
-
-- **Options**:
-
+- **Usage**:
   ```bash
   ppio object auth
       --accessor=<accessor>
       [--duration=<duration>]
       <object-hash>
   ```
-
-- **Options**:
+- **Argument**:
 
   ```bash
   <object-hash>: The hash value of the Object to be authorized
   ```
-
 - **Options**:
 
   | options| default | description |
   |--|--|--|
-  |--accessor| null |Authorized user's id|
+  |--accessor| none |Authorized user's id|
   |--duration|86400(equals a day)|Authorized effective duration, unit in s (second)|
 - **Example**:
   ```bash
@@ -954,13 +805,9 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
   ```
 
 ## ppio status
-
-- **Options**:
-
+- **Description**:  
   Display details of the current PPIO user node runtime
-
-- **Options**:
-
+- **Usage**:
   ```bash
   ppio status
   ```
@@ -976,20 +823,13 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
   ```
 
 ## ppio storage
-
-- **Options**:
-
+- **Description**:  
   Manage local storage
-
-- **Options**:
-
+- **Usage**:
   ```bash
   ppio storage SUB-COMMAND
   ```
-
-
-- **Options**:
-
+- **Subcommand**:
 
   | subcommand | description |
   |--|--|
@@ -1001,18 +841,13 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
   |[`ppio storage gc`](#ppio-storage-gc) <Badge text="todo" type="warn" vertical="middle"/>|Clean up objects that are not kept in the local storage space|
 
 ### ppio storage object
-
-- **Options**:
-
+- **Description**:  
   Display information about the specified Object of the current node
-
-- **Options**:
-
+- **Usage**:
   ```bash
   ppio storage object <object-hash>
   ```
-
-- **Options**:
+- **Arguments**:
 
   ```bash
   <object-hash>: Hash value of the Object to be displayed, hex string
@@ -1028,13 +863,9 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
   ```
 
 ### ppio storage objects
-
-- **Options**:
-
+- **Description**:  
   Display information about all Objects of the current node
-
-- **Options**:
-
+- **Usage**:
   ```bash
   ppio storage objects
   ```
@@ -1050,13 +881,9 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
   ```
 
 ### ppio storage segments
-
-- **Options**:
-
+- **Description**:  
   Display information about all segments of the current node
-
-- **Options**:
-
+- **Usage**:
   ```bash
   ppio storage segments
   ```
@@ -1075,9 +902,7 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
   ```
 
 ### ppio storage keep <Badge text="todo" type="warn" vertical="middle"/>
-
-- **Options**:
-
+- **Description**:  
   Keep an Object in local storage.
 
   ::: warning WARNING
@@ -1087,9 +912,7 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
   ```bash
   ppio storage keep <object-hash>
   ```
-
-- **Options**:
-
+- **Arguments**:
   ```bash
   <object-hash>: The hash value of the Object to be set
   ```
@@ -1101,13 +924,9 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
   ```
 
 ### ppio storage usage <Badge text="todo" type="warn" vertical="middle"/>
-
-- **Options**:
-
+- **Description**:  
   View usage of local storage
-
-- **Options**:
-
+- **Usage**:
   ```
   ppio storage usage
   ```
@@ -1122,13 +941,9 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
   ```
 
 ### ppio storage gc <Badge text="todo" type="warn" vertical="middle"/>
-
-- **Options**:
-
+- **Description**:  
   Clean up objects that are not kept in the local storage space
-
-- **Options**:
-
+- **Usage**:
   ```bash
   ppio storage gc
   ```
@@ -1140,18 +955,13 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
   ```
 
 ## ppio wallet
-
-- **Options**:
-
+- **Description**:  
   Manage user's wallet
-
-- **Options**:
-
+- **Usage**:
   ```bash
   ppio wallet SUB-COMMAND
   ```
-
-- **Options**:
+- **Subcommand**:
 
   | subcommand | description |
   |--|--|
@@ -1159,13 +969,9 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
   |[`ppio wallet balance`](#ppio-wallet-balance)|Show the balance of the current wallet address|
 
 ### ppio wallet address
-
-- **Options**:
-
+- **Description**:  
   Show current wallet address
-
-- **Options**:
-
+- **Usage**:
   ```bash
   ppio wallet address
   ```
@@ -1177,13 +983,9 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
   ```
 
 ### ppio wallet balance
-
-- **Options**:
-
+- **Description**:  
   Show the balance of the current wallet address
-
 - **Options**:
-
   ```bash
   ppio metadata get
   ```

@@ -1,78 +1,93 @@
 ---
 sidebarDepth: 2
 ---
-# JSON RPC Reference
+# Jsonrpc APi Reference
+## Overview  
+This article uses `curl` to illustrate PPIO Jsonrpc Api. Developers can refer to this protocol to achieve RPC access to PPIO through other languages or tools.
 
-## Overview
-`ppio` , `ppio daemon` , `ppio daemon start` 都会启动一个 ppio 用户节点
+In general, a PPIO command corresponds to a PPIO jsonrpc request (in addition to commands `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, etc.)
 
-除了 `daemon start` , `init` , `help` , `version` , 其他命令或者子命令都是通过RPC调用，访问或者控制该用户节点，故除非特别说明，它们都有相同的选项 rpchost 和 rpcport
+The `--rpchost` and `--rpcport` options in the PPIO command correspond to the RPC host and port specified in the jsonrpc request.
 
-`ppio daemon start` 也有选项 "rpchost 和 rpcport"，是用来临时覆盖默认配置文件中的RPC服务监听地址和端口
+Other options and parameters in the PPIO command are passed in params in jsonrpc. The order is strictly as specified in this document, the parameter name is ignored.
 
-- **Usage**:
+- **curl options**:
 
-  ```
-  # 对于daemon启动命令
-  ppio daemon start [--rpchost=<rpchost>] [--rpcport=<rpcport>]
-
-  # 对于rpc命令
-  ppio COMMAND [SUB-COMMAND]
-      [--rpchost=<rpchost>]
-      [--rpcport=<rpcport>]
-  ```
-
-- **Options**:
-
-  | 选项    | 默认值      | 描述         |
+  | params | default | description |
   | --------- | ----------- | ------------ |
-  | --rpchost | "127.0.0.1" | RPC 服务地址 |
-  | --rpcport | 18060       | RPC 端口     |
+  | -X | none | requested method name |
+  | -H | none | request header |
+  | --data | none | request params |
+
+  ::: warning WARNING
+    In the examples, unless otherwise specified, the service address and port of the RPC request are: `http://127.0.0.1:18060`, the -H option value is: `content-type:text/json;`, the value of the -X option is: `POST`.
+  :::
+
+- **data parameter**:
+
+  | params    | default      | description        |
+  | --------- | ----------- | ------------ |
+  | id | none | rpc request ID |
+  | jsonrpc | "2.0"       | jsonrpc version     |
+  | method | none       | rpc request method name    |
+  | params | none       | rpc request parmas |
+
+  :::warning WARNING
+    The parameters related to the currency pool are not considered in params.
+  :::
+
+- **Response**:
+
+  | params    |default    | description        |
+  | --------- | ----------- | ------------ |
+  | id | none | rpc request ID(It's the same as the rpc request id.)  |
+  | jsonrpc | "2.0"       | jsonrpc version     |
+  | result | none       | If the rpc request is successful, result is a string indicating that the message is returned or none indicates no message |
+  | error | none      | If the rpc request fails, error is a json object. `error.code` indicates the error code, `error.message` indicates the error message     |
 
 - **Example**:
+  ```
+  # Command
+  > ppio object import --rpchost=127.0.0.1 --rpcport=18060 --encrypt=AES --key=123 /home/u/ppio.txt
 
-  ```bash
-  # 启动用户节点，监听18061端口
-  > ppio --rpcport=18061
+  # Request
+  > curl -X POST -H 'content-type:text/json;' --data '{"id":1,"jsonrpc":"2.0","method":"ObjectImport","params":["/home/u/ppio.txt","AES","123"]}' http://127.0.0.1:18060
 
-  # 进行一个RCP调用，连接18060端口
-  > ppio config --rpcport=18060
+  # Response Result succeed
+  '{"id":1,"jsonrpc":"2.0","result":"bc07088e505d35f10e51a1a782db06ebdfd057cfba984761c57b9307e0449810"}'
 
-  > ppio config show --rpcport=18060
+  # Response Result failed
+  {"error":{"code":-1,"message":"open /home/u/ppio.txt: no such file or directory"},"id":1,"jsonrpc":"2.0"}
+
   ```
 
-## ppio\_config
-
-- **Description**:
-
-  管理用户节点的配置信息
-
+## ppio config
+- **Description**:  
+  Manage user node configuration information
 - **Subcommand**:
 
-  | 子命令                                  | 描述                       |
+  | subcommand      | description         |
   | --------------------------------------- | -------------------------- |
-  | [`ppio_config_show`](#ppio-config-show) | 列出当前用户节点的配置信息 |
+  | [`ConfigShow`](#configshow) | List the configuration information of the current user node. |
 
-## ppio_config\_show
-
-- **Description**:
-
-  列出当前用户节点的配置信息
-
+### ConfigShow
+- **Description**:  
+  List the configuration information of the current user node.
 - **Options**:
 
-  | 选项    | 默认值      | 描述         |
+  | options    | default      | description         |
   | --------- | ----------- | ------------ |
-  | --rpchost | "127.0.0.1" | RPC 服务地址 |
-  | --rpcport | 18060       | RPC 端口     |
-
+  | --rpchost | "127.0.0.1" | RPC service adress |
+  | --rpcport | 18060       | RPC port     |
 - **Example**:
-
   ```bash
-  // Request
-  curl -X POST --data '{"jsonrpc":"2.0","method":"ppio_config_show","params":[],"id":3}'
+  # Command
+  > ppio config show
 
-  // Result
+  # Request
+  > curl --data '{"jsonrpc":"2.0","method":"ConfigShow","params":[],"id":3}' http://127.0.0.1:18060
+
+  # Response
   {
     "id":3,
     "jsonrpc": "2.0",
@@ -94,548 +109,593 @@ sidebarDepth: 2
       },
       "UserAccount": "",
       "StroagePath": "storage",
-      "StorageMax": "1024",
-      "StorageGCThreshold": 0,
+      "StorageMax": 1073741824,
+      "StorageGCThreshold": 0.8,
     }
   }
   ```
 
-## ppio\_daemon
-
-- **Description**:
-
-  管理用户节点服务
-
+## ppio daemon
+- **Description**:  
+  Manage user node services
 - **Subcommand**:
 
-  | 子命令                                  | 描述             |
+  | subcommand      | description  |
   | --------------------------------------- | ---------------- |
-  | [`ppio_daemon_stop`](#ppio-daemon-stop) | 关闭用户节点服务 |
+  | [`DaemonStop`](#daemonstop) | stop user node service |
 
-### ppio\_daemon\_stop
+### DaemonStop
+- **Description**:  
+  stop user node service
+- **params**:
+  none
+- **Success Response**:
 
-- **Description**:
-
-  关闭用户节点服务
-
+  | result    |  description|
+  | --------- | ----------- |
+  | result | null |
+- **Fail Response**:
+  none
 - **Example**:
-
   ```bash
-  # 返回成功标识或失败标识及原因
+  # Command
+  > ppio daemon stop
 
-  // Request
-  curl -X POST --data '{"jsonrpc":"2.0","method":"ppio_daemon_stop","params":[],"id":3}'
+  # Request
+  > curl --data '{"jsonrpc":"2.0","method":"StopDaemon","params":[],"id":3}' http://127.0.0.1:18060
 
-  // Result
+  # Response
   {
     "id":3,
     "jsonrpc": "2.0",
-    "result": "Succeed!"
+    "result": null
   }
   ```
 
-## ppio\_metadata
-
+## ppio metadata
 - **Description**:
-
-  管理用户的元数据
-
+  Manage user node Metadata.
 - **Subcommand**:
 
-  | 子命令                                    | 描述                                 |
+  | subcommand                      | description                            |
   | ----------------------------------------- | ------------------------------------ |
-  | [`ppio_metadata_put`](#ppio-metadata-put) | 向 Indexer 上传用户 的 MetaData 信息 |
-  | [`ppio_metadata_get`](#ppio-metadata-get) | 向 Indexer 下载用户的 MetaData 信息  |
+  | [`MetadataPut`](#metadataput) | Upload the user's MetaData information to the Indexer node |
+  | [`MetadataGet`](#metadataget) | Download the user's MetaData information to the Indexer node |
 
-### ppio\_metadata\_put
-
+### MetadataPut
 - **Description**:
+  Upload the user's MetaData information to the Indexer node, and limit the maximum occupied space of the information to 1M; MetaData is used to store basic information about users, and the usage scenarios are not limited.
+- **params**:
 
-  向 Indexer 上传用户的 MetaData 信息，限制该信息的最大占用空间为 1M
-  MetaData 用于存储用户相关的基本信息，使用场景不限
+  | options    | default | description       |
+  | --------- | ------ | ------------------------------------------------------------ |
+  | metadata | none  | Plain text metadata string entered by the user |
+  | encoding | "RAW"     |"RAW": Upload the metadata string input by the user directly, "HEX": Convert the user-entered metadata in hexadecimal HEX string and upload it.|
+- **Success Response**:
 
-- **Arguments**:
+  | result    |  description         |
+  | --------- | ----------- |
+  | result | null |
+- **Fail Response**:
 
-  ```bash
-  <meta-data>：待上传的 MetaData 内容，文本形式
-  ```
-
+  | result    |  error code         |  error message |
+  | --------- | ----------- |----------- |
+  | error | -1 |"meta-data exceeds it's limit length" |
+  | error | -1 |"account not exists" |
 - **Example**:
+  ```
+  # Command
+  > ./ppio metadata put "Test MetaData"
 
-  ```bash
-  # 返回成功或失败的标识
+  # Request
+  > curl --data '{"id":1,"jsonrpc":"2.0","method":"MetadataPut","params":["Test MetaData",""]}' http://127.0.0.1:18060
 
-  // Request
-  curl -X POST --data '{"jsonrpc":"2.0","method":"ppio_metadata_put","params":{"meta-data":"Test MetaData"},"id":3}'
+  # Result
+  {"id":3,"jsonrpc": "2.0","result": null}
 
-  // Result
-  {
-    "id":3,
-    "jsonrpc": "2.0",
-    "result": "Succeed!"
-  }
   ```
 
-### ppio\_metadata\_get
-
+### MetadataGet
 - **Description**:
+  Download the user's MetaData information to the Indexer node
+- **params**:
 
-  向 Indexer 下载用户的 MetaData 信息
+  | options    | default | description                                                         |
+  | --------- | ------ | ------------------------------------------------------------ |
+  | encoding | "RAW"     | "RAW": returns the user's metadata directly, "HEX": Converts the user's metadata to a hexadecimal HEX string and returns.|
+- **Success Responses**:
 
+  | result    |  description         |
+  | --------- | ----------- |
+  | result | The metadata of the user node, encoded according to encoding|
+- **Fail Responses**:
+
+  | result    |  error code         |  error message |
+  | --------- | ----------- |----------- |
+  | error | -1 |"account not exists" |
 - **Example**:
-
   ```bash
-  # 命令执行成功后可获得用户 MetaData 的十六进制形式的字符串
+  # Command
+  > ./ppio metadata get
 
-  // Request
-  curl -X POST --data '{"jsonrpc":"2.0","method":"ppio_metadata_get","params":[],"id":3}'
+  # Request
+  > curl --data '{"id":1,"jsonrpc":"2.0","method":"MetadataGet","params":[""]}' http://127.0.0.1:18060
 
-  // Result
-  {
-    "id":3,
-    "jsonrpc": "2.0",
-    "result": "Test MetaData"
-  }
+  # Result succeed
+  {"id":1,"jsonrpc":"2.0","result":"Test MetaData"}
+
+  # Result failed
+  {"error":{"code":-1,"message":"account not exists"},"id":1,"jsonrpc":"2.0"}
   ```
 
-## ppio\_net
-
+## ppio net
 - **Description**:
-
-  管理用户节点的网络信息
-
+  Manage network information of user node.
 - **Subcommand**:
 
-  | 子命令                                  | 描述                                   |
-  | --------------------------------------- | -------------------------------------- |
-  | [`ppio_net_id`](#ppio-net-id)           | 显示当前节点的网络地址，十六进制字符串 |
-  | [`ppio_net_ping`](#ppio-net-ping)       | 检测与其他节点之间的连接情况           |
-  | [`ppio_net_peers`](#ppio-net-peers)     | 显示当前已连接的 peer 信息列表         |
-  | [`ppio_net_servers`](#ppio-net-servers) | 显示当前已连接的 Servers 信息列表      |
+  | subcommand        | description     |
+  | --------------------| -------------------------------- |
+  | [`NetId`](#netid)           | Display the current user node's network address, hex string |
+  | [`NetPing`](#netping)       | Detect connections to other user nodes |
+  | [`NetPeers`](#netpeers)     | Display the list of currently connected peer information  |
+  | [`NetServers`](#netservers) | Display the list of currently connected server information |
 
-### ppio\_net\_id
-
+### NetId
 - **Description**:
+  Display the current node's network address, hex string
+- **params**:
+  none
+- **Success Responses**:
 
-  显示当前节点的网络地址
-
+  | result    |  description         |
+  | --------- | ----------- |
+  | result | 当前节点的网络Id，以十六进制字符串表示|
+- **Fail Responses**:
+  none
 - **Example**:
-
   ```bash
-  # 命令返回
+  # Request
+  > curl --data '{"jsonrpc":"2.0","method":"NetId","params":[],"id":3}' http://127.0.0.1:18060
 
-  // Request
-  curl -X POST --data '{"jsonrpc":"2.0","method":"ppio_net_id","params":[],"id":3}'
+  # Result
+  {"id":3,"jsonrpc":"2.0","result":"002508021221033fb36e1471d2153d0759e14386c6c294b1ad09244841ee8d043eadd1bfe7baaa"}
+  ```
 
-  // Result
+### NetPing
+- **Description**:
+  Detect connections to other user nodes.
+- **params**:
+
+  | name    | default | description                                                         |
+  | --------- | ------ | ---------------------------- |
+  | target-id | "none"     | 待检测的目标 peer id 值|
+- **Success Responses**:
+
+  | result    |  description         |
+  | --------- | ----------- |
+  | result | 待检测的目标的网络连接情况|
+  | result.id | 待检测的目标的 peer id 值|
+  | result.out-latency | 本节点到目标节点的去向延迟，单位ms|
+  | result.in-latency | 目标节点到本节点的进向延迟，单位ms|
+- **Fail Responses**:
+  none
+- **Example**:
+  ```bash
+  # Command
+  > ppio net ping 080a6fdb95cee6f852cb4b061525c866cbbe2c0a
+
+  # Request
+  > curl --data '{"jsonrpc":"2.0","method":"NetPing","params":["080a6fdb95cee6f852cb4b061525c866cbbe2c0a"],"id":3}' http://127.0.0.1:18060
+
+  # Result
   {
     "id":3,
     "jsonrpc": "2.0",
-    "result": "080a6fdb95cee6f852cb4b061525c866cbbe2c0a"
+    "result": {
+      "id": "080a6fdb95cee6f852cb4b061525c866cbbe2c0a"
+      "out-latency": 20
+      "in-latency": 20
+    }
   }
   ```
 
-### ppio\_net\_ping
-
+### NetPeers
 - **Description**:
+  Display the list of currently connected peer information
+- **params**:
+  none
+- **Success Responses**:
 
-  检测与其他节点之间的连接情况
-
-- **Arguments**:
-
-  ```bash
-  <target-peer-id>：待检测的目标 peer ID 值
-  ```
-
+  | result    |  description         |
+  | --------- | ----------- |
+  | result | 所有已连接节点的网络连接情况|
+  | result[i].id | 第 i 个已链接节点的 id 值|
+  | result[i].out-latency | 本节点到第 i 个已链接节点的去向延迟，单位ms|
+  | result[i].in-latency | 第 i 个已链接节点到本节点的进向延迟，单位ms|
+- **Fail Responses**:
+  none
 - **Example**:
-
   ```bash
-  # 命令返回内容格式：
-  # <target-peer-id> <out-latency> <in-latency>
+  # Command
+  > ppio net peers
 
-  // Request
-  curl -X POST --data '{"jsonrpc":"2.0","method":"ppio_net_ping","params":{"target-peer-id":"080a6fdb95cee6f852cb4b061525c866cbbe2c0a"},"id":3}'
+  # Request
+  > curl --data '{"jsonrpc":"2.0","method":"NetPeers","params":["080a6fdb95cee6f852cb4b061525c866cbbe2c0a"],"id":3}' http://127.0.0.1:18060
 
-  // Result
-  {
-    "id":3,
-    "jsonrpc": "2.0",
-    "result": "080a6fdb95cee6f852cb4b061525c866cbbe2c0a 20ms 20ms"
-  }
-  ```
-
-### ppio\_net\_peers
-
-- **Description**:
-
-  显示当前已连接的 Peer 信息列表
-
-- **Example**:
-
-  ```bash
-  # 返回的记录格式
-  # <peer-id> <ip:port> <software-version> <in-latency> <out-latency>
-
-  // Request
-  curl -X POST --data '{"jsonrpc":"2.0","method":"ppio_net_peers","params":[],"id":3}'
-
-  // Result
-  {
-    "id":3,
-    "jsonrpc": "2.0",
-    "result": [{"080a6fdb95cee6f852cb4b061525c866cbbe2c0a 101.200.0.1:5000 v1.1 10ms 20ms"}, {"080a6fdb95cee6f852cb4b061525c866cbbe2c0a 101.200.0.3:5100 v1.1 10ms 20ms"}]
-  }
-  ```
-
-### ppio\_net\_servers
-
-- **Description**:
-
-  显示当前已连接的 Servers 信息列表
-
-- **Example**:
-
-  ```bash
-  # 返回的记录格式
-  # <index> [indexer | verifier] <ip>:<tcpport>:<udpport>
-
-  // Request
-  curl -X POST --data '{"jsonrpc":"2.0","method":"ppio_net_servers","params":[],"id":3}'
-
-  // Result
+  # Result
   {
     "id":3,
     "jsonrpc": "2.0",
     "result": [
-      {"Indexers count":"1", "0":"indexer 127.0.0.1:8030:8030"},
-      {"Verifiers count":"1", "0":"verifier 127.0.0.1:8040:8040"}
-      ]
+      {
+        "id": "080a6fdb95cee6f852cb4b061525c866cbbe2c0a"
+        "out-latency": 20
+        "in-latency": 20
+      },
+      {
+        "id": "080a6fdb95cee6f852cb4b061525c866cbbe2c0b"
+        "out-latency": 20
+        "in-latency": 20
+      }
+    ]
   }
   ```
 
-## ppio\_object
-
+### NetServers
 - **Description**:
+  Display the list of currently connected server information.
+- **params**:
+  none
+- **Success Responses**:
 
-  管理用户的 Object
+  | result    |  description         |
+  | --------- | ----------- |
+  | result | 所有已连接服务节点的状态|
+  | result.Indexers[i]| 第 i 个Indexer节点的状态|
+  | result.Verifiers[i]| 第 i 个Verifier节点的状态|
+- **Fail Responses**:
+  none
+- **Example**:
+  ```bash
+  # 返回的记录格式
+  # <index> [indexer | verifier] <ip>:<tcpport>:<udpport>
 
+  # Request
+  > curl --data '{"jsonrpc":"2.0","method":"NetServers","params":[],"id":3}' http://127.0.0.1:18060
+
+  # Result
+  {
+      "id":3,
+      "jsonrpc":"2.0",
+      "result":{
+          "Indexers":[
+          {
+              "Name":"indexer",
+              "PeerID":"00250802122102ec8e7f2675863c26ba5f61c7b7972bd3a5c4a8276566de829390a6faf83470fc",
+              "Address":
+              {
+                  "IP":"127.0.0.1",
+                  "UDPPort":8030,
+                  "TCPPort":8030
+              }
+          }
+          ],
+          "Verifiers":[
+          {
+          "Name":"verifier",
+          "PeerID":"00250802122103974c318dc943780b89f526d2c91199c1f5847687250720cee1a7ae3086c7052e",
+              "Address":
+              {
+                  "IP":"127.0.0.1",
+                  "UDPPort":8040,
+                  "TCPPort":8040
+              }
+          }
+          ]
+      }
+  }
+  ```
+
+## ppio object
+- **Description**:
+  Manage the Object of the PPIO user node
 - **Subcommand**:
 
-  | 子命令                                            | 描述                                                                    |
-  | ------------------------------------------------- | ----------------------------------------------------------------------- |
-  | [`ppio_object_import`](#ppio-object-import)       | 从本地文件系统或者管道导入一个文件到存储空间                            |
-  | [`ppio_object_export`](#ppio-object-export)       | 从本地存储空间导出一个 Object 到本地文件系统                            |
-  | [`ppio_object_put`](#ppio-object-put)             | 发布一个用于上传 Object 的合约                                          |
-  | [`ppio_object_get`](#ppio-object-get)             | 下载一个 Object 的所有内容到本地存储空间                                |
-  | [`ppio_object_copy`](#ppio-object-copy)           | 发起一个 Object 的拷贝合约，用来将某个 Object 拷贝到自己名下            |
-  | [`ppio_object_status`](#ppio-object-status)       | 获取某个 Object 相关的合约信息及执行情况，只能用于查看用户自己的 Object |
-  | [`ppio_object_list`](#ppio-object-list)           | 分页获取所有 Object 的合约执行情况                                      |
-  | [`ppio_object_delete`](#ppio-object-delete)       | 删除某个 Object 对应的合约                                              |
-  | [`ppio_object_renew`](#ppio-object-renew)         | 重新发布某个 Object 对应的合约                                          |
-  | [`ppio_object_updateacl`](#ppio-object-updateacl) | 更新某个 Object 的 ACL 信息                                             |
-  | [`ppio_object_auth`](#ppio-object-auth)           | 将本地存储空间里面的 Object 授权给其他用户                              |
+  | subcommand | description    |
+  | --------------------| --------------------------------|
+  | [`ObjectImport`](#objectimport)       | Import a file from a local file system or pipe into storage|
+  | [`ObjectExport`](#objectexport)       | Export an Object from the local storage to the local file system|
+  | [`ObjectPut`](#objectput)             | Publish a contract to upload an Object |
+  | [`ObjectGet`](#objectget)             | Download all the contents of an Object to the local storage |
+  | [`ObjectCopy`](#objectcopy)           | Initiate a copy contract of Object and copy an Object to yourself  |
+  | [`ObjectStatus`](#objectstatus)       | 	Obtain the contract information and execution status of an Object, which can only be used to view the user's own Object. |
+  | [`ObjectList`](#objectlist)           | Get contract execution for all Objects |
+  | [`ObjectDelete`](#objectdelete)       | Delete the contract for an Object |
+  | [`ObjectRenew`](#objectrenew)         | Republish the contract for an Object |
+  | [`ObjectUpdateacl`](#objectupdateacl) | Update ACL information for an Object |
+  | [`ObjectAuth`](#objectauth)           | Authorize Objects in local storage to other users |
 
-### ppio\_object\_import
-
+### ObjectImport
 - **Description**:
+  Import a file from the local file system or pipeline, process the file and store it in the local storage space. The file that is finally stored in the local storage space is called "Object".  
 
+  **Detailed process of file processing:**
+  1. Encrypt the file first
+  2. The encrypted file is sliced to cut it into multiple files (called Segment), and the file name of the Segment is the Hash value of its content.
+  3. After splicing the Hash values of all Segment contents, Hash the spliced content to generate the Hash value of the Object.
+
+  **The location of the Segment in the local storage space is as follows:**
   ```bash
-  从本地文件系统或者管道读入一个文件，对文件进行处理后将其存放到本地存储空间，最终存放到本地存储空间里的文件我们称之为 Object
-  文件处理的详细过程：
-  先对该文件进行加密，然后对加密后的文件进行切片以将其切成多个文件（称之为 Segment），Segment 的文件名为其内容的 Hash 值，将所有 Segment 内容的 Hash 值进行拼接后，对拼接后的内容进行 Hash 以生成 Object 的 Hash 值
-  Segment 在本地存储空间的位置如下所示：
-
   <datadir>/storage/<object-hash>/<object-hash>.desc
   <datadir>/storage/<object-hash>/<segment1-id>.dat
   <datadir>/storage/<object-hash>/<segment2-id>.dat
 
   # <object-hash> = HASH(<segment1-hash><segment2-hash>)
-  # <object-hash>.desc 的文件内容：
+  # the content of "<object-hash>.desc":
   # <object-hash> <object-hash>   <segment-count>  <object-length>
   # <segment1-id> <segment1-hash> <segment1-index> <segment1-length>
   # <segment1-id> <segment2-hash> <segment2-index> <segment2-length>
+  ```  
+  After the file is successfully imported, you can view the object information through the `ppio storage object` or `ppio storage objects` command.
+- **params**:
 
-  文件成功导入后，可以通过 storage object 或者 storage objects 命令查看该 object 的信息
-  ```
+  | name    | default | description                                                         |
+  | --------- | ------ | ---------------------------- |
+  | local-path | "none"     | 导入文件的本地路径|
+  | encrypt | "AES"  | 设置用于加密原始文件内容的加密算法，当前可选择的加密算法有：AES |
+  | key     | ""     | 指定用于加密原始文件内容的密钥                                  |
+- **Success Responses**:
 
-- **Arguments**:
+  | result    |  description         |
+  | --------- | ----------- |
+  | result | object-hash，以十六进制表示 |
+- **Fail Responses**:
 
-  ```bash
-  <local-file-path>： 待导入的本地文件路径
-  -：表示可通过管道传输文件数据
-  ```
-
-- **Options**:
-
-  | 选项    | 默认值 | 描述                                                         |
-  | --------- | ------ | ------------------------------------------------------------ |
-  | --encrypt | "AES"  | 设置用于加密原始文件内容的加密算法，当前可选择的加密算法有：AES |
-  | --key     | ""     | 指定用于加密原始文件内容的密钥                                  |
-
+  | result    |  error code         |  error message |
+  | --------- | ----------- |----------- |
+  | error | -1 |"no such file or directory" |
 - **Example**:
+  ```
+  # Command
+  > ppio object import --rpchost=127.0.0.1 --rpcport=18060 --encrypt=AES --key=123 /home/u/ppio.txt
 
-  ```bash
-  # 如果导入成功，命令返回的是 Object 的 Hash 值；否则返回错误标识及错误原因
+  # Request
+  > curl --data '{"id":1,"jsonrpc":"2.0","method":"ObjectImport","params":["/home/u/ppio.txt","AES","123"]}' http://127.0.0.1:18060
 
-  // Request
-  curl -X POST --data '{"jsonrpc":"2.0","method":"ppio_object_import","params":{"local-file-path":"/home/u/1.txt"},"id":3}'
+  # Result succeed
+  '{"id":1,"jsonrpc":"2.0","result":"bc07088e505d35f10e51a1a782db06ebdfd057cfba984761c57b9307e0449810"}'
 
-  // Result
-  {
-    "id":3,
-    "jsonrpc": "2.0",
-    "result": "98715955d14b4ea129fed7efd1ffdd2ba7a0cc4a2e46160058a740893bbaf2d1"
-  }
-
-
-  // Request
-  curl -X POST --data '{"jsonrpc":"2.0","method":"ppio_object_import","params":{"encrypt":"AES", "key":"TEST_KEY", "local-file-path":"/home/u/1.txt"},"id":3}'
-
-  // Result
-  {
-    "id":3,
-    "jsonrpc": "2.0",
-    "result": "98715955d14b4ea129fed7efd1ffdd2ba7a0cc4a2e46160058a740893bbaf2d1"
-  }
-
-
-  // Request
-  curl -X POST --data '{"jsonrpc":"2.0","method":"ppio_object_import","params":{"encrypt":"AES", "key":"TEST_KEY", "local-file-path":"/home/u/1.txt"},"id":3}'
-
-  // Result
-  {
-    "id":3,
-    "jsonrpc": "2.0",
-    "result": "98715955d14b4ea129fed7efd1ffdd2ba7a0cc4a2e46160058a740893bbaf2d1"
-  }
-
-  <TODO>
-  > echo "TEST" | ppio object import --encrypt=AES --key=TEST_KEY -
-  98715955d14b4ea129fed7efd1ffdd2ba7a0cc4a2e46160058a740893bbaf2d1
-
+  # Result failed
+  {"error":{"code":-1,"message":"open /home/u/ppio.txt: no such file or directory"},"id":1,"jsonrpc":"2.0"}
   ```
 
-### ppio\_object\_export
-
+### ObjectExport
 - **Description**:
+  Export an Object from the local storage to the local file system
+  **Detailed process:**  
+  1. If there is no specified Object in the local storage space, the download to the space is requested from the PPIO network first;
+  2. Once the Object is ready, splicing, decrypting the Segments in the Object, and then saving the resulting file to the local file system
+- **params**:
 
-  从本地存储空间导出一个 Object 到本地文件系统
-  **具体流程：**
-  1. 如果本地存储空间中没有指定的 Object，则会先从 ppfs 网络中请求下载到空间；
-  2. 准备好 Object 后，对 Object 中的 Segment 进行拼接、解密，然后将最终生成的文件存入本地文件系统
+  | name    | default | description                                                         |
+  | --------- | ------ | ---------------------------- |
+  | object-hash | "none"     | 导出文件的 hash |
+  | encrypt | "AES"  | 设置用于加密原始文件内容的加密算法，当前可选择的加密算法有：AES |
+  | key     | ""     | 指定用于加密原始文件内容的密钥                                  |
+  | output  | 当前目录或文件 | 本地文件的路径，如果不指定，则以 \<object-hash\> 为文件名写入当前目录 |
+- **Success Responses**:
 
-- **Arguments**:
+  | result    |  description         |
+  | --------- | ----------- |
+  | result | null |
+- **Fail Responses**:
 
-  ```bash
-  <object-hash>：待导出的 Object 的 Hash 值
-  ```
-
-- **Options**:
-
-  | 选项    | 默认值   | 描述                                                         |
-  | --------- | -------- | ------------------------------------------------------------ |
-  | --encrypt | "AES"    | 设置用于解密原始文件内容的加密算法，和加密算法相对应         |
-  | --key     | ""       | 指定用于解密 Object 中内容的密钥                             |
-  | --output  | 当前目录 | 本地文件的路径，如果不指定，则以 \<object-hash\> 为文件名写入当前目录 |
-
+  | result    |  error code         |  error message |
+  | --------- | ----------- |----------- |
+  | error | -1 |"output can not open" |
 - **Example**:
-
-  ```bash
-  # 命令执行成功后，返回导出文件的所在路径；否则返回错误码及错误原因
+  ```
+  # 命令执行成功后，返回导出文件的所在路径；否则返回error code及错误原因
   > pwd
-  /home/u/a/b/c/
+  /home/u/
 
-  // Request
-  curl -X POST --data '{"jsonrpc":"2.0","method":"ppio_object_export","params":{"object-hash":"98715955d14b4ea129fed7efd1ffdd2ba7a0cc4a2e46160058a740893bbaf2d1"},"id":3}'
+  # Command
+  > ppio object export --output=/home/u/ppio.txt 7547DF322CBAF84FD02248133BF5A1C2FAE7296960ECED0EF6BDE2FF3EF37CF8
 
-  // Result
-  {
-    "id":3,
-    "jsonrpc": "2.0",
-    "result": "Succeed to export to   /home/u/a/b/c/98715955d14b4ea129fed7efd1ffdd2ba7a0cc4a2e46160058a740893bbaf2d1"
-  }
+  # Request
+  > curl --data '{"id":1,"jsonrpc":"2.0","method":"ObjectExport","params":["7547DF322CBAF84FD02248133BF5A1C2FAE7296960ECED0EF6BDE2FF3EF37CF8","","","/home/u/ppio.txt"]}' http://127.0.0.1:18060
 
+  # Result succeed
+  {"id":1,"jsonrpc":"2.0","result":null}
 
-  // Request
-  curl -X POST --data '{"jsonrpc":"2.0","method":"ppio_object_export","params":{"key":"TEST_KEY", "output":"/home/u/1.txt", "object-hash":"98715955d14b4ea129fed7efd1ffdd2ba7a0cc4a2e46160058a740893bbaf2d1"},"id":3}'
+  # Result failed
+  {"error":{"code":-1,"message":"output can not open"},"id":1,"jsonrpc":"2.0"}
 
-  // Result
-  {
-    "id":3,
-    "jsonrpc": "2.0",
-    "result": "Succeed to export to /home/u/1.txt"
-  }
   ```
 
-### ppio\_object\_put
-
+### ObjectPut
 - **Description**:
+  Publish a contract to upload an Object用于上传 Object 的合约
+- **params**:
 
-  发布一个用于上传 Object 的合约
+  | name    | default | description                                                         |
+  | --------- | ------ | ---------------------------- |
+  | object-hash | "none"     | 目标 Object 的 Hash |
+  | copies   | 5                | 存储的副本个数，至少为 5 个                                  |
+  | duration | 8640000，即100天 | Object 的存放时间，以 s（秒）为单位                          |
+  | gasprice | none               | Gas 单价，以 wei 为单位                                      |
+  | acl      | public           | Object 的访问权限：设置为 public 代表该 Object 可以被任何人访问；设置为 private 代表该 Object 是私密的，需要被授权才能访问 |
+- **Success Responses**:
 
-- **Arguments**:
+  | result    |  description         |
+  | --------- | ----------- |
+  | result | null |
+- **Fail Responses**:
 
-  ```bash
-  <object-hash>：目标 Object 的 Hash 值
-  ```
-
-- **Options**:
-
-  | 选项     | 默认值           | 描述                                                         |
-  | ---------- | ---------------- | ------------------------------------------------------------ |
-  | --copies   | 5                | 存储的副本个数，至少为 5 个                                  |
-  | --duration | 8640000，即100天 | Object 的存放时间，以 s（秒）为单位                          |
-  | --gasprice | 无               | Gas 单价，以 wei 为单位                                      |
-  | --acl      | public           | Object 的访问权限：设置为 public 代表该 Object 可以被任何人访问；设置为 private 代表该 Object 是私密的，需要被授权才能访问 |
-
+  | result    |  error code         |  error message |
+  | --------- | ----------- |----------- |
+  | error | -1 |"invalid buffer size" |
+  | error | 2017 |"contract has already exsited" |
 - **Example**:
-
-  ```bash
+  ```
   # 合约发布成功，不代表 Indexer 一定会调度或 Object 已上传成功，可以通过 `ppio object status` 命令来查询该 Object 是否被成功上传
-  # 如果合约发布失败，会返回错误标识及错误原因
 
-  // Request
-  curl -X POST --data '{"jsonrpc":"2.0","method":"ppio_object_put","params":{"copies":"3", "duration":"864000", "gasprice":"10000", "acl":"public", "object-hash":"98715955d14b4ea129fed7efd1ffdd2ba7a0cc4a2e46160058a740893bbaf2d1"},"id":3}'
+  > ppio object put --copies=5 --duration=864000 --gasprice=100 --acl=public 7547DF322CBAF84FD02248133BF5A1C2FAE7296960ECED0EF6BDE2FF3EF37CF8
 
-  // Result
-  {
-    "id":3,
-    "jsonrpc": "2.0",
-    "result": "Succeed!"
-  }
+  # Request
+  > curl --data '{"id":1,"jsonrpc":"2.0","method":"ObjectPut","params":["7547DF322CBAF84FD02248133BF5A1C2FAE7296960ECED0EF6BDE2FF3EF37CF8",5,864000,100,"public"]}' http://127.0.0.1:18060
+
+  # Result succeed
+  {"id":1,"jsonrpc":"2.0","result":null}
+
+  # Result failed
+  {"error":{"code":-1,"message":"invalid buffer size"},"id":1,"jsonrpc":"2.0"}
+  {"error":{"code":2017,"message":"contract has already exsited"},"id":1,"jsonrpc":"2.0"}
   ```
 
-### ppio\_object\_get
-
+### ObjectGet
 - **Description**:
+  Download the contents of an Object to your local storage. When Object is owned by someone else, there are two situations:
+  - If the ACL of the Object is set to public, you can download the Object directly via `ppio object get`
+  - If the ACL of the Object is set to private, you must first have the signature authorization for the Object (via the `ppio object auth` command), and the user can download the object via `ppio object get` during the validity period of the signature.
+- **params**:
 
-  下载一个 Object 的所有内容到本地存储空间,当 Object 为其他人所拥有时，有如下两种情况：
-    - 如果 Object 的 ACL 设置为 public，则可以直接通过 object get 来下载该 Object
-    - 如果 Object 的 ACL 设置为 private，则必须先拥有该 Object 的签名授权（通过 object auth命令），且在该签名有效期内，用户才能通过 object get 下载该 Object
+  | name    | default | description                                                         |
+  | --------- | ------ | ---------------------------- |
+  | object-hash | none     | 目标 Object 的 Hash |
+  | gasprice | none     | Gas 单价，以 wei 为单位当 Object 为其他人所拥有时，需要设置该字段 |
+  | owner    | none     | 当 Object 为其他人所拥有时，该字段表示其他人的 user-id       |
+  | access-duration   | none     | Object的拥有者授权别人多长时间之内可以访问某个Object |
+  | access-signature  | none     | Object的拥有者授权别人多长时间之内可以访问某个Object时的签名 |
+  | auth     | none              | Object的拥有者授权别人多长时间之内可以访问某个Object时的签名+签名内容 |
+- **Success Responses**:
 
-- **Arguments**:
+  | result    |  description         |
+  | --------- | ----------- |
+  | result | null |
+- **Fail Responses**:
 
-  ```bash
-  <object-hash>：Object 的 Hash 值（可以是其他人的 Object）
-  ```
-
-- **Options**:
-
-  | 选项     | 默认值 | 描述                                                         |
-  | ---------- | ------ | ------------------------------------------------------------ |
-  | --gasprice | 无     | Gas 单价，以 wei 为单位当 Object 为其他人所拥有时，需要设置该字段 |
-  | --owner    | 无     | 当 Object 为其他人所拥有时，该字段表示其他人的 user-id       |
-  | --auth     | 无     | 当 Object 为其他人所拥有且 Object 的 ACL 设置为 private 时，需要其他人提供该 Object 的签名用以授权 |
-
+  | result    |  error code         |  error message |
+  | --------- | ----------- |----------- |
+  | error | 2003 |"failed to schedule task" |
 - **Example**:
+  ```
+  # 用户 002508021221033fb36e1471d2153d0759e14386c6c294b1ad09244841ee8d043eadd1bfe7baaa 下载自己的或者是Public的Object
 
-  ```bash
-  # 命令执行成功后则返回 Object 在本地存储空间中的目录信息，否则返回错误标识和错误信息
+  > ppio object get --rpcport=18060 --gasprice=100 --owner=002508021221033fb36e1471d2153d0759e14386c6c294b1ad09244841ee8d043eadd1bfe7baaa 7547DF322CBAF84FD02248133BF5A1C2FAE7296960ECED0EF6BDE2FF3EF37CF8
 
-  # 用户080a6fdb95cee6f852cb4b061525c866cbbe2c0a下自己的或者是Public的Object
-  // Request
-  curl -X POST --data '{"jsonrpc":"2.0","method":"ppio_object_get","params":{"gasprice":"1000", "object-hash":"98715955d14b4ea129fed7efd1ffdd2ba7a0cc4a2e46160058a740893bbaf2d1"},"id":3}'
+  # Request
+  > curl --data '{"id":1,"jsonrpc":"2.0","method":"ObjectGet","params":["7547DF322CBAF84FD02248133BF5A1C2FAE7296960ECED0EF6BDE2FF3EF37CF8",100,"002508021221033fb36e1471d2153d0759e14386c6c294b1ad09244841ee8d043eadd1bfe7baaa",86400,""]}' http://127.0.0.1:18060
 
-  // Result
-  {
-    "id":3,
-    "jsonrpc": "2.0",
-    "result": "Succeed!"
-  }
+  # Result
+  {"id":1,"jsonrpc":"2.0","result":null}
 
-  # 用户080a6fdb95cee6f852cb4b061525c866cbbe2c0a给用户080a6fdb95cee6f852cb4b061525c866cbbe2c0a授权
-  // Request
-  curl -X POST --data '{"jsonrpc":"2.0","method":"ppio_object_auth","params":{"accessor":"fffffff95cee6f852cb4b061525c866cbbe2c0a", "duration":"86400", "object-hash":"98715955d14b4ea129fed7efd1ffdd2ba7a0cc4a2e46160058a740893bbaf2d1"},"id":3}'
-
-  // Result
-  {
-    "id":3,
-    "jsonrpc": "2.0",
-    "result": {"Auth Info":"667b0377..."}
-  }
-
-  # 用户fffffff95cee6f852cb4b061525c866cbbe2c0a通过授权下载文件
-  // Request
-  curl -X POST --data '{"jsonrpc":"2.0","method":"ppio_object_get","params":{"gasprice":"1000", "auth":"667b0377...", "owner": "080a6fdb95cee6f852cb4b061525c866cbbe2cff", "object-hash": "98715955d14b4ea129fed7efd1ffdd2ba7a0cc4a2e46160058a740893bbaf2d1"},"id":3}'
-
-  // Result
-  {
-    "id":3,
-    "jsonrpc": "2.0",
-    "result": "Succeed!"
-  }
   ```
 
-### ppio\_object\_copy
+  ```
+  # 用户002508021221033fb36e1471d2153d0759e14386c6c294b1ad09244841ee8d043eadd1bfe7baaa给用户002508021221024d8a69222ab1b305aa6abd5615058ed0e7e9f4da04e190284bbfb5fae968b348授权
 
+  # Command
+  > ppio object auth --rpcport=18060 --accessor=002508021221024d8a69222ab1b305aa6abd5615058ed0e7e9f4da04e190284bbfb5fae968b348 --duration=86400 7547DF322CBAF84FD02248133BF5A1C2FAE72969
+  60ECED0EF6BDE2FF3EF37CF8
+
+  # Request
+  > curl --data '{"jsonrpc":"2.0","method":"ObjectAuth","params":{"accessor":"002508021221024d8a69222ab1b305aa6abd5615058ed0e7e9f4da04e190284bbfb5fae968b348", "duration":"86400", "object-hash":"7547DF322CBAF84FD02248133BF5A1C2FAE7296960ECED0EF6BDE2FF3EF37CF8"},"id":3}' http://127.0.0.1:18060
+
+  # Result
+  {"id":1,"jsonrpc":"2.0","result":"4ef8d76685cf81675d5356e16f30b5c5f7ae63a3665a665dd3cf225ab7b4aa7372012029203d3aca5f3317bf4297be1507d171930726ede7e864a9b8a4d6c5b9007547df322cbaf84fd02248133bf5a1c2fae7296960eced0ef6bde2ff3ef37cf827000000002508021221033fb36e1471d2153d0759e14386c6c294b1ad09244841ee8d043eadd1bfe7baaa27000000002508021221024d8a69222ab1b305aa6abd5615058ed0e7e9f4da04e190284bbfb5fae968b348de93c05b00000000"}
+
+  # 用户002508021221024d8a69222ab1b305aa6abd5615058ed0e7e9f4da04e190284bbfb5fae968b348通过授权下载文件
+
+  # Command
+  > ppio object get --gasprice=100 --rpcport=18061 --owner=002508021221033fb36e1471d2153d0759e14386c6c294b1ad09244841ee8d043eadd1bfe7baaa --auth=4ef8d76685cf81675d5356e16f30b5c5f7ae63a3665a665dd3cf225ab7b4aa7372012029203d3aca5f3317bf4297be1507d171930726ede7e864a9b8a4d6c5b9007547df322cbaf84fd02248133bf5a1c2fae7296960eced0ef6bde2ff3ef37cf827000000002508021221033fb36e1471d2153d0759e14386c6c294b1ad09244841ee8d043eadd1bfe7baaa27000000002508021221024d8a69222ab1b305aa6abd5615058ed0e7e9f4da04e190284bbfb5fae968b348de93c05b00000000 7547DF322CBAF84FD02248133BF5A1C2FAE7296960ECED0EF6BDE2FF3EF37CF8
+
+  # Request
+  > curl --data '{"id":1,"jsonrpc":"2.0","method":"ObjectGet","params":["7547DF322CBAF84FD02248133BF5A1C2FAE7296960ECED0EF6BDE2FF3EF37CF8",100,"002508021221033fb36e1471d2153d0759e14386c6c294b1ad09244841ee8d043eadd1bfe7baaa",86400,"",""]}' http://127.0.0.1:18060
+
+  # Result
+  {"id":1,"jsonrpc":"2.0","result":null}
+  ```
+
+### ObjectCopy
 - **Description**:
+  Initiate a copy contract of Object to copy an Object to your own
+- **params**:
 
-  发起一个 Object 的拷贝合约，用来将某个 Object 拷贝到自己名下
+  | name    | default | description                                                         |
+  | --------- | ------ | ---------------------------- |
+  | object-hash | none     | 待拷贝的 Object 的 Hash 值 |
+  | copies   | 5                | 存储的副本个数，至少为 5 个                                  |
+  | duration | 100天，即8640000 | Object 的存放时间，以 s（秒）为单位                          |
+  | gasprice | none               | Gas 单价，以 wei 为单位                                      |
+  | acl      | public           | Object 的访问权限，设置为 public 代表该 Object 可以被任何人访问；设置为 private 代表该 Object 是私密的，需要被授权才能访问 |
+  | auth     | none               | 拷贝其他人的 Object 时所需，需要其他人提供的 Object 签名用以授权 |
+  | owner    | none               | 文件拥有者的id      |
+- **Success Responses**:
 
-- **Arguments**:
+  | result    |  description         |
+  | --------- | ----------- |
+  | result | null |
+- **Fail Responses**:
 
-  ```bash
-  <object-hash>：待拷贝的 Object 的 Hash 值
-  ```
-
-- **Options**:
-
-  | 选项     | 默认值           | 描述                                                         |
-  | ---------- | ---------------- | ------------------------------------------------------------ |
-  | --copies   | 5                | 存储的副本个数，至少为 5 个                                  |
-  | --duration | 100天，即8640000 | Object 的存放时间，以 s（秒）为单位                          |
-  | --gasprice | 无               | Gas 单价，以 wei 为单位                                      |
-  | --acl      | public           | Object 的访问权限，设置为 public 代表该 Object 可以被任何人访问；设置为 private 代表该 Object 是私密的，需要被授权才能访问 |
-  | --owner    | 无               | 文件拥有者的id                                                                                                             |
-  | --auth     | 无               | 拷贝其他人的 Object 时所需，需要其他人提供的 Object 签名用以授权                                                           |
-
+  | result    |  error code         |  error message |
+  | --------- | ----------- |----------- |
+  | error | -1 |"failed to schedule copy-object" |
 - **Example**:
-
-  ```bash
+  ```
   # 合约 Copy 成功后则直接返回成功标识，不代表 Indexer 一定会调度或 Object 已拷贝成功，可以通过 `object status` 命令来查询该 Object 是否被成功拷贝
-  # 合约 Copy 失败则返回错误标识及错误原因
 
-  // Request
-  curl -X POST --data '{"jsonrpc":"2.0","method":"ppio_object_copy","params":{"copies":"5", "duration":"86400", "gasprice":"100", "auth":"0x1234", "owner": "080a6fdb95cee6f852cb4b061525c866cbbe2cff", "object-hash": "98715955d14b4ea129fed7efd1ffdd2ba7a0cc4a2e46160058a740893bbaf2d1"},"id":3}'
+  # Command
+  > ppio object copy --rpcport=18060 --copies=5 --duration=86400 --gasprice=100 --acl=public --auth=4ef8d76685cf81675d5356e16f30b5c5f7ae63a3665a665dd3cf225ab7b4aa7372012029203d3aca5f3317bf4297be1507d171930726ede7e864a9b8a4d6c5b9007547df322cbaf84fd02248133bf5a1c2fae7296960eced0ef6bde2ff3ef37cf827000000002508021221033fb36e1471d2153d0759e14386c6c294b1ad09244841ee8d043eadd1bfe7baaa27000000002508021221024d8a69222ab1b305aa6abd5615058ed0e7e9f4da04e190284bbfb5fae968b348de93c05b00000000 --owner=002508021221033fb36e1471d2153d0759e14386c6c294b1ad09244841ee8d043eadd1bfe7baaa 7547DF322CBAF84FD02248133BF5A1C2FAE7296960ECED0EF6BDE2FF3EF37CF8
 
-  // Result
-  {
-    "id":3,
-    "jsonrpc": "2.0",
-    "result": "Succeed!"
-  }
+  # Request
+  > curl --data '{"id":1,"jsonrpc":"2.0","method":"ObjectCopy","params":["7547DF322CBAF84FD02248133BF5A1C2FAE7296960ECED0EF6BDE2FF3EF37CF8",5,86400,100,"public","4ef8d76685cf81675d5356e16f30b5c5f7ae63a3665a665dd3cf225ab7b4aa7372012029203d3aca5f3317bf4297be1507d171930726ede7e864a9b8a4d6c5b9007547df322cbaf84fd02248133bf5a1c2fae7296960eced0ef6bde2ff3ef37cf827000000002508021221033fb36e1471d2153d0759e14386c6c294b1ad09244841ee8d043eadd1bfe7baaa27000000002508021221024d8a69222ab1b305aa6abd5615058ed0e7e9f4da04e190284bbfb5fae968b348de93c05b00000000","002508021221033fb36e1471d2153d0759e14386c6c294b1ad09244841ee8d043eadd1bfe7baaa"]}' http://127.0.0.1:18060
+
+  # Result Succeed
+  {"id":1,"jsonrpc":"2.0","result":null}
+
+  # Result Failed
+  {"error":{"code":-1,"message":"failed to schedule copy-object"},"id":1,"jsonrpc":"2.0"}
   ```
 
-### ppio\_object\_status
-
+### ObjectStatus
 - **Description**:
+  Get the contract information and execution status of an Object, which can only be used to view your own Object.
+- **params**:
 
-  获取某个 Object 相关的合约信息及执行状况，只能用于查看自己的 Object
+  | name    | default | description                            |
+  | --------- | ------ | ---------------------------- |
+  | object-hash | none     | 待查询的 Object 的 Hash 值 |
+- **Success Responses**:
 
-- **Arguments**:
+  | result    |  description         |
+  | --------- | ----------- |
+  | result | Object的状态信息 |
+- **Fail Responses**:
 
-  ```bash
-  <object-hash>：待查询的 Object 的 Hash 值
-  ```
-
+  | result    |  error code         |  error message |
+  | --------- | ----------- |----------- |
+  | error | -1 |"invalid buffer size" |
 - **Example**:
-
-  ```bash
+  ```
   # 命令执行成功，返回示例：
-  // Request
-  curl -X POST --data '{"jsonrpc":"2.0","method":"ppio_object_status","params":{"object-hash": "98715955d14b4ea129fed7efd1ffdd2ba7a0cc4a2e46160058a740893bbaf2d1"},"id":3}'
 
-  // Result
+  # Command
+  > ppio object status --rpcport=18060  7547DF322CBAF84FD02248133BF5A1C2FAE7296960ECED0EF6BDE2FF3EF37CF8
+
+  # Request
+  > curl --data '{"id":1,"jsonrpc":"2.0","method":"ObjectStatus","params":[["7547DF322CBAF84FD02248133BF5A1C2FAE7296960ECED0EF6BDE2FF3EF37CF8"],null]}' http://127.0.0.1:18060
+
+  # Result succeed
   {
     "id":3,
     "jsonrpc": "2.0",
     "result": {
-    //TODO format
-        "Object Hash": "98715955d14b4ea129fed7efd1ffdd2ba7a0cc4a2e46160058a740893bbaf2d1",
+        "Object Hash": "7547DF322CBAF84FD02248133BF5A1C2FAE7296960ECED0EF6BDE2FF3EF37CF8",
   "Storage Contracts":
   [
     {
-      "ObjectHash": "98715955d14b4ea129fed7efd1ffdd2ba7a0cc4a2e46160058a740893bbaf2d1",
+      "ObjectHash": "7547DF322CBAF84FD02248133BF5A1C2FAE7296960ECED0EF6BDE2FF3EF37CF8",
       "ContractId": "3c10a30666e4a7f98893931e9823181e0d1e7fa14a94af33e2e3873b8feea857",
       "ContractStatus": "US_DEAL",
       "Copies": 1,
@@ -648,7 +708,7 @@ sidebarDepth: 2
           {
             "SegmentInfo": {
               "BasicInfo": {
-                "SegmentHash": "98715955d14b4ea129fed7efd1ffdd2ba7a0cc4a2e46160058a740893bbaf2d1",
+                "SegmentHash": "7547DF322CBAF84FD02248133BF5A1C2FAE7296960ECED0EF6BDE2FF3EF37CF8",
                 "SegmentId": "e2380dbf52d2d165042b120277fe4b55a485f508625c2877ad348062997070ff",
                 "SegmentLength": 365
               }
@@ -660,47 +720,71 @@ sidebarDepth: 2
   ]
     }
   }
+
+  # Result failed
+  {"error":{"code":-1,"message":"invalid buffer size"},"id":1,"jsonrpc":"2.0"}
   ```
 
-### ppio\_object\_list
-
+### ObjectList
 - **Description**:
+  Paginate all Objects. Unlike ppio object status, ppio object list is just a list of Objects, and there is no information about the execution of the corresponding contract.
+- **params**:
+  none
+- **Success Responses**:
 
-  分页获取所有 object 。和object status不同的是，object list 只是 Object 的列表，没有相对应的合约的执行情况等信息
+  | result    |  description         |
+  | --------- | ----------- |
+  | result | 多个Object的状态信息 |
+- **Fail Responses**:
 
-- **Options**:
-
-  | 选项       | 默认值 | 描述                         |
-  | ------------ | ------ | ---------------------------- |
-  | --start-page | 1      | 开始页，需大于等于 1         |
-  | --page-size  | 10     | 每页最多包含的 Object 记录数 |
-
+  | result    |  error code         |  error message |
+  | --------- | ----------- |----------- |
+  | error | -1 |"invalid buffer size" |
 - **Example**:
+  ```
+  # Command
 
-  ```bash
-  # 命令输出格式：
-  // Request
-  curl -X POST --data '{"jsonrpc":"2.0","method":"ppio_object_list","params":[],"id":3}'
+  > ./ppio object list --rpcport=18060
 
-  // Result
+
+  # Request
+  > curl --data '{"id":1,"jsonrpc":"2.0","method":"ObjectList","params":[]}' http://127.0.0.1:18060
+
+  # Result
   {
     "id":3,
     "jsonrpc": "2.0",
     // TODO format
     "result":
-    [
+  [
     {
       "ObjectBasicInfo": {
-        "ObjectHash": "98715955d14b4ea129fed7efd1ffdd2ba7a0cc4a2e46160058a740893bbaf2d1",
+        "ObjectHash": "7547df322cbaf84fd02248133bf5a1c2fae7296960eced0ef6bde2ff3ef37cf8",
         "ObjectType": "file",
         "ObjectAclType": "Public"
       },
       "SegmentInfos": [
         {
           "BasicInfo": {
-            "SegmentHash": "98715955d14b4ea129fed7efd1ffdd2ba7a0cc4a2e46160058a740893bbaf2d1",
-            "SegmentId": "e2380dbf52d2d165042b120277fe4b55a485f508625c2877ad348062997070ff",
-            "SegmentLength": 365
+            "SegmentHash": "7547df322cbaf84fd02248133bf5a1c2fae7296960eced0ef6bde2ff3ef37cf8",
+            "SegmentId": "6ad3e2278e1251c1a1ebf3f842dcff2caf21d24b94148a8649896f915e574c1e",
+            "SegmentLength": 87041
+          }
+        }
+      ]
+    },
+    {
+      "ObjectBasicInfo": {
+        "ObjectHash": "0f32bbbb22778b52eed14e0c295dbb442e8dc6666ff6f04c21e00f8e16e1f918",
+        "ObjectType": "file",
+        "ObjectAclType": "Public"
+      },
+      "SegmentInfos": [
+        {
+          "BasicInfo": {
+            "SegmentHash": "0f32bbbb22778b52eed14e0c295dbb442e8dc6666ff6f04c21e00f8e16e1f918",
+            "SegmentId": "786445aba3770037357ff4f2c48cfdf46f1a5e15af7061a704c6fec83593685f",
+            "SegmentLength": 45056
           }
         }
       ]
@@ -709,228 +793,352 @@ sidebarDepth: 2
   }
   ```
 
-### ppio\_object\_delete
-
+### ObjectDelete
 - **Description**:
+  Delete the contract of an Object
+- **params**:
 
-  删除某个 Object 对应的合约
+  | name    | default | description                            |
+  | --------- | ------ | ---------------------------- |
+  | object-hash | none     | 待查询的 Object 的 Hash 值 |
+- **Success Responses**:
 
-- **Arguments**:
+  | result    |  description         |
+  | --------- | ----------- |
+  | result | null |
+- **Fail Responses**:
 
-  ```bash
-  <object-hash>：待删除的 Object 的 Hash 值
-  ```
-
+  | result    |  error code         |  error message |
+  | --------- | ----------- |----------- |
+  | error | -1 |"invalid buffer size" |
 - **Example**:
-
-  ```bash
+  ```
   # 删除合约成功后会返回成功标识，否则返回错误标识和原因
-  // Request
-  curl -X POST --data '{"jsonrpc":"2.0","method":"ppio_object_delete","params":{"object-hash": "98715955d14b4ea129fed7efd1ffdd2ba7a0cc4a2e46160058a740893bbaf2d1"},"id":3}'
+  > ppio object delete --rpcport=18060 0F32BBBB22778B52EED14E0C295DBB
+  442E8DC6666FF6F04C21E00F8E16E1F918
 
-  // Result
-  {
-    "id":3,
-    "jsonrpc": "2.0",
-    "result": "Succeed!"
-  }
+  # Request
+  > curl --data '{"id":1,"jsonrpc":"2.0","method":"ObjectDelete","params":["0F32BBBB22778B52EED14E0C295DBB442E8DC6666FF6F04C21E00F8E16E1F918"]}' http://127.0.0.1:18060
+
+  # Result
+  {"id":1,"jsonrpc":"2.0","result":null}
   ```
 
-### ppio\_object\_renew
-
+### ObjectRenew
 - **Description**:
+  Republish the contract for an Object
 
-  重新发布某个 Object 对应的合约
+- **params**:
 
-- **Arguments**:
+  | name    | default | description                            |
+  | --------- | ------ | ---------------------------- |
+  | object-hash | none     | 待重新发布合约的 Object 的 Hash 值 |
+  | copies   | 5                | 存储副本的个数，不小于 5                                     |
+  | duration | 100天，即8640000 | Object 的存放时间，以 s（秒）为单位                          |
+  | gasprice | none               | Gas 单价，以 wei 为单位                                      |
+  | acl      | public           | Object 的访问权限，设置为 public 代表该 Object 可以被任何人访问；设置为 private 代表该 Object 是私密的，需要被授权才能访问 |
 
-  ```bash
-  <object-hash>：待重新发布合约的 Object 的 Hash 值
-  ```
+- **Success Responses**:
 
-- **Options**:
+  | result    |  description         |
+  | --------- | ----------- |
+  | result | null |
 
-  | 选项     | 默认值           | 描述                                                         |
-  | ---------- | ---------------- | ------------------------------------------------------------ |
-  | --copies   | 5                | 存储副本的个数，不小于 5                                     |
-  | --duration | 100天，即8640000 | Object 的存放时间，以 s（秒）为单位                          |
-  | --gasprice | 无               | Gas 单价，以 wei 为单位                                      |
-  | --acl      | public           | Object 的访问权限，设置为 public 代表该 Object 可以被任何人访问；设置为 private 代表该 Object 是私密的，需要被授权才能访问 |
+- **Fail Responses**:
+
+  | result    |  error code         |  error message |
+  | --------- | ----------- |----------- |
+  | error | -1 |"invalid buffer size" |
+  | error | 2009 |"no need to renew object" |
 
 - **Example**:
 
-  ```bash
+  ```
   # 发布合约成功会返回成功标识，否则会返回失败标识及原因另外，发布合约成功，并不代表 Indexer 一定会调度
-  // Request
-  curl -X POST --data '{"jsonrpc":"2.0","method":"ppio_object_renew","params":{"duration":"864000", "gasprice":"100", "copies":"5", "acl":"public", "object-hash":"98715955d14b4ea129fed7efd1ffdd2ba7a0cc4a2e46160058a740893bbaf2d1"},"id":3}'
 
-  // Result
-  {
-    "id":3,
-    "jsonrpc": "2.0",
-    "result": "Succeed!"
-  }
+  # Command
+  > ppio object renew --rpcport=18060 --duration=864000 --gasprice=100 --copies=5 --acl=public 7547DF322CBAF84FD02248133BF5A1C2FAE7296960ECED0EF6BDE2FF3EF37CF8
+
+  # Request
+  > curl --data '{"id":1,"jsonrpc":"2.0","method":"ObjectRenew","params":["7547DF322CBAF84FD02248133BF5A1C2FAE7296960ECED0EF6BDE2FF3EF37CF8",5,864000,100,"public"]}'
+  http://127.0.0.1:18060
+
+  # Result succeed
+  {"id":1,"jsonrpc":"2.0","result":null}
+
+  # Result failed
+  {"error":{"code":2009,"message":"no need to renew object"},"id":1,"jsonrpc":"2.0"}
+
   ```
 
-### ppio\_object\_updateacl
+
+### ObjectUpdateacl
 
 - **Description**:
 
+  ```
   更新某个 Object 的 ACL 信息
-
-- **Arguments**:
-
-  ```bash
-  <object-hash>：待更新 ACL 信息的 Object 的 Hash 值
   ```
 
-- **Options**:
+- **params**:
 
-  | 选项  | 默认值 | 描述                                                                                                                       |
-  | ----- | ------ | -------------------------------------------------------------------------------------------------------------------------- |
-  | --acl | public | Object 的访问权限，设置为 public 代表该 Object 可以被任何人访问；设置为 private 代表该 Object 是私密的，需要被授权才能访问 |
+  | name    | default | description                            |
+  | --------- | ------ | ---------------------------- |
+  | object-hash | none     | 待重新发布合约的 Object 的 Hash 值 |                                 |
+  | acl      | public           | Object 的访问权限，设置为 public 代表该 Object 可以被任何人访问；设置为 private 代表该 Object 是私密的，需要被授权才能访问 |
+
+- **Success Responses**:
+
+  | result    |  description         |
+  | --------- | ----------- |
+  | result | null |
+
+- **Fail Responses**:
+
+  | result    |  error code         |  error message |
+  | --------- | ----------- |----------- |
+  | error | -1 |"invalid buffer size" |
 
 - **Example**:
 
-  ```bash
+  ```
   # 更新成功会返回成功标识，否则返回失败标识及原因
-  // Request
-  curl -X POST --data '{"jsonrpc":"2.0","method":"ppio_object_updateacl","params":{"acl": "public", "object-hash": "98715955d14b4ea129fed7efd1ffdd2ba7a0cc4a2e46160058a740893bbaf2d1"},"id":3}'
 
-  // Result
-  {
-    "id":3,
-    "jsonrpc": "2.0",
-    "result": "Succeed!"
-  }
+  # Command
+  > ppio object updateacl --acl=private --rpcport=18060 7547DF322CBAF
+  84FD02248133BF5A1C2FAE7296960ECED0EF6BDE2FF3EF37CF8
+
+  # Request
+  > curl --data '{"id":1,"jsonrpc":"2.0","method":"ObjectUpdateAcl","params":["7547DF322CBAF84FD02248133BF5A1C2FAE7296960ECED0EF6BDE2FF3EF37CF8","private"]}' http://127.0.0.1:18060
+
+  # Result succeed
+  {"id":1,"jsonrpc":"2.0","result":null}
   ```
 
-### ppio\_object\_auth
+
+### ObjectAuth
 
 - **Description**:
 
-  将本地存储空间里面的 Object 授权给其他用户，如果该 Object 的 ACL 为 public，则该命令执行无实际效果。
+  ```
+  将本地存储空间里面的 Object 授权给其他用户，如果该 Object 的 ACL 为 public，则该命令执行none实际效果。
   授权时长不能超过该用户拥有该文件的剩余时长。
-
-- **Arguments**:
-
-  ```bash
-  <object-hash>：待授权的 Object 的 Hash 值
   ```
 
-- **Options**:
+- **params**:
 
-  | 选项       | 默认值       | 描述                             |
-  | ---------- | ------------ | -------------------------------- |
-  | --accessor | 无           | 被授权用户的id                   |
-  | --duration | 1天，即86400 | 授权有效持续时间，单位为 s（秒） |
+  | name    | default | description                            |
+  | --------- | ------ | ---------------------------- |
+  | object-hash | none     | 待授权的 Object 的 Hash 值  |
+  | accessor | none           | 被授权用户的id           |
+  | duration | 1天，即86400 | 授权有效持续时间，单位为 s（秒） |
+
+- **Success Responses**:
+
+  | result    |  description         |
+  | --------- | ----------- |
+  | result | null |
+
+- **Fail Responses**:
+
+  | result    |  error code         |  error message |
+  | --------- | ----------- |----------- |
+  | error | -1 |"invalid buffer size" |
 
 - **Example**:
 
-  ```bash
+  ```
   # 授权成功，则返回授权的签名信息，用于被授权用户来获取 Object，否则返回错误标识和信息
-  // Request
-  curl -X POST --data '{"jsonrpc":"2.0","method":"ppio_object_auth","params":{"accessor": "080a6fdb95cee6f852cb4b061525c866cbbe2c0a", "duration": "86400", "object-hash": "98715955d14b4ea129fed7efd1ffdd2ba7a0cc4a2e46160058a740893bbaf2d1"},"id":3}'
+  # 用户002508021221033fb36e1471d2153d0759e14386c6c294b1ad09244841ee8d043eadd1bfe7baaa给用户002508021221024d8a69222ab1b305aa6abd5615058ed0e7e9f4da04e190284bbfb5fae968b348授权
 
-  // Result
-  {
-    "id":3,
-    "jsonrpc": "2.0",
-    "result": {"Auth Info": "667b0377565b0bde135abca46dc724f1e7db610e0d849e06b34d5110d72f427f26ec6250d10f02c46a6fc3c339f0985cc8dd3ace423302bae2d77a4e656f79420198715955d14b4ea129fed7efd1ffdd2ba7a0cc4a2e46160058a740893bbaf2d127000000002508021221033fb36e1471d2153d0759e14386c6c294b1ad09244841ee8d043eadd1bfe7baaa14000000080a6fdb95cee6f852cb4b061525c866cbbe2c0a63f3b65b00000000"}
-  }
+  # Command
+  > ppio object auth --rpcport=18060 --accessor=002508021221024d8a69222ab1b305aa6abd5615058ed0e7e9f4da04e190284bbfb5fae968b348 --duration=86400 7547DF322CBAF84FD02248133BF5A1C2FAE72969
+  60ECED0EF6BDE2FF3EF37CF8
+
+  # Request
+  > curl --data '{"jsonrpc":"2.0","method":"ObjectAuth","params":["7547DF322CBAF84FD02248133BF5A1C2FAE7296960ECED0EF6BDE2FF3EF37CF8","002508021221024d8a69222ab1b305aa6abd5615058ed0e7e9f4da04e190284bbfb5fae968b348", 864000]}' http://127.0.0.1:18060
+
+  # Result
+  {"id":1,"jsonrpc":"2.0","result":"4ef8d76685cf81675d5356e16f30b5c5f7ae63a3665a665dd3cf225ab7b4aa7372012029203d3aca5f3317bf4297be1507d171930726ede7e864a9b8a4d6c5b9007547df322cbaf84fd02248133bf5a1c2fae7296960eced0ef6bde2ff3ef37cf827000000002508021221033fb36e1471d2153d0759e14386c6c294b1ad09244841ee8d043eadd1bfe7baaa27000000002508021221024d8a69222ab1b305aa6abd5615058ed0e7e9f4da04e190284bbfb5fae968b348de93c05b00000000"}
   ```
 
-## ppio\_status
+
+  ### ppio status
 
 - **Description**:
 
+  ```
   显示当前 ppio 节点运行时的详细信息
+  ```
+
+- **params**:
+  none
+
+- **Success Responses**:
+
+  | result    |  description         |
+  | --------- | ----------- |
+  | protocol-version | 当前节点的网络Id，以字符串表示|
+  | version | 当前节点的网络Id，以字符串表示|
+  | id | 当前节点的网络Id，以十六进制字符串表示|
+  | rpchost | 当前节点的网络IP地址，以4段整数表示|
+  | rpcport | 当前节点的网络端口，以整数表示|
+
+- **Fail Responses**:
+  none
+
 
 - **Example**:
 
-  ```bash
-  // Request
-  curl -X POST --data '{"jsonrpc":"2.0","method":"ppio_status","params":[],"id":3}'
+  ```
+  # Command
+  > ppio status --rpcport=18060
 
-  // Result
+  # Request
+  > curl --data '{"jsonrpc":"2.0","method":"ppio_status","params":[],"id":3}'
+
+  # Result
   {
     "id":3,
     "jsonrpc": "2.0",
     "result": {
         "protocol-version": "v0.0.1",
         "version": "v0.1.0",
-        "id": "QmfE6VMnNx1ZYdgihniprx4SKqBRDjrDqHWishLQ7CSdEj",
+        "id": "002508021221033fb36e1471d2153d0759e14386c6c294b1ad09244841ee8d043eadd1bfe7baaa",
         "rpchost": "127.0.0.1",
         "rpcport": "18060"
     }
   }
   ```
 
-## ppio\_storage
+
+  ### ppio storage
 
 - **Description**:
-
+  ```
   管理本地存储空间
+  ```
 
 - **Subcommand**:
 
-  | 子命令                                            | 描述                                    |
+  | subcommand                                            | description                                    |
   | ------------------------------------------------- | --------------------------------------- |
-  | [`ppio_storage_object`](#ppio-storage-object)     | 显示当前节点指定object的信息            |
-  | [`ppio_storage_objects`](#ppio-storage-objects)   | 显示当前节点所有objects的信息           |
-  | [`ppio_storage_segments`](#ppio-storage-segments) | 显示当前节点所有segments的信息          |
-  | [`ppio_storage_keep`](#ppio-storage-keep)         | 将 Object 保持在本地存储空间中          |
-  | [`ppio_storage_usage`](#ppio-storage-usage)       | 查看本地存储空间的使用情况              |
-  | [`ppio_storage_gc`](#ppio-storage-gc)             | 清理掉本地存储空间中没有被保持的 Object |
+  | [`StorageObject`](#storageobject)     | 显示当前节点指定object的信息            |
+  | [`StorageObjects`](#storageobjects)   | 显示当前节点所有objects的信息           |
+  | [`StorageSegments`](#storagesegments) | 显示当前节点所有segments的信息          |
+  | [`StorageKeep`](#storagekeep)         | 将 Object 保持在本地存储空间中          |
+  | [`StorageUsage`](#storageusage)       | 查看本地存储空间的使用情况              |
+  | [`StorageGc`](#storagegc)             | 清理掉本地存储空间中没有被保持的 Object |
 
-### ppio\_storage\_object
+
+### StorageObject
 
 - **Description**:
 
-  显示当前节点指定object的信息
-
-- **Arguments**:
-
-  ```bash
-  <object-hash>：待显示的 Object 的 Hash 值，十六进制字符串
   ```
+  显示当前节点指定object的信息
+  ```
+
+- **params**:
+
+  | name    | default | description                                                         |
+  | --------- | ------ | ---------------------------- |
+  | object-hash | "none"     | 指定object的 hash 值|
+
+- **Success Responses**:
+
+  | result    |  description         |
+  | --------- | ----------- |
+  | result | 当前节点指定object的信息|
+  | result.Hash | 当前节点指定object的hash|
+  | result.Length | 当前节点指定object的字节数|
+  | result.Segments | 当前节点对应于指定object的segment|
+  | result.Segments.Id | 相应segment的ID|
+  | result.Segments.Hash| 相应segment的hash|
+  | result.Segments.Length | 相应segment的字节数|
+
+- **Fail Responses**:
+
+  | result    |  description         |
+  | --------- | ----------- |
+  | error | 错误信息|
+  | error.code | error code|
+  | error.message | 详细错误信息|
 
 - **Example**:
 
-  ```bash
+  ```
   # 显示当前节点指定object的信息，包括其大小，segment的个数，以及各个segment的id和hash值
 
-  // Request
-  curl -X POST --data '{"jsonrpc":"2.0","method":"ppio_storage_keep","params":{"object-hash": "7547df322cbaf84fd02248133bf5a1c2fae7296960eced0ef6bde2ff3ef37cf8"},"id":3}'
+  # Command
+  > ppio storage object --rpcport=18060 D2837E475978764B0A14034306C9B79A5D325040A57793CBEBAE69257AC250CE
 
-  // Result
+  # Request
+  > curl --data '{"id":1,"jsonrpc":"2.0","method":"StorageObject","params":["D2837E475978764B0A14034306C9B79A5D325040A57793CBEBAE69257AC250CE"]}'  http://127.0.0.1:18060
+
+  # Result
   {
-    "id":3,
+    "id":1,
     "jsonrpc": "2.0",
-    "result": {
-        "Hash": "7547df322cbaf84fd02248133bf5a1c2fae7296960eced0ef6bde2ff3ef37cf8",
-        "Length": "87041",
-        "Segment Count": "1",
-        "Segment 0": "6ad3e2278e1251c1a1ebf3f842dcff2caf21d24b94148a8649896f915e574c1e 7547df322cbaf84fd02248133bf5a1c2fae7296960eced0ef6bde2ff3ef37cf8"
+    "result":
+    {
+      "Hash":"d2837e475978764b0a14034306c9b79a5d325040a57793cbebae69257ac250ce",
+      "Length":13,
+      "Segments":
+       [
+        {
+        "Id":"eaf86f80081b8b3096fda5964da5deba0ddece4b9eff79d4cb14c8d853d22710",
+        "Hash":"d2837e475978764b0a14034306c9b79a5d325040a57793cbebae69257ac250ce",
+        "Length":13
+        }
+      ]
     }
+  }
+
+  # Result Error
+  {
+    "error":{
+      "code":-1,
+      "message":"no such object"
+      },
+    "id":1,
+    "jsonrpc":"2.0"
   }
   ```
 
-### ppio\_storage\_objects
+
+### StorageObjects
 
 - **Description**:
 
+  ```
   显示当前节点所有objects的信息
+  ```
+- **params**:
+  none
 
+- **Success Responses**:
+
+  | result    |  description         |
+  | --------- | ----------- |
+  | result | 当前节点所有objects的信息|
+  | result.Hash | 当前节点某一object的hash|
+  | result.Length | 当前节点某一object的字节数|
+
+- **Fail Responses**:
+  none
 - **Example**:
 
-  ```bash
+  ```
   # 显示当前节点所有objects的信息，包括每个 object 的hash值和大小
 
-  // Request
-  curl -X POST --data '{"jsonrpc":"2.0","method":"ppio_storage_objects","params":[],"id":3}'
+  # Command
+  > ppio storage objects --rpcport=18060
 
-  // Result
+  # Request
+  > curl --data '{"jsonrpc":"2.0","method":"StorageObjects","params":[],"id":3}' http://127.0.0.1:18060
+
+  # Result
   {
     "id":3,
     "jsonrpc": "2.0",
@@ -947,33 +1155,45 @@ sidebarDepth: 2
             "Hash": "7547DF322CBAF84FD02248133BF5A1C2FAE7296960ECED0EF6BDE2FF3EF37CF8",
             "Length": "87041"
         },
-        {
-            "Hash": "BFA15DD67653A6C20A871D8F94E2136A4D053E587CF9CD1D5CF88B96C9370E28",
-            "Length": "132098"
-        },
-        {
-            "Hash": "C7E5A790B4D232C5BB7FF5F4618A2A0D1EBF7A96ACD08F57564BAA471E5671CD",
-            "Length": "33554432"
-        }
     ]
   }
   ```
 
-### ppio\_storage\_segments
+
+### StorageSegments
 
 - **Description**:
 
+  ```
   显示当前节点所有segments的信息
+  ```
+
+- **params**:  none
+
+- **Success Responses**:
+
+  | result    |  description         |
+  | --------- | ----------- |
+  | result | 当前节点所有segments的信息|
+  | result.Id | 当前节点某一segment的Id|
+  | result.Hash | 当前节点某一segment的hash|
+  | result.Length | 当前节点某一segment的字节数|
+
+- **Fail Responses**:
+  none
 
 - **Example**:
 
-  ```bash
+  ```
   # 显示当前节点所有segments的信息，包括每个segment的id，hash，和大小
 
-  // Request
-  curl -X POST --data '{"jsonrpc":"2.0","method":"ppio_storage_segments","params":[],"id":3}'
+  # Command
+  > ppio storage segments --rpcport=18060
 
-  // Result
+  # Request
+  > curl --data '{"jsonrpc":"2.0","method":"StorageSegments","params":[],"id":3}' http://127.0.0.1:18060
+
+  # Result
   {
     "id":3,
     "jsonrpc": "2.0",
@@ -993,56 +1213,50 @@ sidebarDepth: 2
             "Hash": "c9b351ca25f45d9a1d3830f16d987eeeb90668466768a03a38dc592fca9937ec",
             "Length": "16777216"
         },
-        {
-            "Id": "53e36b79903add8f2c8102fb174ac67461bdca851387083726954c79f43f1ce4"，
-            "Hash": "72bddba68e17c5ee3fef4f2dc8fa3489c1416abf826e73fdbf7f54c2d4f41172",
-            "Length": "16777216"
-        },
-        {
-            "Id": "4a09e20aa0bc0d351f21918e4f740e8cc064d7bce0295acda8ee167850004921"，
-            "Hash": "c9b351ca25f45d9a1d3830f16d987eeeb90668466768a03a38dc592fca9937ec",
-            "Length": "16777216"
-        },
-        {
-            "Id": "f6cb55447cbff363854cab3d3bada54953143bb7269fd6380c2558a75428bda0"，
-            "Hash": "c9b351ca25f45d9a1d3830f16d987eeeb90668466768a03a38dc592fca9937ec",
-            "Length": "16777216"
-        },
-        {
-            "Id": "56e60eeaf1744b4c1f2344ae26b07e958800ef12a4c9c1ba579c3bb240690e8f"，
-            "Hash": "72bddba68e17c5ee3fef4f2dc8fa3489c1416abf826e73fdbf7f54c2d4f41172",
-            "Length": "16777216"
-        },
-        {
-            "Id": "4b5053da3189dc72a60ab4232a13d76f187227a12cbbd2e749c8f9785f05eb2d"，
-            "Hash": "4a5577926eb696943ce694ca52d57a62588a3867535dadf23d2afa2863b67a36",
-            "Length": "3"
-        }
+
     ]
   }
   ```
 
-### ppio\_storage\_keep
+
+### StorageKeep
 
 - **Description**:
 
-  将某个 Object 保持在本地存储空间中
-
-- **Arguments**:
-
-  ```bash
-  <object-hash>：待设置的 Object 的 Hash 值
   ```
+  将某个 Object 保持在本地存储空间中
+  ```
+
+- **params**:
+
+  | name    | default | description                                                         |
+  | --------- | ------ | ---------------------------- |
+  | object-hash | "none"     | 待设置的 Object 的 Hash 值|
+
+
+- **Success Responses**:
+
+  | result    |  description         |
+  | --------- | ----------- |
+  | result | 成功或失败标识|
+
+
+- **Fail Responses**:
+
+  | result    |  description         |
+  | --------- | ----------- |
+  | result | 成功或失败标识|
 
 - **Example**:
 
-  ```bash
-  # 返回成功或失败标识
+  ```
+  # Command
+  > ppio storage keep 7547DF322CBAF84FD02248133BF5A1C2FAE7296960ECED0EF6BDE2FF3EF37CF8
 
-  // Request
-  curl -X POST --data '{"jsonrpc":"2.0","method":"ppio_storage_keep","params":{"object-hash": "98715955d14b4ea129fed7efd1ffdd2ba7a0cc4a2e46160058a740893bbaf2d1"},"id":3}'
+  # Request
+  > curl --data '{"jsonrpc":"2.0","method":"StorageKeep","params":[7547DF322CBAF84FD02248133BF5A1C2FAE7296960ECED0EF6BDE2FF3EF37CF8],"id":3}' http://127.0.0.1:18060
 
-  // Result
+  # Result
   {
     "id":3,
     "jsonrpc": "2.0",
@@ -1050,19 +1264,43 @@ sidebarDepth: 2
   }
   ```
 
-### ppio\_storage\_usage
+
+### StorageUsage
 
 - **Description**:
 
+  ```
   查看本地存储空间的使用情况
+  ```
+
+- **params**:
+  none
+
+- **Success Responses**:
+
+  | result    |  description         |
+  | --------- | ----------- |
+  | result | 本地存储空间的使用情况|
+  | result.UsageRate | 使用率|
+  | result.Total | 总量|
+  | result.Used | 已使用|
+  | result.KetpTotal | kept objects总量|
+  | result.KeptCount| kept objects数量|
+
+- **Fail Responses**:
+  none
+
 
 - **Example**:
 
-  ```bash
-  // Request
-  curl -X POST --data '{"jsonrpc":"2.0","method":"ppio_storage_usage","params":[],"id":3}'
+  ```
+  # Command
+  > ppio storage usage --rpcport=18060
 
-  // Result
+  # Request
+  > curl --data '{"jsonrpc":"2.0","method":"StorageUsage","params":[],"id":3}' http://127.0.0.1:18060
+
+  # Result
   {
     "id":3,
     "jsonrpc": "2.0",
@@ -1076,21 +1314,42 @@ sidebarDepth: 2
   }
   ```
 
-### ppio\_storage\_gc
+
+### StorageGc
 
 - **Description**:
 
+  ```
   清理掉本地存储空间中没有被保持的 Object
+  ```
+
+- **params**:  none
+
+
+- **Success Responses**:
+
+  | result    |  description         |
+  | --------- | ----------- |
+  | result | 成功或失败标识|
+
+
+- **Fail Responses**:
+
+  | result    |  description         |
+  | --------- | ----------- |
+  | result | 成功或失败标识|
+
 
 - **Example**:
 
-  ```bash
-  # 返回成功或失败标识
+  ```
+  # Command
+  > ppio storage gc --rpcport=18060
 
-  // Request
-  curl -X POST --data '{"jsonrpc":"2.0","method":"ppio_storage_gc","params":[],"id":3}'
+  # Request
+  > curl --data '{"jsonrpc":"2.0","method":"StorageGc","params":[],"id":3}' http://127.0.0.1:18060
 
-  // Result
+  # Result
   {
     "id":3,
     "jsonrpc": "2.0",
@@ -1098,56 +1357,102 @@ sidebarDepth: 2
   }
   ```
 
-## ppio\_wallet
+
+  ### ppio wallet
 
 - **Description**:
-
+  ```
   管理用户的钱包
+  ```
 
 - **Subcommand**:
 
-  | 子命令                                        | 描述                             |
+  | subcommand                                        | description                             |
   | --------------------------------------------- | -------------------------------- |
-  | [`ppio_wallet_address`](#ppio-wallet-address) | 显示当前钱包地址，十六进制字符串 |
-  | [`ppio_wallet_balance`](#ppio-wallet-balance) | 显示当前钱包地址的余额           |
+  | [`WalletAddress`](#walletaddress) | 显示当前钱包地址，十六进制字符串 |
+  | [`WalletBalance`](#walletbalance) | 显示当前钱包地址的余额           |
 
-### ppio\_wallet\_address
+
+### WalletAddress
 
 - **Description**:
 
+  ```
   显示当前钱包地址
+  ```
+
+- **params**:  none
+
+- **Success Responses**:
+
+  | result    |  description         |
+  | --------- | ----------- |
+  | result | 当前钱包地址|
+
+
+- **Fail Responses**:
+  none
 
 - **Example**:
 
-  ```bash
+  ```
   # 返回当前钱包地址
 
-  // Request
-  curl -X POST --data '{"jsonrpc":"2.0","method":"ppio_wallet_address","params":[],"id":3}'
+  # Command
+  > ppio wallet id --rpcport=18060
 
-  // Result
+  # Request
+  > curl --data '{"id":1,"jsonrpc":"2.0","method":"NetID","params":[]}'  http://127.0.0.1:18060
+
+  # Result
   {
-    "id":3,
+    "id":1,
     "jsonrpc": "2.0",
-    "result": "080a6fdb95cee6f852cb4b061525c866cbbe2c0a"
+    "result": "002508021221033fb36e1471d2153d0759e14386c6c294b1ad09244841ee8d043eadd1bfe7baaa"
   }
   ```
 
-### ppio\_wallet\_balance
+
+### WalletBalance
 
 - **Description**:
 
+  ```
   显示当前钱包地址的余额
+  ```
+
+- **params**:  
+  none
+
+- **Success Responses**:
+
+  | result    |  description         |
+  | --------- | ----------- |
+  | result | 当前钱包地址的余额|
+
+
+- **Fail Responses**:
+  none
 
 - **Example**:
 
-  ```bash
+  ```
   # 返回当前钱包地址的余额
 
-  // Request
-  curl -X POST --data '{"jsonrpc":"2.0","method":"ppio_wallet_balance","params":[],"id":3}'
+  # Command
+  > ppio wallet balance --rpcport=18060
 
-  // Result
+  # Request
+  > curl --data '{"id":1,"jsonrpc":"2.0","method":"NetID","params":[]}' http://127.0.0.1:18060
+  {
+    "id":1,
+    "jsonrpc": "2.0",
+    "result": "002508021221033fb36e1471d2153d0759e14386c6c294b1ad09244841ee8d043eadd1bfe7baaa"
+  }
+
+  > curl --data '{"id":1,"jsonrpc":"2.0","method":"BalanceOf","params":["002508021221033fb36e1471d2153d0759e14386c6c294b1ad09244841ee8d043eadd1bfe7baaa"]}'  http://127.0.0.1:18070
+
+  # Result
   {
     "id":3,
     "jsonrpc": "2.0",
