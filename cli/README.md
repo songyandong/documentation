@@ -4,9 +4,9 @@ sidebarDepth: 2
 
 # Command Line Reference
 ## Overview
-`ppio`, `ppio daemon`, `ppio daemon start` will start a PPIO user node.
+`ppio`, `ppio daemon`, `ppio daemon start` will start a user node.
 
-In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, other commands or subcommands are invoked through RPC. So unless specify otherwise, they all have the same options "rpchost" and "rpcport".
+In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, other commands or subcommands are called through RPC. So unless specify otherwise, they all have the same options "rpchost" and "rpcport".
 
 `ppio daemon start` also has options "rpchost" and "rpcport", which are used to temporarily override the RPC service listening address and port in the default configuration file.
 
@@ -39,14 +39,14 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
   > ppio config show --rpcport=18060
   ```
   ::: warning WARNING
-    The options configuration on the command line overrides the configuration in the configuration file.
+    Configuration options entered on the command line will override the configuration in the configuration file.
   :::
 
 ## ppio help
 - **Description**:  
-  display help for commands or subcommands
+  Display help for commands or subcommands.
 - **Options**:
-  ```bash
+  ```
   ppio [COMMAND] help
   ```
 - **Example**:  
@@ -104,18 +104,18 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
 - **Description**:  
   Manage user node configuration information.
 - **Usage**:
-  ```bash
+  ```
   ppio config [SUB-COMMAND]
   ```
 - **Options**:
 
   | subcommand | description |
   |--|--|
-  | [`ppio config show`](#ppio-config-show) |List the configuration information of the current user node|
+  | [`ppio config show`](#ppio-config-show) |List the configuration information of the current user node.|
 
 ### ppio config show
 - **Description**:  
-  List the configuration information of the current user node
+  List the configuration information of the current user node.
 - **Usage**:
   ```bash
   ppio config show
@@ -156,7 +156,7 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
 
 ## ppio daemon
 - **Description**:  
-  Manage PPIO user node service
+  Manage user node service.
 - **Usage**:
   ```bash
   ppio daemon SUB-COMMAND
@@ -165,12 +165,12 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
 
   | subcommand | description |
   |--|--|
-  | [`ppio daemon start`](#ppio-daemon-start) | start PPIO user node service |
-  | [`ppio daemon stop`](#ppio-daemon-stop) | stop PPIO user node service |
+  | [`ppio daemon start`](#ppio-daemon-start) | start user node service |
+  | [`ppio daemon stop`](#ppio-daemon-stop) | stop user node service |
 
 ### ppio daemon start
 - **Description**:  
-  Start PPIO user node service, establishes a connection and communicates with other user nodes, and exposes the corresponding port to provide RPC services and generates configuration files.
+  Start user node service, establishes a connection and communicates with other user nodes, and exposes the corresponding port to provide RPC services and generates configuration files.
 
   ::: warning WARNING
   Only this command starts the service node, and other commands (except `ppio version` and `ppio help`) communicate with the service node through RPC.
@@ -190,13 +190,11 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
 - **Example**:  
   ```bash
   > ppio daemon start
-  [这里显示 `ppio` 提供的所有命令的名称及简介(To be implemented)]
-
   ```
 
 ### ppio daemon stop
 - **Description**:  
-  Stop PPIO user node service.
+  Stop user node service.
 - **Usage**:
   ```bash
   ppio daemon stop
@@ -210,7 +208,7 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
 
 ## ppio init
 - **Description**:  
-  Initialize the PPIO user node and create the PPIO data directory and configuration file.  
+  Initialize the user node and create the PPIO data directory and configuration file.  
   - If the data directory or configuration file already exists, nothing is done;
   - If the configuration file format is unexpected, the content will be updated to the default.  
 - **Usage**:
@@ -225,8 +223,8 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
 
   | options| default | description |
   |--|--|--|
-  |--datadir|/home/u/.ppio/|specify PPIO user node data directory|
-  |--config|/home/u/.ppio/ppio.config|specify PPIO user node configuration file|
+  |--datadir|/home/u/.ppio/|specify user node data directory|
+  |--config|/home/u/.ppio/ppio.config|specify user node configuration file|
   |--max-storage| 10G | Specify the size of the local space that the user node can use. The unit can be: B,b,M,m,G,g,T,t|
   |--gc-threshold| 0.8 |When the size of the space used by the user exceeds this value, the node will start cleaning up the unkept files.(The value is less than the size of the space set by the user through `--max-storage`)|
 - **Example**:
@@ -258,7 +256,7 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
 
 ## ppio metadata
 - **Description**:  
-  Manage user metadata
+  Manage user node metadata.
 - **Usage**:
   ```bash
   ppio metadata SUB-COMMAND
@@ -267,30 +265,30 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
 
   | subcommand | description |
   |--|--|
-  |[`ppio metadata put`](#ppio-metadata-put)|Upload the user's MetaData information to the Indexer node|
-  |[`ppio metadata get`](#ppio-metadata-get)|Download the user's MetaData information to the Indexer node|
+  |[`ppio metadata put`](#ppio-metadata-put)|Upload the user node metadata to the Indexer node|
+  |[`ppio metadata get`](#ppio-metadata-get)|Download the user node metadata to the Indexer node|
 
 ### ppio metadata put
 - **Description**:  
-  Upload the user's MetaData information to the Indexer node, and limit the maximum occupied space of the information to 1M; MetaData is used to store basic information about users, and the usage scenarios are not limited.
+  Upload the user node metadata to the Indexer node, and limit the maximum occupied space of the information to 1M;Mmetadata is used to store basic information about users, and the usage scenarios are not limited.
 - **Usage**:
   ```bash
   ppio metadata put <meta-data>
   ```
 - **Options**:
   ```bash
-  <meta-data>: MetaData content to be uploaded, text form.
+  <meta-data>: metadata content to be uploaded, text form.
   ```
 - **Example**:  
   ```bash
   # Return a success or failure signal.
-  > ppio metadata put "Test MetaData"
+  > ppio metadata put "test metadata"
   Succeed!
   ```
 
 ### ppio metadata get
 - **Description**:  
-  Download the user's MetaData information from the Indexer node.
+  Download the user node metadata from the Indexer node.
 - **Usage**:
   ```
   ppio metadata get
@@ -298,13 +296,12 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
 - **Example**:
   ```
   > ppio metadata get
-  "Test MetaData"
-
+  "test metadata"
   ```
 
 ## ppio net
 - **Description**:  
-  Manage network information of PPIO user node
+  Manage network information of user node.
 - **Usage**:
   ```
   ppio net SUB-COMMAND
@@ -313,14 +310,14 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
 
   | subcommand | description |
   |--|--|
-  | [`ppio net id`](#ppio-net-id) |Display the current user node's network address, hex string|
-  | [`ppio net ping`](#ppio-net-ping) <Badge text="todo" type="warn" vertical="middle"/> |Detect connections to other user nodes|
-  | [`ppio net peers`](#ppio-net-peers) <Badge text="todo" type="warn" vertical="middle"/> |Display the list of currently connected peer information|
-  | [`ppio net servers`](#ppio-net-servers) |Display the list of currently connected server information|
+  | [`ppio net id`](#ppio-net-id) | display the current user node's network address, hex string |
+  | [`ppio net ping`](#ppio-net-ping) <Badge text="todo" type="warn" vertical="middle"/> | detect connections to other user nodes |
+  | [`ppio net peers`](#ppio-net-peers) <Badge text="todo" type="warn" vertical="middle"/> | display the list of currently connected peer information |
+  | [`ppio net servers`](#ppio-net-servers) | display the list of currently connected server information |
 
 ### ppio net id
 - **Description**:  
-  Display the current node's network address, hex string
+  Display the current node's network address(hex string).
 - **Usage**:
   ```
   ppio net id
@@ -333,7 +330,7 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
 
 ### ppio net ping <Badge text="todo" type="warn" vertical="middle"/>
 - **Description**:  
-  Detect connections to other user nodes
+  Detect connections to other user nodes.
 - **Usage**:
   ```bash
   ppio net <target-peer-id>
@@ -368,7 +365,7 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
 
 ### ppio net servers
 - **Description**:  
-  Display the list of currently connected server information
+  Display the list of currently connected server information.
 - **Usage**:
   ```bash
   ppio net servers
@@ -387,7 +384,7 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
 
 ## ppio object
 - **Description**:  
-  Manage the Object of the PPIO user node
+  Manage the Object of the user node.
 - **Usage**:
   ```bash
   ppio object SUB-COMMAND
@@ -415,7 +412,7 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
   **Detailed process of file processing:**
   1. Encrypt the file first
   2. The encrypted file is sliced to cut it into multiple files (called Segment), and the file name of the Segment is the Hash value of its content.
-  3. After splicing the Hash values of all Segment contents, Hash the spliced content to generate the Hash value of the Object.
+  3. After splicing the hash values of all segment contents, hash the spliced content to generate the Hash value of the Object.
 
   **The location of the Segment in the local storage space is as follows:**
   ```bash
@@ -504,7 +501,7 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
 
 ### ppio object put
 - **Description**:  
-  Publish a contract to upload an Object
+  Publish a contract to upload an Object.
 - **Usage**:
   ```bash
   ppio object put
@@ -580,7 +577,7 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
 
 ### ppio object copy
 - **Description**:  
-  Initiate a copy contract of Object to copy an Object to your own
+  Initiate a copy contract of Object to copy an Object to your own.
 - **Usage**:
   ```bash
   ppio object copy
@@ -702,7 +699,7 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
 
 ### ppio object delete
 - **Description**:  
-  Delete the contract of an Object
+  Delete the contract of an Object.
 - **Usage**:
   ```bash
   ppio object delete <object-hash>
@@ -720,7 +717,7 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
 
 ### ppio object renew
 - **Description**:  
-  Republish the contract for an Object
+  Republish the contract for an Object.
 - **Usage**:
   ```bash
   ppio object renew
@@ -751,7 +748,7 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
 
 ### ppio object updateacl
 - **Description**:  
-  Update ACL information for an Object
+  Update ACL information for an Object.
 - **Usage**:
   ```bash
   ppio object updateacl
@@ -806,7 +803,7 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
 
 ## ppio status
 - **Description**:  
-  Display details of the current PPIO user node runtime
+  Display details of the current user node runtime.
 - **Usage**:
   ```bash
   ppio status
@@ -824,7 +821,7 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
 
 ## ppio storage
 - **Description**:  
-  Manage local storage
+  Manage local storage.
 - **Usage**:
   ```bash
   ppio storage SUB-COMMAND
@@ -842,7 +839,7 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
 
 ### ppio storage object
 - **Description**:  
-  Display information about the specified Object of the current node
+  Display information about the specified Object of the current node.
 - **Usage**:
   ```bash
   ppio storage object <object-hash>
@@ -864,7 +861,7 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
 
 ### ppio storage objects
 - **Description**:  
-  Display information about all Objects of the current node
+  Display information about all Objects of the current node.
 - **Usage**:
   ```bash
   ppio storage objects
@@ -882,7 +879,7 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
 
 ### ppio storage segments
 - **Description**:  
-  Display information about all segments of the current node
+  Display information about all segments of the current node.
 - **Usage**:
   ```bash
   ppio storage segments
@@ -925,7 +922,7 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
 
 ### ppio storage usage <Badge text="todo" type="warn" vertical="middle"/>
 - **Description**:  
-  View usage of local storage
+  View usage of local storage.
 - **Usage**:
   ```
   ppio storage usage
@@ -942,7 +939,7 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
 
 ### ppio storage gc <Badge text="todo" type="warn" vertical="middle"/>
 - **Description**:  
-  Clean up objects that are not kept in the local storage space
+  Clean up objects that are not kept in the local storage space.
 - **Usage**:
   ```bash
   ppio storage gc
@@ -970,7 +967,7 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
 
 ### ppio wallet address
 - **Description**:  
-  Show current wallet address
+  Show current wallet address.
 - **Usage**:
   ```bash
   ppio wallet address
@@ -984,7 +981,7 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
 
 ### ppio wallet balance
 - **Description**:  
-  Show the balance of the current wallet address
+  Show the balance of the current wallet address.
 - **Options**:
   ```bash
   ppio metadata get

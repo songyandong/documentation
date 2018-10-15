@@ -8,7 +8,6 @@ We can't wait to let you experience PPIO for the first time, just like a child c
 **We promise that you experience PPIO in December of this year.**
 
 You can learn about PPIO by watching the video we recorded during the test.
-<iframe width="560" height="315" src="https://www.youtube.com/embed/dmMwajvsb0M" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 ## Usage
 You can get more usages of Command Line Tool in [CLI Reference](../cli/)
