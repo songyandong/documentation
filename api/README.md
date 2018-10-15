@@ -673,7 +673,7 @@ Other options and parameters in the PPIO command are passed in params in jsonrpc
   | --------- | ----------- |----------- |
   | error | -1 |"invalid buffer size" |
 - **Example**:
-  ```
+  ```bash
   # Command
   > ppio object status --rpcport=18060  7547DF322CBAF84FD02248133BF5A1C2FAE7296960ECED0EF6BDE2FF3EF37CF8
 
@@ -735,7 +735,7 @@ Other options and parameters in the PPIO command are passed in params in jsonrpc
   | --------- | ----------- |----------- |
   | error | -1 |"invalid buffer size" |
 - **Example**:
-  ```
+  ```bash
   # Command
   > ./ppio object list --rpcport=18060
 
@@ -805,7 +805,7 @@ Other options and parameters in the PPIO command are passed in params in jsonrpc
   | --------- | ----------- |----------- |
   | error | -1 |"invalid buffer size" |
 - **Example**:
-  ```
+  ```bash
   # command
   > ppio object delete --rpcport=18060 0F32BBBB22778B52EED14E0C295DBB
   442E8DC6666FF6F04C21E00F8E16E1F918
@@ -842,8 +842,7 @@ Other options and parameters in the PPIO command are passed in params in jsonrpc
   | error | 2009 |"no need to renew object" |
 
 - **Example**:
-
-  ```
+  ```bash
   # The successful completion of the contract will return the success signal, otherwise it will return the error code and the reason. In addition, the release of the contract is successful, it does not mean that the Indexer node will be scheduled.
 
   # Command
@@ -881,7 +880,7 @@ Other options and parameters in the PPIO command are passed in params in jsonrpc
   | --------- | ----------- |----------- |
   | error | -1 |"invalid buffer size" |
 - **Example**:
-  ```
+  ```bash
   # The successful update will return the success signal, otherwise it will return the error code and the reason.
 
   # Command
@@ -917,7 +916,7 @@ Other options and parameters in the PPIO command are passed in params in jsonrpc
   | --------- | ----------- |----------- |
   | error | -1 |"invalid buffer size" |
 - **Example**:
-  ```
+  ```bash
   # If the authorization is successful, the authorized signature information is returned for the authorized user to obtain the Object, otherwise the error code and information are returned.
 
   # User 002508021221033fb36e1471d2153d0759e14386c6c294b1ad09244841ee8d043eadd1bfe7baaa authorizes user 002508021221024d8a69222ab1b305aa6abd5615058ed0e7e9f4da04e190284bbfb5fae968b348
@@ -950,7 +949,7 @@ Other options and parameters in the PPIO command are passed in params in jsonrpc
 - **Fail Responses**:
   none
 - **Example**:
-  ```
+  ```bash
   # Command
   > ppio status --rpcport=18060
 
@@ -1010,7 +1009,7 @@ Other options and parameters in the PPIO command are passed in params in jsonrpc
   | error.code | error code |
   | error.message | detailed error message |
 - **Example**:
-  ```
+  ```bash
   # Display information about the specified Object of the current node, including its size, the number of segments, and the id and hash values of each segment.
 
   # Command
@@ -1063,7 +1062,7 @@ Other options and parameters in the PPIO command are passed in params in jsonrpc
 - **Fail Responses**:
   none
 - **Example**:
-  ```
+  ```bash
   # Display information about all objects of the current node, including the hash value and size of each object
 
   # Command
@@ -1108,7 +1107,7 @@ Other options and parameters in the PPIO command are passed in params in jsonrpc
 - **Fail Responses**:
   none
 - **Example**:
-  ```
+  ```bash
   # Display information about all segments of the current node, including id, hash, and size of each segment
 
   # Command
@@ -1165,7 +1164,7 @@ Other options and parameters in the PPIO command are passed in params in jsonrpc
   | --------- | ----------- |
   | result | success or failure signal|
 - **Example**:
-  ```
+  ```bash
   # Command
   > ppio storage keep 7547DF322CBAF84FD02248133BF5A1C2FAE7296960ECED0EF6BDE2FF3EF37CF8
 
@@ -1197,7 +1196,7 @@ Other options and parameters in the PPIO command are passed in params in jsonrpc
 - **Fail Responses**:
   none
 - **Example**:
-  ```
+  ```bash
   # Command
   > ppio storage usage --rpcport=18060
 
@@ -1234,7 +1233,7 @@ Other options and parameters in the PPIO command are passed in params in jsonrpc
   | --------- | ----------- |
   | result | success or failure signal|
 - **Example**:
-  ```
+  ```bash
   # Command
   > ppio storage gc --rpcport=18060
 
@@ -1272,7 +1271,7 @@ Other options and parameters in the PPIO command are passed in params in jsonrpc
 - **Fail Responses**:
   none
 - **Example**:
-  ```
+  ```bash
   # return current wallet address, hex string
 
   # Command
@@ -1302,7 +1301,7 @@ Other options and parameters in the PPIO command are passed in params in jsonrpc
 - **Fail Responses**:
   none
 - **Example**:
-  ```
+  ```bash
   # return the balance of the current wallet address
 
   # Command

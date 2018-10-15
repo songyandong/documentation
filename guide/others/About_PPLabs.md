@@ -9,10 +9,7 @@ And certainly PPLabs' founding team has deep technical accumulation in the field
 At present, PPlabs has absorbed members from Alibaba, IBM, Huawei and security companies, located in Silicon Valley, Singapore, Shanghai, China and other places.
 
 ### reference
-[1] Yan Huang, Tom Z.J. Fu, Dah-Ming Gasu, John C.S. Lui, Cheng Huang, "Challenges, design and analysis of a large-scale p2p-vod system",ACM Sigcomm 2008
-
-[2] XU Ke, Haitao Li, Jiangchuan Liu, Wei Zhu, Wenyu Wang, "PPVA: A Universal and Transparent Peer-to-Peer Accelerator for Interactive Online Video Sharing," IEEE IWQoS 2010.
-
-[3] Huang Yan, Xu Ke., Li HaiTao, Cao Yang, Yao Xin, "Large-scale P2PVOD system: Focusing on clients"
-
-[4] Li Haitao, Ke Xu, James Seng, Po Hu, "Towards health of replication in large-scale P2P-VoD systems," IEEE IPCCC 2009.
+[1] [Yan Huang, Tom Z.J. Fu, Dah-Ming Chiu, John C.S. Lui, Cheng Huang, "Challenges, design and analysis of a large-scale p2p-vod system",ACM Sigcomm 2008](http://ccr.sigcomm.org/online/files/p375-huangA.pdf)
+[2] [XU Ke, Haitao Li, Jiangchuan Liu, Wei Zhu, Wenyu Wang, "PPVA: A Universal and Transparent Peer-to-Peer Accelerator for Interactive Online Video Sharing," IEEE IWQoS 2010.](https://ieeexplore.ieee.org/document/5542762)
+[3] [Huang Yan, Xu Ke., Li HaiTao, Cao Yang, Yao Xin, "Large-scale P2PVOD system: Focusing on clients"](https://link.springer.com/article/10.1007/s11432-011-4288-6)
+[4] [Li Haitao, Ke Xu, James Seng, Po Hu, "Towards health of replication in large-scale P2P-VoD systems," IEEE IPCCC 2009.](http://www.thucsnet.org/uploads/2/5/2/8/25289795/05403807.pdf)
