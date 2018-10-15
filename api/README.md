@@ -77,7 +77,7 @@ Other options and parameters in the PPIO command are passed in params in jsonrpc
 
   | options    | default      | description         |
   | --------- | ----------- | ------------ |
-  | --rpchost | "127.0.0.1" | RPC service adress |
+  | --rpchost | "127.0.0.1" | RPC service address |
   | --rpcport | 18060       | RPC port     |
 - **Example**:
   ```bash
@@ -827,7 +827,6 @@ Other options and parameters in the PPIO command are passed in params in jsonrpc
 ### ObjectRenew
 - **Description**:
   Republish the contract for an Object
-
 - **params**:
 
   | name    | default | description                            |
@@ -837,13 +836,11 @@ Other options and parameters in the PPIO command are passed in params in jsonrpc
   | duration | 100天，即8640000 | Object 的存放时间，以 s（秒）为单位                          |
   | gasprice | none               | Gas 单价，以 wei 为单位                                      |
   | acl      | public           | Object 的访问权限，设置为 public 代表该 Object 可以被任何人访问；设置为 private 代表该 Object 是私密的，需要被授权才能访问 |
-
 - **Success Responses**:
 
   | result    |  description         |
   | --------- | ----------- |
   | result | null |
-
 - **Fail Responses**:
 
   | result    |  error code         |  error message |
@@ -854,7 +851,7 @@ Other options and parameters in the PPIO command are passed in params in jsonrpc
 - **Example**:
 
   ```
-  # 发布合约成功会返回成功标识，否则会返回失败标识及原因另外，发布合约成功，并不代表 Indexer 一定会调度
+  # The successful completion of the contract will return the success signal, otherwise it will return the error code and the reason. In addition, the release of the contract is successful, it does not mean that the Indexer node will be scheduled.
 
   # Command
   > ppio object renew --rpcport=18060 --duration=864000 --gasprice=100 --copies=5 --acl=public 7547DF322CBAF84FD02248133BF5A1C2FAE7296960ECED0EF6BDE2FF3EF37CF8
@@ -871,38 +868,28 @@ Other options and parameters in the PPIO command are passed in params in jsonrpc
 
   ```
 
-
 ### ObjectUpdateacl
-
 - **Description**:
-
-  ```
-  更新某个 Object 的 ACL 信息
-  ```
-
+  Update ACL information for an Object
 - **params**:
 
   | name    | default | description                            |
   | --------- | ------ | ---------------------------- |
-  | object-hash | none     | 待重新发布合约的 Object 的 Hash 值 |                                 |
-  | acl      | public           | Object 的访问权限，设置为 public 代表该 Object 可以被任何人访问；设置为 private 代表该 Object 是私密的，需要被授权才能访问 |
-
+  | object-hash | none     | Hsah value of the obejct |                                 |
+  | acl      | public      | The access permission of Object, set to public means that the Object can be accessed by anyone; set to private means that the Object is private and needs to be authorized to access |
 - **Success Responses**:
 
   | result    |  description         |
   | --------- | ----------- |
   | result | null |
-
 - **Fail Responses**:
 
   | result    |  error code         |  error message |
   | --------- | ----------- |----------- |
   | error | -1 |"invalid buffer size" |
-
 - **Example**:
-
   ```
-  # 更新成功会返回成功标识，否则返回失败标识及原因
+  # The successful update will return the success signal, otherwise it will return the error code and the reason.
 
   # Command
   > ppio object updateacl --acl=private --rpcport=18060 7547DF322CBAF
@@ -915,41 +902,32 @@ Other options and parameters in the PPIO command are passed in params in jsonrpc
   {"id":1,"jsonrpc":"2.0","result":null}
   ```
 
-
 ### ObjectAuth
-
 - **Description**:
-
-  ```
-  将本地存储空间里面的 Object 授权给其他用户，如果该 Object 的 ACL 为 public，则该命令执行none实际效果。
-  授权时长不能超过该用户拥有该文件的剩余时长。
-  ```
-
+  Authorize the Object in the local storage space to other users. If the ACL of the Object is public, the command has no effect.
+  The authorization duration cannot exceed the length of time the user has the file.
 - **params**:
 
   | name    | default | description                            |
   | --------- | ------ | ---------------------------- |
-  | object-hash | none     | 待授权的 Object 的 Hash 值  |
-  | accessor | none           | 被授权用户的id           |
-  | duration | 1天，即86400 | 授权有效持续时间，单位为 s（秒） |
-
+  | object-hash | none     | Hash value of the object |
+  | accessor | none           | Authorized user's id  |
+  | duration | 1天，即86400 | Authorized effective duration, unit in s (second) |
 - **Success Responses**:
 
   | result    |  description         |
   | --------- | ----------- |
   | result | null |
-
 - **Fail Responses**:
 
   | result    |  error code         |  error message |
   | --------- | ----------- |----------- |
   | error | -1 |"invalid buffer size" |
-
 - **Example**:
-
   ```
-  # 授权成功，则返回授权的签名信息，用于被授权用户来获取 Object，否则返回错误标识和信息
-  # 用户002508021221033fb36e1471d2153d0759e14386c6c294b1ad09244841ee8d043eadd1bfe7baaa给用户002508021221024d8a69222ab1b305aa6abd5615058ed0e7e9f4da04e190284bbfb5fae968b348授权
+  # If the authorization is successful, the authorized signature information is returned for the authorized user to obtain the Object, otherwise the error code and information are returned.
+
+  # User 002508021221033fb36e1471d2153d0759e14386c6c294b1ad09244841ee8d043eadd1bfe7baaa authorizes user 002508021221024d8a69222ab1b305aa6abd5615058ed0e7e9f4da04e190284bbfb5fae968b348
 
   # Command
   > ppio object auth --rpcport=18060 --accessor=002508021221024d8a69222ab1b305aa6abd5615058ed0e7e9f4da04e190284bbfb5fae968b348 --duration=86400 7547DF322CBAF84FD02248133BF5A1C2FAE72969
@@ -962,34 +940,23 @@ Other options and parameters in the PPIO command are passed in params in jsonrpc
   {"id":1,"jsonrpc":"2.0","result":"4ef8d76685cf81675d5356e16f30b5c5f7ae63a3665a665dd3cf225ab7b4aa7372012029203d3aca5f3317bf4297be1507d171930726ede7e864a9b8a4d6c5b9007547df322cbaf84fd02248133bf5a1c2fae7296960eced0ef6bde2ff3ef37cf827000000002508021221033fb36e1471d2153d0759e14386c6c294b1ad09244841ee8d043eadd1bfe7baaa27000000002508021221024d8a69222ab1b305aa6abd5615058ed0e7e9f4da04e190284bbfb5fae968b348de93c05b00000000"}
   ```
 
-
-  ### ppio status
-
+## ppio status
 - **Description**:
-
-  ```
-  显示当前 ppio 节点运行时的详细信息
-  ```
-
+  Display details of the current PPIO user node runtime
 - **params**:
   none
-
 - **Success Responses**:
 
   | result    |  description         |
   | --------- | ----------- |
-  | protocol-version | 当前节点的网络Id，以字符串表示|
-  | version | 当前节点的网络Id，以字符串表示|
+  | protocol-version |protocol version |
+  | version | api version |
   | id | 当前节点的网络Id，以十六进制字符串表示|
-  | rpchost | 当前节点的网络IP地址，以4段整数表示|
-  | rpcport | 当前节点的网络端口，以整数表示|
-
+  | rpchost | ip address|
+  | rpcport | port|
 - **Fail Responses**:
   none
-
-
 - **Example**:
-
   ```
   # Command
   > ppio status --rpcport=18060
@@ -1014,40 +981,31 @@ Other options and parameters in the PPIO command are passed in params in jsonrpc
 
   ### ppio storage
 
+## ppio storage
 - **Description**:
-  ```
-  管理本地存储空间
-  ```
-
+  Manage local storage
 - **Subcommand**:
 
-  | subcommand                                            | description                                    |
-  | ------------------------------------------------- | --------------------------------------- |
-  | [`StorageObject`](#storageobject)     | 显示当前节点指定object的信息            |
-  | [`StorageObjects`](#storageobjects)   | 显示当前节点所有objects的信息           |
-  | [`StorageSegments`](#storagesegments) | 显示当前节点所有segments的信息          |
-  | [`StorageKeep`](#storagekeep)         | 将 Object 保持在本地存储空间中          |
-  | [`StorageUsage`](#storageusage)       | 查看本地存储空间的使用情况              |
-  | [`StorageGc`](#storagegc)             | 清理掉本地存储空间中没有被保持的 Object |
-
+  | subcommand         | description       |
+  | ------------------| --------------------------------------- |
+  | [`StorageObject`](#storageobject)     | Display information about the specified Object of the current node    |
+  | [`StorageObjects`](#storageobjects)   | Display information about all Objects of the current node    |
+  | [`StorageSegments`](#storagesegments) | Display information about all segments of the current node   |
+  | [`StorageKeep`](#storagekeep)         | Keep Object in local storage  |
+  | [`StorageUsage`](#storageusage)       | View usage of local storage |
+  | [`StorageGc`](#storagegc)             | Clean up objects that are not kept in the local storage space |
 
 ### StorageObject
-
 - **Description**:
-
-  ```
-  显示当前节点指定object的信息
-  ```
-
+  Display information about the specified Object of the current node
 - **params**:
 
   | name    | default | description                                                         |
   | --------- | ------ | ---------------------------- |
   | object-hash | "none"     | 指定object的 hash 值|
-
 - **Success Responses**:
 
-  | result    |  description         |
+  | result    |  description  |
   | --------- | ----------- |
   | result | 当前节点指定object的信息|
   | result.Hash | 当前节点指定object的hash|
@@ -1056,7 +1014,6 @@ Other options and parameters in the PPIO command are passed in params in jsonrpc
   | result.Segments.Id | 相应segment的ID|
   | result.Segments.Hash| 相应segment的hash|
   | result.Segments.Length | 相应segment的字节数|
-
 - **Fail Responses**:
 
   | result    |  description         |
@@ -1064,11 +1021,9 @@ Other options and parameters in the PPIO command are passed in params in jsonrpc
   | error | 错误信息|
   | error.code | error code|
   | error.message | 详细错误信息|
-
 - **Example**:
-
   ```
-  # 显示当前节点指定object的信息，包括其大小，segment的个数，以及各个segment的id和hash值
+  # Display information about the specified Object of the current node, including its size, the number of segments, and the id and hash values of each segment.
 
   # Command
   > ppio storage object --rpcport=18060 D2837E475978764B0A14034306C9B79A5D325040A57793CBEBAE69257AC250CE
@@ -1106,17 +1061,11 @@ Other options and parameters in the PPIO command are passed in params in jsonrpc
   }
   ```
 
-
 ### StorageObjects
-
 - **Description**:
-
-  ```
-  显示当前节点所有objects的信息
-  ```
+  Display information about all Objects of the current node
 - **params**:
   none
-
 - **Success Responses**:
 
   | result    |  description         |
@@ -1124,13 +1073,11 @@ Other options and parameters in the PPIO command are passed in params in jsonrpc
   | result | 当前节点所有objects的信息|
   | result.Hash | 当前节点某一object的hash|
   | result.Length | 当前节点某一object的字节数|
-
 - **Fail Responses**:
   none
 - **Example**:
-
   ```
-  # 显示当前节点所有objects的信息，包括每个 object 的hash值和大小
+  # Display information about all objects of the current node, including the hash value and size of each object
 
   # Command
   > ppio storage objects --rpcport=18060
@@ -1159,17 +1106,11 @@ Other options and parameters in the PPIO command are passed in params in jsonrpc
   }
   ```
 
-
 ### StorageSegments
-
 - **Description**:
-
-  ```
-  显示当前节点所有segments的信息
-  ```
-
-- **params**:  none
-
+  Display information about all segments of the current node
+- **params**:  
+  none
 - **Success Responses**:
 
   | result    |  description         |
@@ -1178,14 +1119,11 @@ Other options and parameters in the PPIO command are passed in params in jsonrpc
   | result.Id | 当前节点某一segment的Id|
   | result.Hash | 当前节点某一segment的hash|
   | result.Length | 当前节点某一segment的字节数|
-
 - **Fail Responses**:
   none
-
 - **Example**:
-
   ```
-  # 显示当前节点所有segments的信息，包括每个segment的id，hash，和大小
+  # Display information about all segments of the current node, including id, hash, and size of each segment
 
   # Command
   > ppio storage segments --rpcport=18060
@@ -1218,37 +1156,29 @@ Other options and parameters in the PPIO command are passed in params in jsonrpc
   }
   ```
 
-
 ### StorageKeep
-
 - **Description**:
+  Keep an Object in local storage.
 
-  ```
-  将某个 Object 保持在本地存储空间中
-  ```
-
+  ::: warning WARNING
+    The user's own Objects are automatically kept to local storage space. Files copied from other users require to be kept to local storage space manually.
+  :::
 - **params**:
 
   | name    | default | description                                                         |
   | --------- | ------ | ---------------------------- |
-  | object-hash | "none"     | 待设置的 Object 的 Hash 值|
-
-
+  | object-hash | "none"     | Hash value of the object|
 - **Success Responses**:
 
   | result    |  description         |
   | --------- | ----------- |
-  | result | 成功或失败标识|
-
-
+  | result | success or failure signal|
 - **Fail Responses**:
 
   | result    |  description         |
   | --------- | ----------- |
-  | result | 成功或失败标识|
-
+  | result | success or failure signal|
 - **Example**:
-
   ```
   # Command
   > ppio storage keep 7547DF322CBAF84FD02248133BF5A1C2FAE7296960ECED0EF6BDE2FF3EF37CF8
@@ -1264,18 +1194,11 @@ Other options and parameters in the PPIO command are passed in params in jsonrpc
   }
   ```
 
-
 ### StorageUsage
-
 - **Description**:
-
-  ```
-  查看本地存储空间的使用情况
-  ```
-
+  View usage of local storage
 - **params**:
   none
-
 - **Success Responses**:
 
   | result    |  description         |
@@ -1286,13 +1209,9 @@ Other options and parameters in the PPIO command are passed in params in jsonrpc
   | result.Used | 已使用|
   | result.KetpTotal | kept objects总量|
   | result.KeptCount| kept objects数量|
-
 - **Fail Responses**:
   none
-
-
 - **Example**:
-
   ```
   # Command
   > ppio storage usage --rpcport=18060
@@ -1314,34 +1233,22 @@ Other options and parameters in the PPIO command are passed in params in jsonrpc
   }
   ```
 
-
 ### StorageGc
-
 - **Description**:
-
-  ```
-  清理掉本地存储空间中没有被保持的 Object
-  ```
-
-- **params**:  none
-
-
+  Clean up objects that are not kept in the local storage space
+- **params**:  
+  none
 - **Success Responses**:
 
   | result    |  description         |
   | --------- | ----------- |
-  | result | 成功或失败标识|
-
-
+  | result | success or failure signal|
 - **Fail Responses**:
 
   | result    |  description         |
   | --------- | ----------- |
-  | result | 成功或失败标识|
-
-
+  | result | success or failure signal|
 - **Example**:
-
   ```
   # Command
   > ppio storage gc --rpcport=18060
@@ -1357,46 +1264,31 @@ Other options and parameters in the PPIO command are passed in params in jsonrpc
   }
   ```
 
-
-  ### ppio wallet
-
+## ppio wallet
 - **Description**:
-  ```
-  管理用户的钱包
-  ```
-
+  Manage user's wallet
 - **Subcommand**:
 
-  | subcommand                                        | description                             |
-  | --------------------------------------------- | -------------------------------- |
-  | [`WalletAddress`](#walletaddress) | 显示当前钱包地址，十六进制字符串 |
-  | [`WalletBalance`](#walletbalance) | 显示当前钱包地址的余额           |
-
+  | subcommand   | description      |
+  | ----------------- | -------------|
+  | [`WalletAddress`](#walletaddress) | Display current wallet address, hex string |
+  | [`WalletBalance`](#walletbalance) | Show the balance of the current wallet address  |
 
 ### WalletAddress
-
 - **Description**:
-
-  ```
-  显示当前钱包地址
-  ```
-
-- **params**:  none
-
+  Display current wallet address, hex string
+- **params**:  
+  none
 - **Success Responses**:
 
-  | result    |  description         |
+  | result    |  description     |
   | --------- | ----------- |
-  | result | 当前钱包地址|
-
-
+  | result | current wallet address|
 - **Fail Responses**:
   none
-
 - **Example**:
-
   ```
-  # 返回当前钱包地址
+  # return current wallet address, hex string
 
   # Command
   > ppio wallet id --rpcport=18060
@@ -1412,32 +1304,21 @@ Other options and parameters in the PPIO command are passed in params in jsonrpc
   }
   ```
 
-
 ### WalletBalance
-
 - **Description**:
-
-  ```
-  显示当前钱包地址的余额
-  ```
-
+  Show the balance of the current wallet address
 - **params**:  
   none
-
 - **Success Responses**:
 
   | result    |  description         |
   | --------- | ----------- |
-  | result | 当前钱包地址的余额|
-
-
+  | result | the balance of the current wallet address|
 - **Fail Responses**:
   none
-
 - **Example**:
-
   ```
-  # 返回当前钱包地址的余额
+  # return the balance of the current wallet address
 
   # Command
   > ppio wallet balance --rpcport=18060
