@@ -12,12 +12,12 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
 
 - **Usage**:
   ```bash
-  # 对于daemon启动命令
+  # daemon command
   ppio [--rpchost=<rpchost>] [--rpcport=<rpcport>]
   ppio daemon [--rpchost=<rpchost>] [--rpcport=<rpcport>]
   ppio daemon start [--rpchost=<rpchost>] [--rpcport=<rpcport>]
 
-  # 对于rpc命令
+  # rpc command
   ppio COMMAND [SUB-COMMAND]
       [--rpchost=<rpchost>]
       [--rpcport=<rpcport>]
@@ -524,7 +524,7 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
   |--|--|--|
   |--copies|5|The number of copies stored, at least 5|
   |--duration|8640000(equals 100 days)|The storage time of the object, unit in s (second)|
-  |--gasprice| none |Gas 单价，以 wei 为单位|
+  |--gasprice| none |price of Gas, unit in wei|
   |--acl|public|Access to Object: Set to public to mean that the Object can be accessed by anyone; set to private to mean that the Object is private and needs to be authorized to access|
 - **Example**:
   ```bash
@@ -558,9 +558,9 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
 
   | options| default | description |
   |--|--|--|
-  |--gasprice|无|Gas 单价，以 wei 为单位 (This field needs to be set when the Object is owned by someone else)|
-  |--owner|无|user-id (This field needs to be set when the Object is owned by someone else)|
-  |--auth|无|Signature of Object (When Object is owned by someone else and the ACL of the Object is set to private)|
+  |--gasprice| none |price of Gas, unit in wei (This field needs to be set when the Object is owned by someone else)|
+  |--owner| none |user-id (This field needs to be set when the Object is owned by someone else)|
+  |--auth| none |Signature of Object (When Object is owned by someone else and the ACL of the Object is set to private)|
 - **Example**:
   ```bash
   # If the command is successfully executed, it returns the directory information of the Object in the local storage space. Otherwise it returns the error code and error message.
@@ -602,7 +602,7 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
   |--|--|--|
   |--copies|5|The number of copies stored, at least 5|
   |--duration|8640000(equals 100 days)|The storage time of the Object, unit in s (second)|
-  |--gasprice| none |Gas 单价，以 wei 为单位|
+  |--gasprice| none |price of Gas, unit in wei|
   |--acl|public|The access permission of Object, set to public means that the Object can be accessed by anyone; set to private means that the Object is private and needs to be authorized to access|
   |--owner| none |User ID of the Object owner|
   |--auth| none | Required to copy other people's Objects, need an Object signature provided by others to authorize|
@@ -740,7 +740,7 @@ In addition to `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, ot
   |--|--|--|
   |--copies|5|The number of stored copies, not less than 5|
   |--duration|8640000(equals 100 days)|The storage time of the object, unit in s (seconds)|
-  |--gasprice| none |Gas 单价，以 wei 为单位|
+  |--gasprice| none |price of Gas, unit in wei|
   |--acl|public|The access permission of Object, set to public means that the Object can be accessed by anyone; set to private means that the Object is private and needs to be authorized to access|
 - **Example**:
   ```bash
