@@ -1,6 +1,6 @@
 # System Design of PPIO
 
-After a preliminary understanding of PPIO, the technologies and implementation behind PPIO's decentralized file system will be discussed in the following.
+After the preliminary understanding of PPIO, you will know the technology details and implementation in the following.
 
 ## P2P Network
 In the traditional Client-Server (C/S) model, the server can easily become the bottleneck of the network when the client population grows. However, a decentralized peer-to-peer network does not rely on any central server to function properly, and can easily tolerate fault and failure of individual nodes.
