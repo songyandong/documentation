@@ -5,7 +5,7 @@ sidebarDepth: 2
 # Command Line Reference
 ## Overview
 
-ppio provids commands and subcommands to control a user node in PPIO network
+PPIO provides commands and subcommands to control a user node in PPIO network.
 
 Except `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, other commands or subcommands are called through RPC. So unless specify otherwise, they all have the same options "rpchost" and "rpcport".
 
@@ -21,13 +21,13 @@ Except `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, other comm
       [--rpchost=<rpchost>]
       [--rpcport=<rpcport>]
   ```
-  
+
 - **Options**:
 
 
   | Option| Default | Description |
   |--|--|--|
-  |--rpchost|"127.0.0.1"|RPC service adress|
+  |--rpchost|"127.0.0.1"|RPC service address|
   |--rpcport|18060|RPC port|
 
 - **Example**:  
@@ -47,7 +47,7 @@ Except `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, other comm
 ## ppio help
 - **Description**:  
   Show help for commands or subcommands.
-  
+
 - **Commands**:
   ```
   ppio [COMMAND] help
@@ -115,7 +115,7 @@ Except `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, other comm
 - **Subcommands**:
 
 
-  | subcommand | description |
+  | Subcommand | Description |
   |--|--|
   | [`ppio config show`](#ppio-config-show) |Show the configuration of the user node.|
 
@@ -123,14 +123,14 @@ Except `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, other comm
 
 - **Description**:  
   Show the configuration of the user node.
-  
+
 - **Usage**:
   ```bash
   ppio config show
       [--rpchost=<rpchost>]
       [--rpcport=<rpcport>]
   ```
-  
+
 - **Options**:
 
 
@@ -174,7 +174,7 @@ Except `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, other comm
 - **Subcommands**:
 
 
-  | subcommand | description |
+  | Subcommand | Description |
   |--|--|
   | [`ppio daemon start`](#ppio-daemon-start) | start the daemon service |
   | [`ppio daemon stop`](#ppio-daemon-stop) | stop the daemon service |
@@ -271,7 +271,7 @@ Except `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, other comm
 
 ## ppio metadata
 - **Description**:  
-  Manage metadata of the user node. Mmetadata is used to store user's basic information and the size is limited to 1M. 
+  Manage metadata of the user node. Metadata is used to store user's basic information and the size is limited to 1M.
 - **Usage**:
   ```bash
   ppio metadata SUB-COMMAND
@@ -279,17 +279,17 @@ Except `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, other comm
 - **Subcommands**:
 
 
-  | subcommand | description |
+  | Subcommand | Description |
   |--|--|
   |[`ppio metadata put`](#ppio-metadata-put)|Upload the metadata to the Indexer node|
-  |[`ppio metadata get`](#ppio-metadata-get)|Download the metadata to the Indexer node|
+  |[`ppio metadata get`](#ppio-metadata-get)|Download the metadata from the Indexer node|
 
 ### ppio metadata put
 - **Description**:  
   Upload the metadata to the Indexer node.
 - **Usage**:
   ```bash
-  ppio metadata put [--encoding=<encoding>] <meta-data> 
+  ppio metadata put [--encoding=<encoding>] <meta-data>
   ```
 - **Arguments**:
   ```bash
@@ -301,39 +301,39 @@ Except `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, other comm
 
   | Option| Default | Description |
   |--|--|--|
-  |--encoding|"RAW"|"RAW" indicates the <meta-data> is in text format. "HEX" indicates <meta-data> is in hex format|
- 
-  
+  |--encoding|"RAW"|"RAW" indicates the \<meta-data> is in text format. "HEX" indicates \<meta-data> is in hex format|
+
+
 - **Example**:  
   ```bash
   > ppio metadata put "test metadata"
   Succeed!
-  
+
   > ppio metadata put --encoding="HEX" "01234567"
   Succeed!
   ```
 
 ### ppio metadata get
 - **Description**:  
-  Download the user node metadata from the Indexer node.
+  Download the metadata from the Indexer node.
 - **Usage**:
   ```
   ppio metadata get [--encoding=<encoding>]
   ```
-  
+
   - **Options**:
 
 
   | Option| Default | Description |
   |--|--|--|
-  |--encoding|"RAW"|"RAW" indicates the <meta-data> is in text format. "HEX" indicates <meta-data> is in hex format|
- 
- 
+  |--encoding|"RAW"|"RAW" indicates the \<meta-data> is in text format. "HEX" indicates \<meta-data> is in hex format|
+
+
 - **Example**:
   ```
   > ppio metadata get
   "test metadata"
-  
+
   > ppio metadata get --encoding="HEX"
   "01234567"
   ```
@@ -348,7 +348,7 @@ Except `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, other comm
 - **Subcommands**:
 
 
-  | subcommand | description |
+  | Subcommand | Description |
   |--|--|
   | [`ppio net id`](#ppio-net-id) | Show the user node's network address, in hex string. |
   | [`ppio net ping`](#ppio-net-ping) <Badge text="todo" type="warn" vertical="middle"/> | Ping another user node. |
@@ -436,11 +436,11 @@ Except `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, other comm
 - **Subcommands**:
 
 
-  | subcommand | description |
+  | Subcommand | Description |
   |--|--|
   |[`ppio object import`](#ppio-object-import)| Import a file from local file system or pipe into local storage|
   |[`ppio object export`](#ppio-object-export)|Export an Object in the local storage to local file system|
-  |[`ppio object put`](#ppio-object-put)|Uppload an Object in local storage|
+  |[`ppio object put`](#ppio-object-put)|Upload an Object in local storage|
   |[`ppio object get`](#ppio-object-get)|Download an Object to local storage|
   |[`ppio object copy`](#ppio-object-copy)|Copy an Object owned by the other user|
   |[`ppio object status`](#ppio-object-status)|Get status of an Object|
@@ -452,13 +452,13 @@ Except `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, other comm
 
 ### ppio object import
 - **Description**:  
-  Import a file from local file system or pipe and store it into local storage of the user node. 
+  Import a file from local file system or pipe and store it into local storage of the user node.
   The file that is stored in local storage is called "Object".  
 
   **Detailed process of file processing:**
-  1. Encrypt the file first
+  1. Encrypt the file first.
   2. The encrypted file is sliced to multiple files (called Segments), and the file name of the Segment is the Hash value of its content.
-  3. The name of Object is the Hash value all its segments
+  3. The name of Object is the Hash value all its segments.
 
   **The layout of the Segments in the local storage is shown as follows:**
   ```bash
@@ -493,7 +493,7 @@ Except `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, other comm
   |--|--|--|
   |--encrypt| "AES" | Algorithm used to encrypt the original file.|
   |--key|N/A|Key used to encrypt the original file|
-  
+
 - **Example**:
   ```bash
   # If the file is imported successfully, the command returns the Hash value of the Object; otherwise, it returns the error ID and the cause of the error.
@@ -513,7 +513,7 @@ Except `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, other comm
 
 - **Description**:  
   Export an Object from user node's storage to local file system
-  
+
   **Detailed process:**  
   1. If there is no specified Object, it will download the object from PPIO network first;
   2. Once the Object is ready in local storage, segments are composed and then decrypted, and stored into local file system
@@ -571,7 +571,7 @@ Except `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, other comm
   ```bash
   <object-hash>: The hash of the target Object
   ```
-  
+
 - **Options**:
 
 
@@ -658,7 +658,7 @@ Except `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, other comm
       [--owner=<owner-id>]
       <object-hash>
   ```
-  
+
 - **Arguments**:
   ```bash
   <object-hash>: The hash of the Object to be copied
@@ -694,7 +694,7 @@ Except `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, other comm
   ```bash
   ppio object status <object-hash>
   ```
-  
+
 - **Arguments**:
   ```bash
   <object-hash>: The hash of the Object to be queried
@@ -751,7 +751,7 @@ Except `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, other comm
   |--|--|--|
   |--start-page|1|Start page, need to be greater than or equal to 1|
   |--page-size|10|Maximum number of Object records per page|
-  
+
 - **Example**:
   ```bash
   # The content format returned by the command:
@@ -932,11 +932,11 @@ Except `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, other comm
   ```bash
   ppio storage SUB-COMMAND
   ```
-  
+
 - **Subcommand**:
 
 
-  | subcommand | description |
+  | Subcommand | Description |
   |--|--|
   |[`ppio storage object`](#ppio-storage-object)|Show storage information of an Object|
   |[`ppio storage objects`](#ppio-storage-objects)|Show storage information of all the Objects|
@@ -1073,7 +1073,7 @@ Except `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, other comm
 ## ppio wallet
 
 - **Description**:  
-  Manage user's wallet
+  Manage user's wallet.
 - **Usage**:
   ```bash
   ppio wallet SUB-COMMAND
@@ -1081,7 +1081,7 @@ Except `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, other comm
 - **Subcommand**:
 
 
-  | subcommand | description |
+  | Subcommand | Description |
   |--|--|
   |[`ppio wallet address`](#ppio-wallet-address)|Show wallet address, in hex string|
   |[`ppio wallet balance`](#ppio-wallet-balance)|Show the balance of the wallet address|

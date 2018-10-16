@@ -13,37 +13,37 @@ Other options and parameters in the PPIO command are passed in params in jsonrpc
 
 - **curl options**:
 
-  | params | default | description |
-  | --------- | ----------- | ------------ |
+  | Params | Default | Description |
+  | -- | -- | -- |
   | -X | none | requested method name |
   | -H | none | request header |
   | --data | none | request params |
 
-  ::: warning WARNING
+  ::: warning NOTE
     In the examples, unless otherwise specified, the service address and port of the RPC request are: `http://127.0.0.1:18060`, the -H option value is: `content-type:text/json;`, the value of the -X option is: `POST`.
   :::
 
 - **data parameter**:
 
-  | params    | default      | description        |
-  | --------- | ----------- | ------------ |
+  | Params | Default | Description |
+  | -- | -- | -- |
   | id | none | rpc request ID |
-  | jsonrpc | "2.0"       | jsonrpc version     |
-  | method | none       | rpc request method name    |
-  | params | none       | rpc request parmas |
+  | jsonrpc | "2.0" | jsonrpc version |
+  | method | none | rpc request method name |
+  | params | none | rpc request parmas |
 
-  :::warning WARNING
+  :::warning NOTE
     The parameters related to the currency pool are not considered in params.
   :::
 
 - **Response**:
 
-  | params    |default    | description        |
-  | --------- | ----------- | ------------ |
+  | Params | Default | Description |
+  | -- | -- | -- |
   | id | none | rpc request ID(It's the same as the rpc request id.)  |
-  | jsonrpc | "2.0"       | jsonrpc version     |
-  | result | none       | If the rpc request is successful, result is a string indicating that the message is returned or none indicates no message |
-  | error | none      | If the rpc request fails, error is a json object. `error.code` indicates the error code, `error.message` indicates the error message     |
+  | jsonrpc | "2.0" | jsonrpc version |
+  | Result | none | If the rpc request is successful, result is a string indicating that the message is returned or none indicates no message |
+  | error | none | If the rpc request fails, error is a json object. `error.code` indicates the error code, `error.message` indicates the error message |
 
 - **Example**:
   ```bash
@@ -62,22 +62,22 @@ Other options and parameters in the PPIO command are passed in params in jsonrpc
 
 ## ppio config
 - **Description**:  
-  Manage user node configuration information
-- **Subcommand**:
+  Manage configuration of user node.
+- **Subcommands**:
 
-  | subcommand      | description         |
-  | --------------------------------------- | -------------------------- |
-  | [`ConfigShow`](#configshow) | List the configuration information of the current user node. |
+  | Subcommand | Description |
+  | -- | -- |
+  | [`ConfigShow`](#configshow) | Show the configuration of the user node. |
 
 ### ConfigShow
 - **Description**:  
-  List the configuration information of the current user node.
+  Show the configuration of the user node.
 - **Options**:
 
-  | options    | default      | description         |
-  | --------- | ----------- | ------------ |
+  | Options | Default | Description |
+  | -- | -- | -- |
   | --rpchost | "127.0.0.1" | RPC service address |
-  | --rpcport | 18060       | RPC port     |
+  | --rpcport | 18060 | RPC port |
 - **Example**:
   ```bash
   # Command
@@ -116,22 +116,22 @@ Other options and parameters in the PPIO command are passed in params in jsonrpc
 
 ## ppio daemon
 - **Description**:  
-  Manage user node services
-- **Subcommand**:
+  Manage daemon service of the user node.
+- **Subcommands**:
 
-  | subcommand      | description  |
-  | --------------------------------------- | ---------------- |
-  | [`DaemonStop`](#daemonstop) | stop user node service |
+  | Subcommand | Description |
+  | -- | -- |
+  | [`DaemonStop`](#daemonstop) | stop the daemon service |
 
 ### DaemonStop
 - **Description**:  
-  stop user node service
-- **params**:
+  Stop daemon service of user node.
+- **Params**:
   none
 - **Success Response**:
 
-  | result    |  description|
-  | --------- | ----------- |
+  | Result | Description |
+  | -- | -- |
   | result | null |
 - **Fail Response**:
   none
@@ -153,41 +153,41 @@ Other options and parameters in the PPIO command are passed in params in jsonrpc
 
 ## ppio metadata
 - **Description**:  
-  Manage user node Metadata.
-- **Subcommand**:
+  Manage metadata of the user node. Metadata is used to store user's basic information and the size is limited to 1M.
+- **Subcommands**:
 
-  | subcommand                      | description                            |
-  | ----------------------------------------- | ------------------------------------ |
-  | [`MetadataPut`](#metadataput) | Upload the user's MetaData information to the Indexer node |
-  | [`MetadataGet`](#metadataget) | Download the user's MetaData information to the Indexer node |
+  | Subcommand | Description |
+  | -- | -- |
+  | [`MetadataPut`](#metadataput) | Upload the metadata to the Indexer node |
+  | [`MetadataGet`](#metadataget) | Download the metadata from the Indexer node |
 
 ### MetadataPut
 - **Description**:  
-  Upload the user's MetaData information to the Indexer node, and limit the maximum occupied space of the information to 1M; MetaData is used to store basic information about users, and the usage scenarios are not limited.
-- **params**:
+  Upload the metadata to the Indexer node.
+- **Params**:
 
-  | options    | default | description       |
-  | --------- | ------ | ------------------------------------------------------------ |
-  | metadata | none  | Plain text metadata string entered by the user |
-  | encoding | "RAW"     |"RAW": Upload the metadata string input by the user directly, "HEX": Convert the user-entered metadata in hexadecimal HEX string and upload it.|
+  | Options | Default | Description |
+  | -- | -- | -- |
+  | metadata | none | Plain text metadata string entered by the user |
+  | encoding | "RAW" | "RAW" indicates the \<meta-data\> is in text format. "HEX" indicates \<meta-data\> is in hex format |
 - **Success Response**:
 
-  | result    |  description         |
-  | --------- | ----------- |
-  | result | null |
+  | Result | Description |
+  | -- | -- |
+  | Result | null |
 - **Fail Response**:
 
-  | result    |  error code         |  error message |
-  | --------- | ----------- |----------- |
+  | Result | Error Code | Error Message |
+  | -- | -- | -- |
   | error | -1 |"meta-data exceeds it's limit length" |
   | error | -1 |"account not exists" |
 - **Example**:
   ```bash
   # Command
-  > ./ppio metadata put "Test MetaData"
+  > ./ppio metadata put "Test metadata"
 
   # Request
-  > curl --data '{"id":1,"jsonrpc":"2.0","method":"MetadataPut","params":["Test MetaData",""]}' http://127.0.0.1:18060
+  > curl --data '{"id":1,"jsonrpc":"2.0","method":"MetadataPut","params":["Test metadata",""]}' http://127.0.0.1:18060
 
   # Result
   {"id":3,"jsonrpc": "2.0","result": null}
@@ -196,21 +196,21 @@ Other options and parameters in the PPIO command are passed in params in jsonrpc
 
 ### MetadataGet
 - **Description**:  
-  Download the user's MetaData information to the Indexer node
-- **params**:
+  Download the metadata from the Indexer node
+- **Params**:
 
-  | options    | default | description                                                         |
-  | --------- | ------ | ------------------------------------------------------------ |
-  | encoding | "RAW"     | "RAW": returns the user's metadata directly, "HEX": Converts the user's metadata to a hexadecimal HEX string and returns.|
+  | Options | Default | Description |
+  | -- | -- | -- |
+  | encoding | "RAW" | "RAW" indicates the \<meta-data\> is in text format. "HEX" indicates \<meta-data\> is in hex format |
 - **Success Responses**:
 
-  | result    |  description         |
-  | --------- | ----------- |
-  | result | The metadata of the user node, encoded according to encoding|
+  | Result | Description |
+  | -- | -- |
+  | Result | The metadata of the user node, encoded according to encoding|
 - **Fail Responses**:
 
-  | result    |  error code         |  error message |
-  | --------- | ----------- |----------- |
+  | Result | Error Code | Error Message |
+  | -- | -- | -- |
   | error | -1 |"account not exists" |
 - **Example**:
   ```bash
@@ -221,7 +221,7 @@ Other options and parameters in the PPIO command are passed in params in jsonrpc
   > curl --data '{"id":1,"jsonrpc":"2.0","method":"MetadataGet","params":[""]}' http://127.0.0.1:18060
 
   # Result succeed
-  {"id":1,"jsonrpc":"2.0","result":"Test MetaData"}
+  {"id":1,"jsonrpc":"2.0","result":"Test metadata"}
 
   # Result failed
   {"error":{"code":-1,"message":"account not exists"},"id":1,"jsonrpc":"2.0"}
@@ -230,25 +230,25 @@ Other options and parameters in the PPIO command are passed in params in jsonrpc
 ## ppio net
 - **Description**:  
   Manage network information of user node.
-- **Subcommand**:
+- **Subcommands**:
 
-  | subcommand        | description     |
-  | --------------------| -------------------------------- |
-  | [`NetId`](#netid)           | Display the current user node's network address, hex string |
-  | [`NetPing`](#netping)       | Detect connections to other user nodes |
-  | [`NetPeers`](#netpeers)     | Display the list of currently connected peer information  |
-  | [`NetServers`](#netservers) | Display the list of currently connected server information |
+  | Subcommand | Description |
+  | ----------| -- |
+  | [`NetId`](#netid) | Show the user node's network address, in hex string |
+  | [`NetPing`](#netping) | Ping another user node |
+  | [`NetPeers`](#netpeers) | Show the information of connected peers  |
+  | [`NetServers`](#netservers) | Show the information of connected servers |
 
 ### NetId
 - **Description**:  
-  Display the current node's network address, hex string
-- **params**:
+  Show the user node's network address, in hex string
+- **Params**:
   none
 - **Success Responses**:
 
-  | result    |  description         |
-  | --------- | ----------- |
-  | result | The network ID of the current node, hex string|
+  | Result | Description |
+  | -- | -- |
+  | Result | The network ID of the current node, in hex string|
 - **Fail Responses**:
   none
 - **Example**:
@@ -262,16 +262,16 @@ Other options and parameters in the PPIO command are passed in params in jsonrpc
 
 ### NetPing
 - **Description**:  
-  Detect connections to other user nodes.
-- **params**:
+  Ping another user node.
+- **Params**:
 
-  | name    | default | description |
-  | --------- | ------ | -------------- |
-  | target-id | none  | Peer ID value of the |
+  | Name | Default | Description |
+  | -- | -- | -- |
+  | target-id | none | Peer ID value of the user node |
 - **Success Responses**:
 
-  | result    |  description         |
-  | --------- | ----------- |
+  | Result | Description |
+  | -- | -- |
   | result.id | Peer ID of the detected target |
   | result.out-latency | The going delay of this node to the target node, unit in milliseconds |
   | result.in-latency | The forward delay from the target node to the current node, unit in milliseconds |
@@ -299,13 +299,13 @@ Other options and parameters in the PPIO command are passed in params in jsonrpc
 
 ### NetPeers
 - **Description**:  
-  Display the list of currently connected peer information
-- **params**:
+  Show the information of connected peers.
+- **Params**:
   none
 - **Success Responses**:
 
-  | result    |  description   |
-  | --------- | ----------- |
+  | Result | Description |
+  | -- | -- |
   | result[i].id | The id value of the i-th connected node |
   | result[i].out-latency | The going delay of this node to the i-th connected node, unit in milliseconds|
   | result[i].in-latency | The forward delay of this node to the i-th connected node, unit in milliseconds|
@@ -340,13 +340,13 @@ Other options and parameters in the PPIO command are passed in params in jsonrpc
 
 ### NetServers
 - **Description**:  
-  Display the list of currently connected server information.
-- **params**:
+    Show the information of connected servers.
+- **Params**:
   none
 - **Success Responses**:
 
-  | result    |  description         |
-  | --------- | ----------- |
+  | Result | Description |
+  | -- | -- |
   | result.Indexers[i]| Status of the i-th Indexer node |
   | result.Verifiers[i]|Status of the i-th Verifier node |
 - **Fail Responses**:
@@ -394,31 +394,32 @@ Other options and parameters in the PPIO command are passed in params in jsonrpc
 
 ## ppio object
 - **Description**:  
-  Manage the Object of the PPIO user node
-- **Subcommand**:
+  Manage the Objects of the user node.
+- **Subcommands**:
 
-  | subcommand | description    |
-  | --------------------| --------------------------------|
-  | [`ObjectImport`](#objectimport)       | Import a file from a local file system or pipe into storage|
-  | [`ObjectExport`](#objectexport)       | Export an Object from the local storage to the local file system|
-  | [`ObjectPut`](#objectput)             | Publish a contract to upload an Object |
-  | [`ObjectGet`](#objectget)             | Download all the contents of an Object to the local storage |
-  | [`ObjectCopy`](#objectcopy)           | Initiate a copy contract of Object and copy an Object to yourself  |
-  | [`ObjectStatus`](#objectstatus)       | 	Obtain the contract information and execution status of an Object, which can only be used to view the user's own Object. |
-  | [`ObjectList`](#objectlist)           | Get contract execution for all Objects |
-  | [`ObjectDelete`](#objectdelete)       | Delete the contract for an Object |
-  | [`ObjectRenew`](#objectrenew)         | Republish the contract for an Object |
-  | [`ObjectUpdateacl`](#objectupdateacl) | Update ACL information for an Object |
-  | [`ObjectAuth`](#objectauth)           | Authorize Objects in local storage to other users |
+  | Subcommand | Description |
+  | ----------| ------------|
+  | [`ObjectImport`](#objectimport) | Import a file from local file system or pipe into local storage|
+  | [`ObjectExport`](#objectexport) | Export an Object in the local storage to local file system|
+  | [`ObjectPut`](#objectput) | Upload an Object in local storage |
+  | [`ObjectGet`](#objectget) | Download an Object to local storage |
+  | [`ObjectCopy`](#objectcopy) | Copy an Object owned by other user |
+  | [`ObjectStatus`](#objectstatus) | Get status of an Object |
+  | [`ObjectList`](#objectlist) | Get status of all Objects owned by the user |
+  | [`ObjectDelete`](#objectdelete) | Delete an Object |
+  | [`ObjectRenew`](#objectrenew) | Republish an Object |
+  | [`ObjectUpdateacl`](#objectupdateacl) | Update ACL information of an Object |
+  | [`ObjectAuth`](#objectauth) | Authorize Objects to other users |
 
 ### ObjectImport
 - **Description**:  
-  Import a file from the local file system or pipeline, process the file and store it in the local storage space. The file that is finally stored in the local storage space is called "Object".  
+  Import a file from local file system or pipe and store it into local storage of the user node.
+  The file that is stored in local storage is called "Object".
 
   **Detailed process of file processing:**
-  1. Encrypt the file first
+  1. Encrypt the file first.
   2. The encrypted file is sliced to cut it into multiple files (called Segment), and the file name of the Segment is the Hash value of its content.
-  3. After splicing the Hash values of all Segment contents, Hash the spliced content to generate the Hash value of the Object.
+  3. The name of Object is the Hash value all its segments.
 
   **The location of the Segment in the local storage space is as follows:**
   ```bash
@@ -433,22 +434,22 @@ Other options and parameters in the PPIO command are passed in params in jsonrpc
   # <segment1-id> <segment2-hash> <segment2-index> <segment2-length>
   ```  
   After the file is successfully imported, you can view the object information through the `ppio storage object` or `ppio storage objects` command.
-- **params**:
+- **Params**:
 
-  | name    | default | description                                                         |
-  | --------- | ------ | ---------------------------- |
+  | Name | Default | Description |
+  | -- | -- | -- |
   | local-path | "none" | Local path to the import file |
-  | encrypt | "AES"  | "AES"	Set the encryption algorithm used to encrypt the contents of the original file. The currently selectable encryption algorithms are: AES |
-  | key     | ""     | Specify the key used to encrypt the contents of the original file |
+  | encrypt | "AES"  | Algorithm used to encrypt the original file |
+  | key | "" | Key used to encrypt the original file |
 - **Success Responses**:
 
-  | result    |  description         |
-  | --------- | ----------- |
-  | result | object-hash, hex string |
+  | Result | Description |
+  | -- | -- |
+  | Result | object-hash, in hex string |
 - **Fail Responses**:
 
-  | result    |  error code  |  error message |
-  | --------- | ----------- |----------- |
+  | Result | Error Code | Error Message |
+  | -- | -- | -- |
   | error | -1 |"no such file or directory" |
 - **Example**:
   ```bash
@@ -467,27 +468,27 @@ Other options and parameters in the PPIO command are passed in params in jsonrpc
 
 ### ObjectExport
 - **Description**:  
-  Export an Object from the local storage to the local file system
+  Export an Object from user node's storage to local file system.
   **Detailed process:**  
-  1. If there is no specified Object in the local storage space, the download to the space is requested from the PPIO network first;
-  2. Once the Object is ready, splicing, decrypting the Segments in the Object, and then saving the resulting file to the local file system
-- **params**:
+  1. If there is no specified Object, it will download the object from PPIO network first;
+  2. Once the Object is ready in local storage, segments are composed and then decrypted, and stored into local file system.
+- **Params**:
 
-  | name    | default | description                                                         |
-  | --------- | ------ | ---------------------------- |
-  | object-hash | "none"     | hash value of the file exported |
+  | Name | Default | Description |
+  | -- | -- | -- |
+  | object-hash | "none" | hash value of the file exported |
   | encrypt | "AES"  | Set the encryption algorithm used to decrypt the contents of the original file, corresponding to the encryption algorithm |
-  | key     | "" | Specify the key used to decrypt the content in the Object |
-  | output  | current file or directory | The path to the local file, if not specified, write the current directory with \<object-hash\> as the file name |
+  | key | "" | Specify the key used to decrypt the content in the Object |
+  | output | current file or directory | The path to the local file, if not specified, write the current directory with \<object-hash\> as the file name |
 - **Success Responses**:
 
-  | result    |  description         |
-  | --------- | ----------- |
-  | result | null |
+  | Result | Description |
+  | -- | -- |
+  | Result | null |
 - **Fail Responses**:
 
-  | result    |  error code         |  error message |
-  | --------- | ----------- |----------- |
+  | Result | Error Code | Error Message |
+  | -- | -- | -- |
   | error | -1 |"output can not open" |
 - **Example**:
   ```bash
@@ -512,24 +513,24 @@ Other options and parameters in the PPIO command are passed in params in jsonrpc
 ### ObjectPut
 - **Description**:  
   Publish a contract to upload an Object
-- **params**:
+- **Params**:
 
-  | name    | default | description |
-  | --------- | ------ | ---------------------------- |
+  | Name | Default | Description |
+  | -- | -- | -- |
   | object-hash | "none" | hash value of the target object |
-  | copies   | 5 | The number of copies stored, at least 5 |
-  | duration | 8640000(equals 100 days) | The storage time of the object, unit in s (second) |
-  | gasprice | none   | price of Gas, unit in wei |
-  | acl      | public | Access to Object: Set to public to mean that the Object can be accessed by anyone; set to private to mean that the Object is private and needs to be authorized to access |
+  | copies | 5 | The number of copies stored, at least 5 |
+  | duration | 8640000(100 days) | Life time of the storage stored in PPIO network, unit in second |
+  | gasprice | none | price of Gas, unit in wei |
+  | acl | public | Access control of the Object: "public" means that the Object can be accessed by anyone; "private" means need authorization to access |
 - **Success Responses**:
 
-  | result    |  description         |
-  | --------- | ----------- |
-  | result | null |
+  | Result | Description |
+  | -- | -- |
+  | Result | null |
 - **Fail Responses**:
 
-  | result    |  error code         |  error message |
-  | --------- | ----------- |----------- |
+  | Result | Error Code | Error Message |
+  | -- | -- | -- |
   | error | -1 |"invalid buffer size" |
   | error | 2017 |"contract has already exsited" |
 - **Example**:
@@ -551,28 +552,29 @@ Other options and parameters in the PPIO command are passed in params in jsonrpc
 
 ### ObjectGet
 - **Description**:  
-  Download the contents of an Object to your local storage. When Object is owned by someone else, there are two situations:
-  - If the ACL of the Object is set to public, you can download the Object directly via `ppio object get`
-  - If the ACL of the Object is set to private, you must first have the signature authorization for the Object (via the `ppio object auth` command), and the user can download the object via `ppio object get` during the validity period of the signature.
-- **params**:
+  Download an Object to your local storage. There are three situations:
+  - If the object is owned by yourself, you can download the Object directly.
+  - If the Object is owned by others, and the ACL is public, you can download the Object directly.
+  - If the Object is owned by others, and the ACL is private, you must first get the authorization of the Object (via the `ppio object auth` command), and then download the object via `ppio object get`.
+- **Params**:
 
-  | name    | default | description                                                         |
-  | --------- | ------ | ---------------------------- |
-  | object-hash | none     | hash value of the target |
-  | gasprice | none     | price of Gas, unit in wei(This field needs to be set when the Object is owned by someone else) |
-  | owner    | none     | user-id (This field needs to be set when the Object is owned by someone else)  |
-  | access-duration   | none     | The owner of the Object authorizes others how long it can access an Object |
-  | access-signature  | none     | The signature which the owner of the Object authorizes others how long it can access an Object |
-  | auth     | none              | The signature and signature content which the owner of the Object authorizes others how long it can access an Object |
+  | Name | Default | Description |
+  | -- | -- | -- |
+  | object-hash | none | hash value of the target |
+  | gasprice | none | price of Gas, unit in wei (Needed when the Object is owned by others and the ACL is private) |
+  | owner | none | user-id (Needed when the Object is owned by others and the ACL is private) |
+  | access-duration | none | The owner of the Object authorizes others how long it can access an Object (Needed when the Object is owned by others and the ACL is private) |
+  | access-signature  | none | Signature of Object (Needed when the Object is owned by others and the ACL is private) |
+  | auth | none | The signature and signature content which the owner of the Object authorizes others how long it can access an Object (Needed when the Object is owned by others and the ACL is private) |
 - **Success Responses**:
 
-  | result    |  description         |
-  | --------- | ----------- |
-  | result | null |
+  | Result | Description |
+  | -- | -- |
+  | Result | null |
 - **Fail Responses**:
 
-  | result    |  error code         |  error message |
-  | --------- | ----------- |----------- |
+  | Result | Error Code | Error Message |
+  | -- | -- | -- |
   | error | 2003 |"failed to schedule task" |
 - **Example**:
   ```bash
@@ -615,27 +617,27 @@ Other options and parameters in the PPIO command are passed in params in jsonrpc
 
 ### ObjectCopy
 - **Description**:  
-  Initiate a copy contract of Object to copy an Object to your own
-- **params**:
+  Copy an Object from other user.
+- **Params**:
 
-  | name    | default | description                                                         |
-  | --------- | ------ | ---------------------------- |
-  | object-hash | none     |Hash value of the object |
-  | copies   | 5                | The number of copies stored, at least 5  |
-  | duration | 8640000(equals 100 days) | The storage time of the Object, unit in s (second) |
-  | gasprice | none               | price of Gas, unit in wei   |
-  | acl      | public           | The access permission of Object, set to public means that the Object can be accessed by anyone; set to private means that the Object is private and needs to be authorized to access |
-  | auth     | none               | Required to copy other people's Objects, need an Object signature provided by others to authorize |
-  | owner    | none               | User ID of the Object owner  |
+  | Name | Default | Description |
+  | -- | -- | -- |
+  | object-hash | none |Hash value of the object |
+  | copies | 5 | The number of copies stored, at least 5  |
+  | duration | 8640000(100 days) | The storage time of the Object, unit in second |
+  | gasprice | none | price of Gas, unit in wei |
+  | acl | public | Access control of the Object: "public" means that the Object can be accessed by anyone; "private" means need authorization to access |
+  | auth | none | Required to copy other people's Objects, need an Object signature provided by others to authorize |
+  | owner | none | User ID of the Object owner  |
 - **Success Responses**:
 
-  | result    |  description         |
-  | --------- | ----------- |
-  | result | null |
+  | Result | Description |
+  | -- | -- |
+  | Result | null |
 - **Fail Responses**:
 
-  | result    |  error code         |  error message |
-  | --------- | ----------- |----------- |
+  | Result | Error Code | Error Message |
+  | -- | -- | -- |
   | error | -1 |"failed to schedule copy-object" |
 - **Example**:
   ```bash
@@ -656,21 +658,21 @@ Other options and parameters in the PPIO command are passed in params in jsonrpc
 
 ### ObjectStatus
 - **Description**:  
-  Get the contract information and execution status of an Object, which can only be used to view your own Object.
-- **params**:
+  Get status of an Object owned by the user node. It will also show the detail contract information.
+- **Params**:
 
-  | name    | default | description                            |
-  | --------- | ------ | ---------------------------- |
-  | object-hash | none     | value of the object |
+  | Name | Default | Description |
+  | -- | -- | -- |
+  | object-hash | none | hash value of the object |
 - **Success Responses**:
 
-  | result    |  description         |
-  | --------- | ----------- |
-  | result | status information of the object |
+  | Result | Description |
+  | -- | -- |
+  | Result | status information of the object |
 - **Fail Responses**:
 
-  | result    |  error code         |  error message |
-  | --------- | ----------- |----------- |
+  | Result | Error Code | Error Message |
+  | -- | -- | -- |
   | error | -1 |"invalid buffer size" |
 - **Example**:
   ```bash
@@ -721,18 +723,18 @@ Other options and parameters in the PPIO command are passed in params in jsonrpc
 
 ### ObjectList
 - **Description**:  
-  Paginate all Objects. Unlike ppio object status, ppio object list is just a list of Objects, and there is no information about the execution of the corresponding contract.
-- **params**:
+  Get status of all Objects owned by the user. Unlike `ppio object status`, `ppio object list` just show the segment information, But no detail contract information for the corresponding object
+- **Params**:
   none
 - **Success Responses**:
 
-  | result    |  description         |
-  | --------- | ----------- |
-  | result | status info of objects|
+  | Result | Description |
+  | -- | -- |
+  | Result | status info of objects|
 - **Fail Responses**:
 
-  | result    |  error code         |  error message |
-  | --------- | ----------- |----------- |
+  | Result | Error Code | Error Message |
+  | -- | -- | -- |
   | error | -1 |"invalid buffer size" |
 - **Example**:
   ```bash
@@ -788,21 +790,21 @@ Other options and parameters in the PPIO command are passed in params in jsonrpc
 
 ### ObjectDelete
 - **Description**:  
-  Delete the contract of an Object
-- **params**:
+  Delete an Object.
+- **Params**:
 
-  | name    | default | description                            |
-  | --------- | ------ | ---------------------------- |
-  | object-hash | none     | hash value of the object |
+  | Name | Default | Description |
+  | -- | -- | -- |
+  | object-hash | none | hash value of the object |
 - **Success Responses**:
 
-  | result    |  description         |
-  | --------- | ----------- |
-  | result | null |
+  | Result | Description |
+  | -- | -- |
+  | Result | null |
 - **Fail Responses**:
 
-  | result    |  error code         |  error message |
-  | --------- | ----------- |----------- |
+  | Result | Error Code | Error Message |
+  | -- | -- | -- |
   | error | -1 |"invalid buffer size" |
 - **Example**:
   ```bash
@@ -819,25 +821,25 @@ Other options and parameters in the PPIO command are passed in params in jsonrpc
 
 ### ObjectRenew
 - **Description**:  
-  Republish the contract for an Object
-- **params**:
+  Republish an Object owned by the user node.
+- **Params**:
 
-  | name    | default | description                            |
-  | --------- | ------ | ---------------------------- |
-  | object-hash | none     | hash value of the object |
-  | copies   | 5                | The number of stored copies, not less than 5  |
-  | duration | 8640000(equals 100 days) | The storage time of the object, unit in s (seconds) |
-  | gasprice | none               | price of Gas, unit in wei |
-  | acl      | public           | The access permission of Object, set to public means that the Object can be accessed by anyone; set to private means that the Object is private and needs to be authorized to access |
+  | Name | Default | Description |
+  | -- | -- | -- |
+  | object-hash | none | hash value of the object |
+  | copies | 5 | The number of stored copies, not less than 5  |
+  | duration | 8640000(100 days) | Duration the object will be stored in PPIO network, unit in second |
+  | gasprice | none | price of Gas, unit in wei |
+  | acl | public | Access control of the Object: "public" means that the Object can be accessed by anyone; "private" means need authorization to access |
 - **Success Responses**:
 
-  | result    |  description         |
-  | --------- | ----------- |
-  | result | null |
+  | Result | Description |
+  | -- | -- |
+  | Result | null |
 - **Fail Responses**:
 
-  | result    |  error code         |  error message |
-  | --------- | ----------- |----------- |
+  | Result | Error Code | Error Message |
+  | -- | -- | -- |
   | error | -1 |"invalid buffer size" |
   | error | 2009 |"no need to renew object" |
 
@@ -862,22 +864,22 @@ Other options and parameters in the PPIO command are passed in params in jsonrpc
 
 ### ObjectUpdateacl
 - **Description**:  
-  Update ACL information for an Object
-- **params**:
+  Update ACL information of an Object.
+- **Params**:
 
-  | name    | default | description                            |
-  | --------- | ------ | ---------------------------- |
-  | object-hash | none     | Hsah value of the obejct |                                 |
-  | acl      | public      | The access permission of Object, set to public means that the Object can be accessed by anyone; set to private means that the Object is private and needs to be authorized to access |
+  | Name | Default | Description |
+  | -- | -- | -- |
+  | object-hash | none | Hsah value of the obejct |
+  | acl | public | Access control of the Object: "public" means that the Object can be accessed by anyone; "private" means need authorization to access |
 - **Success Responses**:
 
-  | result    |  description         |
-  | --------- | ----------- |
-  | result | null |
+  | Result | Description |
+  | -- | -- |
+  | Result | null |
 - **Fail Responses**:
 
-  | result    |  error code         |  error message |
-  | --------- | ----------- |----------- |
+  | Result | Error Code | Error Message |
+  | -- | -- | -- |
   | error | -1 |"invalid buffer size" |
 - **Example**:
   ```bash
@@ -896,24 +898,24 @@ Other options and parameters in the PPIO command are passed in params in jsonrpc
 
 ### ObjectAuth
 - **Description**:  
-  Authorize the Object in the local storage space to other users. If the ACL of the Object is public, the command has no effect.
-  The authorization duration cannot exceed the length of time the user has the file.
-- **params**:
+  Authorize the Object to other user, within a certain duration. If the ACL of the Object is public, the command has no effect.
+  The authorization duration cannot exceed the time the user own the file.
+- **Params**:
 
-  | name    | default | description                            |
-  | --------- | ------ | ---------------------------- |
-  | object-hash | none     | Hash value of the object |
-  | accessor | none           | Authorized user's id  |
-  | duration | 86400(equals a day) | Authorized effective duration, unit in s (second) |
+  | Name | Default | Description |
+  | -- | -- | -- |
+  | object-hash | none | Hash value of the object |
+  | accessor | none | ID of authorized user |
+  | duration | 86400(a day) | Authorized effective duration, unit in second |
 - **Success Responses**:
 
-  | result    |  description         |
-  | --------- | ----------- |
-  | result | null |
+  | Result | Description |
+  | -- | -- |
+  | Result | null |
 - **Fail Responses**:
 
-  | result    |  error code         |  error message |
-  | --------- | ----------- |----------- |
+  | Result | Error Code | Error Message |
+  | -- | -- | -- |
   | error | -1 |"invalid buffer size" |
 - **Example**:
   ```bash
@@ -934,18 +936,18 @@ Other options and parameters in the PPIO command are passed in params in jsonrpc
 
 ## ppio status
 - **Description**:  
-  Display details of the current PPIO user node runtime
-- **params**:
+  Show runtime information of the user node.
+- **Params**:
   none
 - **Success Responses**:
 
-  | result    |  description         |
-  | --------- | ----------- |
-  | protocol-version |protocol version |
+  | Result | Description |
+  | -- | -- |
+  | protocol-version | protocol version |
   | version | api version |
-  | id | network id of current node, hex string|
-  | rpchost | ip address|
-  | rpcport | port|
+  | id | network id of current node, in hex string|
+  | rpchost | RPC service address |
+  | rpcport | RPC port |
 - **Fail Responses**:
   none
 - **Example**:
@@ -972,30 +974,30 @@ Other options and parameters in the PPIO command are passed in params in jsonrpc
 
 ## ppio storage
 - **Description**:  
-  Manage local storage
-- **Subcommand**:
+  Manage storage of the user node.
+- **Subcommands**:
 
-  | subcommand         | description       |
-  | ------------------| --------------------------------------- |
-  | [`StorageObject`](#storageobject)     | Display information about the specified Object of the current node    |
-  | [`StorageObjects`](#storageobjects)   | Display information about all Objects of the current node    |
-  | [`StorageSegments`](#storagesegments) | Display information about all segments of the current node   |
-  | [`StorageKeep`](#storagekeep)         | Keep Object in local storage  |
-  | [`StorageUsage`](#storageusage)       | View usage of local storage |
-  | [`StorageGc`](#storagegc)             | Clean up objects that are not kept in the local storage space |
+  | Subcommand | Description |
+  | --------| -- |
+  | [`StorageObject`](#storageobject) | Show storage information of an Object |
+  | [`StorageObjects`](#storageobjects) | Show storage information of all the Objects |
+  | [`StorageSegments`](#storagesegments) | Show storage information of all the segments |
+  | [`StorageKeep`](#storagekeep) | Keep Object in local storage  |
+  | [`StorageUsage`](#storageusage) | Show usage of local storage |
+  | [`StorageGc`](#storagegc) | Clean up objects that are not kept, if the local storage is in short |
 
 ### StorageObject
 - **Description**:  
-  Display information about the specified Object of the current node
-- **params**:
+  Show storage information of an Object.
+- **Params**:
 
-  | name    | default | description                                                         |
-  | --------- | ------ | ---------------------------- |
-  | object-hash | "none"     | hash value of the object |
+  | Name | Default | Description |
+  | -- | -- | -- |
+  | object-hash | "none" | hash value of the object |
 - **Success Responses**:
 
-  | result    |  description  |
-  | --------- | ----------- |
+  | Result | Description |
+  | -- | -- |
   | result.Hash | hash value of the current object |
   | result.Length | byte length of the current object |
   | result.Segments | The current node corresponds to the segment of the specified object |
@@ -1004,9 +1006,9 @@ Other options and parameters in the PPIO command are passed in params in jsonrpc
   | result.Segments.Length | byte length of the segment |
 - **Fail Responses**:
 
-  | result    |  description         |
-  | --------- | ----------- |
-  | error.code | error code |
+  | Result | Description |
+  | -- | -- |
+  | error.code | Error Code |
   | error.message | detailed error message |
 - **Example**:
   ```bash
@@ -1050,14 +1052,14 @@ Other options and parameters in the PPIO command are passed in params in jsonrpc
 
 ### StorageObjects
 - **Description**:  
-  Display information about all Objects of the current node
-- **params**:
+  Show storage information of all the Objects.
+- **Params**:
   none
 - **Success Responses**:
 
-  | result    |  description         |
-  | --------- | ----------- |
-  | result.Hash | hash of the object |
+  | Result | Description |
+  | -- | -- |
+  | result.Hash | hash value of the object |
   | result.Length | byte length of the object |
 - **Fail Responses**:
   none
@@ -1094,13 +1096,13 @@ Other options and parameters in the PPIO command are passed in params in jsonrpc
 
 ### StorageSegments
 - **Description**:  
-  Display information about all segments of the current node
-- **params**:  
+  Show storage information of all the segments.
+- **Params**:  
   none
 - **Success Responses**:
 
-  | result    |  description         |
-  | --------- | ----------- |
+  | Result | Description |
+  | -- | -- |
   | result.Id | id of the segment |
   | result.Hash | hash value of the segment |
   | result.Length | byte length of the segment |
@@ -1145,24 +1147,24 @@ Other options and parameters in the PPIO command are passed in params in jsonrpc
 - **Description**:  
   Keep an Object in local storage.
 
-  ::: warning WARNING
-    The user's own Objects are automatically kept to local storage space. Files copied from other users require to be kept to local storage space manually.
+  ::: warning NOTE
+    The user's own Objects are automatically kept to local storage space. Files obtained from other users require to be kept to local storage space manually.
   :::
-- **params**:
+- **Params**:
 
-  | name    | default | description                                                         |
-  | --------- | ------ | ---------------------------- |
-  | object-hash | "none"     | Hash value of the object|
+  | Name | Default | Description |
+  | -- | -- | -- |
+  | object-hash | "none" | Hash value of the object|
 - **Success Responses**:
 
-  | result    |  description         |
-  | --------- | ----------- |
-  | result | success or failure signal|
+  | Result | Description |
+  | -- | -- |
+  | Result | success or failure signal|
 - **Fail Responses**:
 
-  | result    |  description         |
-  | --------- | ----------- |
-  | result | success or failure signal|
+  | Result | Description |
+  | -- | -- |
+  | Result | success or failure signal|
 - **Example**:
   ```bash
   # Command
@@ -1181,13 +1183,13 @@ Other options and parameters in the PPIO command are passed in params in jsonrpc
 
 ### StorageUsage
 - **Description**:  
-  View usage of local storage
-- **params**:
+  Show usage of local storage.
+- **Params**:
   none
 - **Success Responses**:
 
-  | result    |  description         |
-  | --------- | ----------- |
+  | Result | Description |
+  | -- | -- |
   | result.UsageRate | usage rate of the local storage |
   | result.Total | total amount of the local storage |
   | result.Used | uesd amount of the local storage |
@@ -1219,19 +1221,19 @@ Other options and parameters in the PPIO command are passed in params in jsonrpc
 
 ### StorageGc
 - **Description**:  
-  Clean up objects that are not kept in the local storage space
-- **params**:  
+  Clean up objects that are not kept, if the local storage is in short.
+- **Params**:  
   none
 - **Success Responses**:
 
-  | result    |  description         |
-  | --------- | ----------- |
-  | result | success or failure signal|
+  | Result | Description |
+  | -- | -- |
+  | Result | success or failure signal|
 - **Fail Responses**:
 
-  | result    |  description         |
-  | --------- | ----------- |
-  | result | success or failure signal|
+  | Result | Description |
+  | -- | -- |
+  | Result | success or failure signal|
 - **Example**:
   ```bash
   # Command
@@ -1250,29 +1252,29 @@ Other options and parameters in the PPIO command are passed in params in jsonrpc
 
 ## ppio wallet
 - **Description**:  
-  Manage user's wallet
-- **Subcommand**:
+  Manage user's wallet.
+- **Subcommands**:
 
-  | subcommand   | description      |
-  | ----------------- | -------------|
-  | [`WalletAddress`](#walletaddress) | Display current wallet address, hex string |
-  | [`WalletBalance`](#walletbalance) | Show the balance of the current wallet address  |
+  | Subcommand | Description |
+  | -- | ---|
+  | [`WalletAddress`](#walletaddress) | Show wallet address, in hex string |
+  | [`WalletBalance`](#walletbalance) | Show the balance of the wallet address  |
 
 ### WalletAddress
 - **Description**:  
-  Display current wallet address, hex string
-- **params**:  
+  Show wallet address, in hex string.
+- **Params**:  
   none
 - **Success Responses**:
 
-  | result    |  description     |
-  | --------- | ----------- |
-  | result | current wallet address|
+  | Result | Description |
+  | -- | -- |
+  | Result | current wallet address|
 - **Fail Responses**:
   none
 - **Example**:
   ```bash
-  # return current wallet address, hex string
+  # return current wallet address, in hex string
 
   # Command
   > ppio wallet id --rpcport=18060
@@ -1290,14 +1292,14 @@ Other options and parameters in the PPIO command are passed in params in jsonrpc
 
 ### WalletBalance
 - **Description**:  
-  Show the balance of the current wallet address
-- **params**:  
+  Show the balance of the wallet address.
+- **Params**:  
   none
 - **Success Responses**:
 
-  | result    |  description         |
-  | --------- | ----------- |
-  | result | the balance of the current wallet address|
+  | Result | Description |
+  | -- | -- |
+  | Result | the balance of the current wallet address|
 - **Fail Responses**:
   none
 - **Example**:
