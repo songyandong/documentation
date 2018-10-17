@@ -10,11 +10,11 @@ And PPIO developed a self-governing, elastic and expandable P2P network that all
 PPIO's P2P network design will be explained in details, including its intelligent data-driven scheduling algorithms, its implementation of the Distributed Hash Table (DHT), its traffic management based on Proactive Network Provider Participation (P4P), and its P2P based content distribution technology(PCDN).
 
 ## Attacks and Proofs
-Traditional P2P network does not offer enough incentives for its nodes to stay in the network. As nodes come and go, it is difficult to maintain the stability of the network. PPIO injects attractive incentives to the network by rewarding the participating nodes based on its storage and bandwidth contribution, and encourage the nodes to stay and keep contributing to the network.
+The nodes of the traditional P2P network are free to choose join or leave the network, it is difficult to maintain the stability of the network. PPIO incentives the nodes based on their contributions of storage and bandwidth, therefore the nodes incline to stay in the network and make a long and reliable contribution.[1]
 
-However, greedy and malicious nodes may attempt to fool the network and get rewarded without making proportional contribution, through various types of attacks like Sybil Attack, Outsourcing Attack, Generation Attack, Distributed Denial of Service Attack and Eclipse Attack. These attacks will be explained in details in the [Five Kinds of Attack](./Five_Kinds_of_Attacks.md).
+However, greedy and malicious nodes would attempt to cheat the network and get rewarded without making proportional contribution, through various types of attacks like Sybil Attack, Outsourcing Attack, Generation Attack, Distributed Denial of Service Attack and Eclipse Attack. These attacks will be explained in details in the [Five Kinds of Attack](./Five_Kinds_of_Attacks.md).
 
-[Four Proof Algorithms](./Four_Proof_Algorithms.md) explains PPIO's Proof of Replication (PoRep), Proof of Download (PoD), Proof of Spacetime (PoSt), and Light Proof of Capacity (LPoC) that are designed to defend the network against all these attacks and maintain the integrity of the system.The optimized implementation of the proofs allow them to be deployed and function efficiently at large scale, that enables the incentives system to operate in a secure manner, and help establish a healthy storage market and economy.
+[Four Proof Algorithms](./Four_Proof_Algorithms.md) explains PPIO's Proof of Replication (PoRep), Proof of Download (PoD), Proof of Spacetime (PoSt), and Light Proof of Capacity (LPoC) that are designed to defend the network against all these attacks and maintain the integrity of the system.[2][3] The optimized implementation of the proofs allow them to be deployed and function efficiently at large scale, that enables the incentives system to operate in a secure manner, and help establish a healthy storage market and economy.
 
 ## Architecture
 
@@ -30,3 +30,8 @@ PPIO follows a layered system design, to facilitate future expansion, and make i
 5. **Incentive Layer:** manages incentives and rewards based on the role of each node in the network
 6. **Interface Layer:** SDK and APIs for the developers and to support the application layer
 7. **Application Layer:** Apps or DApps developed by the 3rd party developers
+
+### Reference
+[1] [M. Piatek, A. Krishnamurthy, A. Venkataramani, R. Yang, D. Zhang and A. Jaffe, "Contracts: Practical Contribution Incentives for P2P Live Streaming"](https://www.usenix.org/legacy/event/nsdi10/tech/full_papers/piatek.pdf)
+[2] [Proof of Replication Technical Report (WIP)](https://filecoin.io/proof-of-replication.pdf)
+[3] [S. Dziembowski1, S. Faust, V. Kolmogorov, K. Pietrzak, "Proofs of Space"](https://www.iacr.org/archive/crypto2015/92160192/92160192.pdf)

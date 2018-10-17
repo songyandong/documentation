@@ -29,7 +29,7 @@ In order to maintain reliable data storage, data redundancy is required. PPIO ad
 
 - **Data Replication:** The original data is replicated into more copies. Although the method introduces large storage overhead, its computation complexity is low and the original data can be easily recovered. It can often be used in storing and distorting popular content.
 
-- **Redundant Coding:** Divide the original data into blocks and encode them with Erasure Code to generate a group of new data blocks that have redundancy embedded. The original data can be recovered if no more than a certain number of the data blocks are lost or corrupted. This method has much lower storage overhead, but it is more computational intensive. It can often be used in storing immutable or less popular content. Reed Solomon is one of the commonly used Erase Code, and can be explained as follows:
+- **Redundant Coding:** Divide the original data into blocks and encode them with Erasure Code to generate a group of new data blocks that have redundancy embedded. The original data can be recovered if no more than a certain number of the data blocks are lost or corrupted. This method has much lower storage overhead, but it is more computational intensive. It can often be used in storing immutable or less popular content. Reed Solomon[5] is one of the commonly used Erase Code, and can be explained as follows:
 
 	- Let $n$ be number of data blocks in the original data, and $m$ be the number of redundant data blocks, the original data blocks can be denoted as $D_{n \times 1}$.
 	- Define a Distribution Matrix as $B_{(n+m) \times n}$, in which the first n rows and n columns form an Identity matrix, and the remaining m rows and n columns are called Vandermonde Matrix or Cauchy matrix.
@@ -43,7 +43,7 @@ In order to maintain reliable data storage, data redundancy is required. PPIO ad
 ## Network Layer
 
 Communication among different nodes in PPIO’s network is based on a set of P2P protocols that include the following:
-- Transmission: Supports TCP and UDP based transmission. To improve efficiency and reliability, KCP, QUIC and SCTP protocols can also be used.
+- Transmission: Supports TCP and UDP based transmission. To improve efficiency and reliability, KCP[1], QUIC[2] and SCTP[3] protocols can also be used.
 
 - Connectivity： NAT traversal technologies are essential to guarantee connectivity. PPIO utilizes STUN (Session Traversal Utilities for NAT) and network relay to help set up connections between nodes behind gateways.
 
@@ -154,3 +154,10 @@ For example:
 - **Data Warehouse:** PPIO can be used as enterprise data warehouse, to store a huge amount of historical data, and replace traditional unreliable local data storage or expensive cloud storage. Besides enterprise data, PPIO can also be used to store public database such as a gene pool.
 
 For other types of storage needs, PPIO will also provide the necessary support. In addtion, PPIO will be open sourced in the near future. At that time, App enthusiasts and developers will be able to participate in PPIO's development and add support for many more applications.
+
+### Reference
+[1] [https://github.com/skywind3000/kcp/blob/master/protocol.txt](https://github.com/skywind3000/kcp/blob/master/protocol.txt)
+[2] [R. Hamilton, J. Iyengar, I. Swett, A. Wilk, "QUIC: A UDP-Based Secure and Reliable Transport for HTTP/2" IETF:draft-tsvwg-quic-protocol 2016.](https://tools.ietf.org/html/draft-tsvwg-quic-protocol-02)
+[3] [R. R. Stewart and Q. Xie. Stream control transmission protocol (SCTP): a reference guide. Addison-Wesley Longman Publishing Co., Inc., 2001.](https://dl.acm.org/citation.cfm?id=502261)
+[4] [Mirrokni, Vahab, Mikkel Thorup, and Morteza Zadimoghaddam. "Consistent Hashing with Bounded Loads." arXiv:1608.01350(2016).](https://arxiv.org/abs/1608.01350)
+[5] [https://en.wikipedia.org/wiki/Reed–Solomon_error_correction](https://en.wikipedia.org/wiki/Reed%E2%80%93Solomon_error_correction)

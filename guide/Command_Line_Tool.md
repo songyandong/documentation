@@ -3,11 +3,9 @@
 You can use the command line tool to perform all the operations you want to perform with PPIO.
 
 ## Installation  
-We can't wait to let you experience PPIO for the first time, just like a child can't wait to show off his perfect score. But for the stability of the service, for the security of the data, in order to give you a better experience, we are still in the process of internal testing.
+We can't wait to let you experience PPIO for the first time at the end of this year. Like a child can't wait to show off his painting. Currently, we are on the final testing process of platform stability and data security to insure you the best experience.
 
-**We promise that you experience PPIO in December of this year.**
-
-You can learn about PPIO by watching the video we recorded during the test.
+You can learn more about PPIO through our demo video.
 
 ## Usage
 You can get more usages of Command Line Tool in [CLI Reference](../cli/)
