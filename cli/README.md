@@ -1107,7 +1107,7 @@ Except `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, other comm
   Show the balance of the wallet address.
 - **Options**:
   ```bash
-  ppio metadata get
+  ppio wallet balance
   ```
 - **Example**:
   ```bash
