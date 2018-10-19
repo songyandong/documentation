@@ -14,4 +14,19 @@ If you are interested in knowing why we want to design PPIO, check out the artic
 ## Installation CLI
 We can't wait to let you experience PPIO for the first time at the end of this year. Like a child can't wait to show off his painting. Currently, we are on the final testing process of platform stability and data security to insure you the best experience.
 
-You can learn more about PPIO through our demo video.
+You can learn more about PPIO through our demo videos.
+
+1. **PPIO demo video in September 2018**
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/DF5I2-kqKf0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+  As the first demo for the PPIO, we will demonstrate some basic distributed storage functionalities of the PPIO, such as put or get an object. We will see the following actions:  
+      - The introduction of the two users and two miners nodes
+      - Uploading the files from the user to the miner
+      - Downloading the file from the miner to the user
+
+2. **PPIO demo video in October 2018**
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/OJIvYua2ymg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+  This demo introduces the relationship between the PPIO blockchain and distributed storage. It starts up a local test network, spawns two users and two miners nodes, runs upload and download actions, then inspects the corresponding settlement results. The demo shows:  
+      - The introduction of the service nodes in PPIO
+      - Transfer tokens from PPIO blockchain to distributed storage
+      - User uploads file and the settlement result
+      - User downloads file and the settlement result
