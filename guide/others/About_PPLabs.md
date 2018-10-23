@@ -1,6 +1,6 @@
 # About PPLabs
 
-PPLabs is a global technology community initiated by former PPLive CTO **Elnino** and CEO **BillYao**.
+PPLabs is a global technology community initiated by former PPLive CTO **Wayne Wong** and CEO **Bill Yao**.
 
 PPLabs' founding team successfully developed PPLive, which is the world‘s only P2P data storage and transmission network that operates on more than 500 million nodes. The operation cost of PPLive is one tenth of that of traditional network. PPLive successfully reached 40PB in P2P storage capacity and continues to supply about 10TB of bandwidth resources through 1% of user resources.
 
