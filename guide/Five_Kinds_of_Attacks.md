@@ -8,7 +8,7 @@ As shown in Figure below, Sybil attack takes place when a greedy lessor node cre
 ![sybilattack](../images/guide/sybilattack.png)
 <p style="font-size:14px; text-align:center;">Sybil Attack</p>
 
-PPIO’s Proof of Replication (PoRep) and Proof of Spacetime (PoSt) prevent Sybil attacks by requiring each copy of the data to be unique. As a result, each Lessor account is supposed to have stored a different copy. The Verifier In both proofs validates the copy based on its uniquely constructed Merkle tree. As it takes significant amount of time to recreate a copy in order to calculate the correct Merkle tree, both proofs will fail or timeout if the Lessor has not correctly stored its unique copy.
+PPIO’s Proof of Replication (PoRep) and Proof of Spacetime (PoSt) prevent Sybil attacks by requiring each copy of the data to be unique. As a result, each Lessor account is supposed to have stored a different copy. The Verifier In both proofs validates the copy based on its uniquely constructed Merkle tree. As it takes a significant amount of time to recreate a copy in order to calculate the correct Merkle tree, both proofs will fail or timeout if the Lessor has not correctly stored its unique copy.
 
 ## Outsourcing Attacks
 As shown in Figure below, outsourcing attacks take place when lessors claim to have stored copies of the data in their physical storage, but they in fact have stored the data on a third party storage system. These Lessors fulfill the download request by forwarding data from the third-party storage to the user. When multiple lessors follow suit, the third-party storage system may only store a single copy of the data to save cost, and service it to multiple lessors. As a result, the attack reduces the actual data redundancy in the system. In addition, when the third-party storage is a centralized storage system, it increases of the risk of data not getting recovered when there is a failure with the centralized server.
@@ -21,7 +21,7 @@ PPIO’s PoSt can effectively defend against the generation attacks, as the Less
 At the same time, the Verifier in PoSt requires the challenges to be answered within a specified period of time. When the lessor stores data on third party storage, it takes additional time to retrieve the data before they can generate the correct proofs. As a result, the challenge is likely to timeout and the lessor will be punished for failing to provide proofs in time.
 
 ## Generation Attacks
-As shown in Figure below, generation attacks take place when a lessor pretends to have stored a copy of the data, but in fact it has only stored enough information that can be used to generate the proofs and respond to the storage challenges from a Verifier in real time. If successful, the lessor can claim to have stored large amount of data and get unfair rewards. On the other hand, since user can not download the correct data from the lessor, the reliability of the storage system is significantly degraded.
+As shown in Figure below, generation attacks take place when a lessor pretends to have stored a copy of the data, but in fact, it has only stored enough information that can be used to generate the proofs and respond to the storage challenges from a Verifier in real time. If successful, the lessor can claim to have stored large amount of data and get unfair rewards. On the other hand, since user can not download the correct data from the lessor, the reliability of the storage system is significantly degraded.
 
 ![Generationa Attack](../images/guide/generationattack.png)
 <p style="font-size:14px; text-align:center;">Generationa Attack</p>
@@ -41,7 +41,7 @@ PPIO can effectively prevent DDoS Attacks with the following design:
 - In PPIO’s consensus mechanism, nodes are being randomly selected to build the next block in the ledger. Unless the attacker attacks all the feasible nodes in the entire network, the operation of PPIO will not be affected. As a result, it is unrealistic for attackers to conduct effective DDoS attacks against PPIO.
 
 ## Eclipse Attacks
-As shown in Figure below, eclipse attacks take place when attackers isolate a victim node by controlling all the connections to and from the node. As a result, the victim node on longer receives correct information from the rest of the network and therefore can be manipulated by the attackers, and may end up with economic losses.
+As shown in Figure below, eclipse attacks take place when attackers isolate a victim node by controlling all the connections to and from the node. As a result, the victim node no longer receives correct information from the rest of the network and therefore can be manipulated by the attackers, and may end up with economic losses.
 
 ![Eclipse Attack](../images/guide/eclipseattack.png)
 <p style="font-size:14px; text-align:center;">Eclipse Attack</p>
