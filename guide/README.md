@@ -1,7 +1,7 @@
 # Getting Started
 
 ## What is PPIO?
-**PPIO** is a decentralized programmable storage network based on **blockchain**. You can use **PPIO** to store and retrieve **any amount of data** at any time, from anywhere on the web. You can accomplish these tasks using the [PPIO SDK <badge text="todo" type="warn" vertical="" />](./PPIO_SDK.md) or [PPIO Command Line Tool](../cli/)(abbreviated as CLI in the following content). This guide introduces how to use PPIO Command Line Tool to complete the tasks.
+**PPIO** is a decentralized programmable storage and delivery network. You can use **PPIO** to store and retrieve **any amount of data** at any time, from anywhere on the web. You can accomplish these tasks using the [PPIO SDK <badge text="todo" type="warn" vertical="" />](./PPIO_SDK.md) or [PPIO Command Line Tool](../cli/)(abbreviated as CLI in the following content). This guide introduces how to use PPIO Command Line Tool to complete the tasks.
 
 PPIO is similar to the existing cloud-based storage services such as AWS S3 in terms of usage and function. But it is more robust, efficient and offers better privacy protection. It also reduces cost significantly. PPIO's well-designed blockchain-based incentives allow it to make use of the vast amount of unused bandwidth and storage resources on the Internet, and to provide robust storage service at much lower cost.
 

@@ -99,11 +99,15 @@ $navbar-horizontal-padding = 1.5rem
   padding $navbar-vertical-padding $navbar-horizontal-padding
   line-height $navbarHeight - 1.4rem
   position relative
+  font-size 0
   a, span, img
     display inline-block
     font-size 16px
+  .home-link
+    vertical-align middle
   .logo
     height $navbarHeight - 2.25rem
+    line-height $navbarHeight - 2.25rem
     min-width $navbarHeight - 2.25rem
     margin-right 0.8rem
     vertical-align middle
@@ -111,7 +115,8 @@ $navbar-horizontal-padding = 1.5rem
     font-size 1.3rem
     font-weight 600
     color $textColor
-    position relative
+    max-height $navbarHeight - 1.4rem
+    vertical-align middle
   .links
     padding-left 1.5rem
     box-sizing border-box

@@ -1,6 +1,6 @@
 # Four Proof Algorithms
 
-PPIO employs 4 different storage proofs, namely Proof of Replication (PoRep), Proof of Download (PoD), Proof of Spacetime and Light Proof of Capacity (LPoC). These proofs guarantee that the storage provider (Lessor) correctly replicates the data, and consistently stores the data within the agreed time period. They also ensure that user can successfully download the data any time during the agreed time period. These proofs maintain the integrity and reliability of PPIO's storage system. They will be discussed in details in this section.
+PPIO employs 4 different storage proofs, namely Proof of Replication (PoRep), Proof of Download (PoD), Proof of Spacetime and Light Proof of Capacity (LPoC). These proofs guarantee that the storage provider (miner) correctly replicates the data, and consistently stores the data within the agreed time period. They also ensure that user can successfully download the data any time during the agreed time period. These proofs maintain the integrity and reliability of PPIO's storage system. They will be discussed in details in this section.
 
 Definition of terms in the section：
 - **CRH:** Collision-resistant Hashing, a hash function h with which it is difficult to find two different inputs $x$，$x'$, and generate the same output $h(x) == h(x')$.
@@ -9,14 +9,14 @@ Definition of terms in the section：
 - **Cipher:** A lightweight encryption method with symmetric keys, used in Proof-of-Download. XOR Cipher is a viable option for its implementation.
 
 ## Proof-of-Replication (PoRep)
-Proof of Replication (PoRep) provides a way to verify that Lessor $L$ correctly replicates Data $D$ from User $U$ and stores it in its storage. The process also provides an indirect proof of the bandwidth available to $L$. The procedure of PoRep is described below.
+Proof of Replication (PoRep) provides a way to verify that miner $L$ correctly replicates Data $D$ from User $U$ and stores it in its storage. The process also provides an indirect proof of the bandwidth available to $L$. The procedure of PoRep is described below.
 
 ![Proof-of-Replication](../images/guide/PoRep.png)
 <p style="font-size:14px; text-align:center;">Proof-of-Replication</p>
 
 **Proof-of-Replication**
 1. User $U$ generates a Seal key $PK_{Seal}$，applies it to encrypt Data $D$, and generates a unique copy $R=Seal(D, PK_{Seal})$. It also builds a Merkle Tree on top of $R$, calculates the root hash of the tree $RT=MerkleCRH(R)$，and sends $RT$ to Verifier $V$.
-2. $U$ transmits $R$ and $PK_{Seal}$ to Lessor $L$.
+2. $U$ transmits $R$ and $PK_{Seal}$ to miner $L$.
 3. $L$ requests PoRep challenge from $V$, $V$ accepts the request and sends a random challenge $c$ to $L$, i.e. it challenges the storage of the $c$th data block of $R$.
 4. $L$ retrieves $R_{c}$ which is the $c$th block of $R$, and calculates $Path_{RC-RT}$ which contains the hash values of all the Merkle tree nodes between $R_{c}$ and the root node. $L$ returns the following to $V$:
 	- $R_{c}$
@@ -24,7 +24,7 @@ Proof of Replication (PoRep) provides a way to verify that Lessor $L$ correctly 
 5. From received $R_{c}$ and $Path_{RC-RT}$, $V$ generates the Merkle tree root hash $RT'$, if $RT'$ matches the original root hash received from $U$, i.e. $RT' == RT$, the proof has succeeded, otherwise the proof has failed.
 
 ## Proof-of-Download (PoD)
-Proof-of-Download (PoD) provides a way to verify that Data $D$ has been correctly downloaded from Lessor $L$ to User $U$. The procedure of PoD is described below.
+Proof-of-Download (PoD) provides a way to verify that Data $D$ has been correctly downloaded from miner $L$ to User $U$. The procedure of PoD is described below.
 
 ![Proof-of-Download](../images/guide/PoD.png)
 <p style="font-size:14px; text-align:center;">Proof-of-Download</p>
@@ -32,7 +32,7 @@ Proof-of-Download (PoD) provides a way to verify that Data $D$ has been correctl
 
 **Proof of Download**
 1. For Data $D$ to be downloaded, User $U$ sends the root hash of its Merkle tree $DT_{U}=MerkleCRH(D)$ to Verifier $V$.
-2. Lessor $L$ decrypts its stored copy $R$ and obtains data $D$. It then calculates the root hash of its Merkle tree $DT_{L}=MerkleCRH(D)$.
+2. Miner $L$ decrypts its stored copy $R$ and obtains data $D$. It then calculates the root hash of its Merkle tree $DT_{L}=MerkleCRH(D)$.
 3. $L$ creates a Cipher Key $PK_{Cipher}$, applies it to Data $D$, and generates a ciphered copy $R'=Cipher(D, PK_{Cipher})$. It then calculates the root hash $R'T=MerkleCRH(R')$, and sends the following to $V$:
 	- $DT_{L}$
 	- $PK_{Cipher}$
@@ -54,7 +54,7 @@ Proof-of-Download (PoD) provides a way to verify that Data $D$ has been correctl
 13. From received $R'{c}$ and $Path{R'C-R'T}$, $V$ generates the Merkle tree root hash $R'T"$, if $R'T"$ matches the root hash $R'T$ previously received from $L$, i.e. $R'T" == R'T$, the proof has succeeded, and $V$ sends the Cipher key $PK_{Cipher}$ to $U$, so that $U$ can decipher $R'$ to recover data $D$ successfully.
 
 ## Proof-of-Spacetime (PoSt)
-Proof of Spacetime (PoSt) provides a way to verify that Lessor $L$ has stored Data $D$ for a given period of time. The process also provides an indirect proof of the storage capacity of $L$. The procedure of PoSt is described below.
+Proof of Spacetime (PoSt) provides a way to verify that miner $L$ has stored Data $D$ for a given period of time. The process also provides an indirect proof of the storage capacity of $L$. The procedure of PoSt is described below.
 
 ![Proof-of-Spacetime](../images/guide/PoSt.png)
 <p style="font-size:14px; text-align:center;">Proof-of-Spacetime</p>
@@ -72,14 +72,14 @@ Proof of Spacetime (PoSt) provides a way to verify that Lessor $L$ has stored Da
 8. The series of repeated successful challenges and proofs between $L$ and $V$ generates the successful proof of spacetime.
 
 ## Light-Proof-of-Capacity (LPoC)
-Light Proof of Capacity (LPoC) provides a way to verify the available storage capacity of Lessor $L$. The available capacity does not include the storage space already used for existing data. PPIO's lightweight proof reduces the amount of resources wasted in conducting complicated proofs. The procedure of LPoC is broken into two phases, which are described below.
+Light Proof of Capacity (LPoC) provides a way to verify the available storage capacity of miner $L$. The available capacity does not include the storage space already used for existing data. PPIO's lightweight proof reduces the amount of resources wasted in conducting complicated proofs. The procedure of LPoC is broken into two phases, which are described below.
 
 ### Initialization Phase
 
 ![Initialization Phase of Light-Proof-of-Capacity](../images/guide/PoLCInit.png)
 <p style="font-size:14px; text-align:center;">Initialization Phase of Light-Proof-of-Capacity</p>
 
-1. $V$ generates a unique Directed Acyclic Graph (DAG) $G=(N, E)$ for a specific Lessor $L$, in which N is the set of nodes in G, and E is the set of edges that connect different nodes in G.
+1. $V$ generates a unique Directed Acyclic Graph (DAG) $G=(N, E)$ for a specific miner $L$, in which N is the set of nodes in G, and E is the set of edges that connect different nodes in G.
 2. Let $\pi(n)={n':(n',n)\in E|n'\in N, n\in N}$ be the set of predecessors of node n in G.
 3. Let $L_{ID}$ be the identifier of $L$, let $|n|$ be the identifier of node $n$.
 4. Let $w(n)=CRH(L_{ID}, |n|, w(\pi(n))$ be the hash value of node $n$, in which $w(\pi(n))=(w(n_{1}),...,w(n_{M}))$ and $n_{1},...n_{M} \in \pi(n)$；

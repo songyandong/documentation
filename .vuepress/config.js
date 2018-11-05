@@ -1,10 +1,12 @@
 module.exports = {
   base: '/',
   title: '',
-  description: 'The api reference, command line tool reference and system design guide of PPIO.',
   port: 8001,
+  description: 'The system design guide, api reference and command line tool reference of PPIO.',
+  ga: 'UA-128641089-2',
   head: [
-    ['link', {rel: 'icon', href:'/favicon.png'}],
+    ['meta', {name: 'keywords', content: 'system design, get started, get starting, api reference, command line tool, PPIO, ppio, ppio sdk'}],
+    ['link', {rel: 'icon', href: '/favicon.png'}],
     ['link', { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css' }],
     ['link', { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.10.0/github-markdown.min.css' }]
   ],
