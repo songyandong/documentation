@@ -60,7 +60,7 @@
     <footer class="page-footer">
         <div class="page-footer-content">
             <section class="copyright">
-              <img src="./images/logo_gray.png" class="page-footer-logo" alt="logo">
+              <img src="/logo_gray.png" class="page-footer-logo" alt="logo">
               <div class="line-sep"></div>
               <span class="page-footer-copyright">Copyright &copy; 2017 PPIO Inc.  All Rights Reserved.</span>
             </section>
