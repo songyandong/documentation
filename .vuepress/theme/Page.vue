@@ -62,7 +62,7 @@
             <section class="copyright">
               <img src="/logo_gray.png" class="page-footer-logo" alt="logo">
               <div class="line-sep"></div>
-              <span class="page-footer-copyright">Copyright &copy; 2017 PPIO Inc.  All Rights Reserved.</span>
+              <span class="page-footer-copyright">Copyright &copy; {{ new Date().getFullYear() }} PPIO Inc.  All Rights Reserved.</span>
             </section>
             <nav class="page-footer-nav">
               <!-- <a class="social-link-fb" href="https://www.facebook.com/PPIO-178595523020994/" target="_blank" rel="noopener">
