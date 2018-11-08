@@ -1,9 +1,9 @@
 ---
 sidebarDepth: 2
 ---
-# Jsonrpc APi Reference
+# JSON-RPC APi Reference
 ## Overview  
-This article uses `curl` to illustrate PPIO Jsonrpc Api. Developers can refer to this protocol to achieve RPC access to PPIO through other languages or tools.
+This article uses `curl` to illustrate PPIO jsonrpc Api. Developers can refer to this protocol to achieve RPC access to PPIO through other languages or tools.
 
 In general, a PPIO command corresponds to a PPIO jsonrpc request (in addition to commands `ppio daemon start`, `ppio init`, `ppio help`, `ppio version`, etc.)
 
