@@ -5,7 +5,7 @@ PPIO employs 4 different storage proofs, namely Proof of Replication (PoRep), Pr
 Definition of terms in the section：
 - **CRH:** Collision-resistant Hashing, a hash function h with which it is difficult to find two different inputs $x$，$x'$, and generate the same output $h(x) == h(x')$.
 - **MerkleCRH：** The root hash of a Merkle tree built from collision resistant hashing. Merkle tree can be used as an efficient way to validate if the content of a data block matches the original data.
-- **Seal:** An encryption method to ensure that each copy of the data has a unique and independent representation. The encryption process should take substantially longer time than description, to prevent Generation Attacks. AES-256 is a viable option for its implementation.
+- **Seal:** An encryption method to ensure that each copy of the data has a unique and independent representation. The encryption process should take substantially longer time than decryption, to prevent Generation Attacks. AES-256 is a viable option for its implementation.
 - **Cipher:** A lightweight encryption method with symmetric keys, used in Proof-of-Download. XOR Cipher is a viable option for its implementation.
 
 ## Proof-of-Replication (PoRep)

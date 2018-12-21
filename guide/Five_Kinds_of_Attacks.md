@@ -27,7 +27,7 @@ As shown in Figure below, generation attacks take place when a miner pretends to
 <p style="font-size:14px; text-align:center;">Generationa Attack</p>
 
 PPIO can effectively prevent generation attacks with the following design:
-- PoSt and PoLC require the miners to pre-generate the Merkle tree or DAG from the data, in order satisfy the periodical challenges. It is very time consuming to generate the proofs, and the challenges are likely to time out when the miner attempts the generate them on demand. Even if the miner invests in hardware that enable real time proof generation, the cost would have outweighed the reward. Therefore miners are not incentivized to conduct generation attacks.
+- PoSt and PoLC require the miners to pre-generate the Merkle tree or DAG from the data, in order to satisfy the periodical challenges. It is very time consuming to generate the proofs, and the challenges are likely to time out when the miner attempts the generate them on demand. Even if the miner invests in hardware that enable real time proof generation, the cost would have outweighed the reward. Therefore miners are not incentivized to conduct generation attacks.
 - In addition, miners that store the user data also need to provide download service. In PoD, the Verifier validates the data user downloads from the miner. As the miner that conducts generation attacks does not keep an actual copy of the data, PoD will always fail, and the miner will eventually be penalized for not being able to fulfill download requests. This also takes away the incentives for miners to conduct generation attacks.
 
 ## Distributed Denial of Service Attacks

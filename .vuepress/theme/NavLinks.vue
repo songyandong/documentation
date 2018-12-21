@@ -123,6 +123,7 @@ export default {
   a
     line-height 1.4rem
     color inherit
+    transition all ease 0.3s
     &:hover, &.router-link-active
       color $accentColor
   .nav-item
@@ -147,7 +148,7 @@ export default {
     &:hover, &.router-link-active
       color $accentColor
   .nav-item > a
-    // &:hover, 
+    &:hover,
     &.router-link-active
       margin-bottom -2px
       border-bottom 2px solid lighten($accentColor, 8%)
