@@ -1,5 +1,12 @@
+if (process.env.SUB) {
+  var base_site = '/' + process.env.SUB
+} else {
+  var base_site = '/'
+}
+console.log(base_site)
+
 module.exports = {
-  base: '/',
+  base: base_site,
   title: '',
   port: 8001,
   description: 'he documentation, system design guide, api reference and command line tool reference of PPIO. PPIO is a private, stable and affordable programmable decentralized cloud storage.',
