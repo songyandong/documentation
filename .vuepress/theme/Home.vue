@@ -1,58 +1,58 @@
 <template>
   <div class="home">
-    <div class="hero">
-      <img
-        v-if="data.heroImage"
-        :src="$withBase(data.heroImage)"
-        alt="hero"
-      >
-
-      <h1>{{ data.heroText || $title || 'Hello' }}</h1>
-
-      <p class="description">
-        {{ data.tagline || $description || 'Welcome to your VuePress site' }}
-      </p>
-
-      <p
-        class="action"
-        v-if="data.actionText && data.actionLink"
-      >
-        <NavLink
-          class="action-button"
-          :item="actionLink"
-        />
-      </p>
+    <div class="banner">
+      <h2 class="title">Documentation of PPIO</h2>
+    </div>
+    <div class="guide-wrap">
+      <a href="/guide/">
+        <div class="guide-item">
+          <h4 class="title">Get Started</h4>
+          <p>ntroduces you to PPIO, walks you through a simple example to use PPIO for the first time. Also provides tips and links to advanced product features and resources.</p>
+          <span class="more">detail ➡</span>
+        </div>
+      </a>
+      <a href="/api/">
+        <div class="guide-item">
+          <h4 class="title">JSON-RPC APi Reference</h4>
+          <p>Describes all the PPIO API operations in detail. Also provides sample requests, responses, and errors for the supported web services protocols.</p>
+          <span class="more">detail ➡</span>
+        </div>
+      </a>
+      <a href="/cli/">
+        <div class="guide-item">
+          <h4 class="title">Command Line User Guide</h4>
+          <p>Provides information to help you use PPIO with the POSS - the command line tool of PPIO.</p>
+          <span class="more">detail ➡</span>
+        </div>
+      </a>
+      <a href="/sdk/">
+        <div class="guide-item">
+          <h4 class="title">PPIO SDK Guide</h4>
+          <p>Here are the installation and usage guides for all of our SDKs. Currently we only have nodeJS and Android SDK.</p>
+          <span class="more">detail ➡</span>
+        </div>
+      </a>
+      <a href="/tutorial/">
+        <div class="guide-item">
+          <h4 class="title">Tutorial</h4>
+          <p>This is a tutorial that teaches you how to program a decentralized personal cloud storage app from 0 to 1 using Electron and PPIO</p>
+          <span class="more">detail ➡</span>
+        </div>
+      </a>
+      <div class="guide-item" style="height:0;padding:0;border:none;margin:0;"></div>
+      <div class="guide-item" style="height:0;padding:0;border:none;margin:0;"></div>
     </div>
 
-    <div
-      class="features"
-      v-if="data.features && data.features.length"
-    >
-      <div
-        class="feature"
-        v-for="feature in data.features"
-      >
-        <h2>{{ feature.title }}</h2>
-        <p>{{ feature.details }}</p>
-      </div>
-    </div>
-
-    <Content custom/>
-
-    <div
-      class="footer"
-      v-if="data.footer"
-    >
-      {{ data.footer }}
-    </div>
+    <FooterComponnent />
   </div>
 </template>
 
 <script>
 import NavLink from './NavLink.vue'
+import FooterComponnent from './Footer.vue'
 
 export default {
-  components: { NavLink },
+  components: { NavLink, FooterComponnent },
 
   computed: {
     data () {
@@ -74,88 +74,77 @@ export default {
 
 .home
   padding $navbarHeight 2rem 0
-  max-width 960px
-  margin 0px auto
-  .hero
-    text-align center
-    img
-      max-height 280px
-      display block
-      margin 3rem auto 1.5rem
-    h1
-      font-size 3rem
-    h1, .description, .action
-      margin 1.8rem auto
-    .description
-      max-width 35rem
-      font-size 1.6rem
-      line-height 1.3
-      color lighten($textColor, 40%)
-    .action-button
-      display inline-block
-      font-size 1.2rem
-      color #fff
-      background-color $accentColor
-      padding 0.8rem 1.6rem
-      border-radius 4px
-      transition background-color .1s ease
-      box-sizing border-box
-      border-bottom 1px solid darken($accentColor, 10%)
-      &:hover
-        background-color lighten($accentColor, 10%)
-  .features
-    border-top 1px solid $borderColor
-    padding 1.2rem 0
-    margin-top 2.5rem
-    display flex
-    flex-wrap wrap
-    align-items flex-start
-    align-content stretch
-    justify-content space-between
-  .feature
-    flex-grow 1
-    flex-basis 30%
-    max-width 30%
-    h2
-      font-size 1.4rem
-      font-weight 500
+  margin 0 auto
+  .banner
+    padding 1rem
+    text-align: center
+    .title
+      font-size 2rem
       border-bottom none
-      padding-bottom 0
-      color lighten($textColor, 10%)
-    p
-      color lighten($textColor, 25%)
-  .footer
-    padding 2.5rem
-    border-top 1px solid $borderColor
-    text-align center
-    color lighten($textColor, 25%)
-
-@media (max-width: $MQMobile)
-  .home
-    .features
-      flex-direction column
-    .feature
+  .guide-wrap
+    font-size 0
+    text-align justify
+    .guide-item
+      transition all ease 0.2s
+      display inline-block
+      box-sizing border-box
+      position relative
+      vertical-align top
+      width 340px
       max-width 100%
-      padding 0 2.5rem
+      text-align left
+      height 200px
+      padding 20px 20px 30px 20px
+      border 1px solid #eee
+      margin-bottom 1.5rem
+      border-radius 4px
+      border: 1px solid rgba($accentColor, 0.2)
+      box-shadow: 1px 1px 6px rgba($accentColor, 0.2)
+      transition all ease 0.3s
+      cursor pointer
+      &:hover
+        transform translate3d(0, -5px, 0)
+        .title
+          text-decoration underline
+      .title
+        font-weight normal
+        font-size 1.2rem
+        margin-top 0
+        margin-bottom 0.5rem
+      p
+       margin 0
+       line-height 1.5
+       color #333
+       font-size 16px
+      .more
+        font-size 14px
+        color $accentColor
+        position absolute
+        height 20px
+        line-height 20px
+        bottom 20px
+        right 20px
+
+
+@media (max-width: 1120px)
+  .home
+    .guide-wrap
+      .guide-item
+        width 48%
+        height 180px
+
+@media (max-width: 710px)
+  .home
+    .guide-wrap
+      text-align center
+      .guide-item
+        width 500px
+        height 200px
 
 @media (max-width: $MQMobileNarrow)
   .home
     padding-left 1.5rem
     padding-right 1.5rem
-    .hero
-      img
-        max-height 210px
-        margin 2rem auto 1.2rem
-      h1
-        font-size 2rem
-      h1, .description, .action
-        margin 1.2rem auto
-      .description
-        font-size 1.2rem
-      .action-button
-        font-size 1rem
-        padding 0.6rem 1.2rem
-    .feature
-      h2
-        font-size 1.25rem
+    .guide-wrap
+      text-align center
 </style>

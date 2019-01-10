@@ -9,7 +9,7 @@ module.exports = {
   base: base_site,
   title: '',
   port: 8001,
-  description: 'he documentation, system design guide, api reference and command line tool reference of PPIO. PPIO is a private, stable and affordable programmable decentralized cloud storage.',
+  description: 'The documentation, system design guide, api reference and command line tool reference of PPIO. PPIO is a private, stable and affordable programmable decentralized cloud storage.',
   ga: 'UA-128641089-2',
   head: [
     ['meta', { name: 'description', content: 'The documentation, system design guide, api reference and command line tool reference of PPIO. PPIO is a private, stable and affordable programmable decentralized cloud storage.'}],
@@ -31,6 +31,7 @@ module.exports = {
     ['meta', { property: 'twitter:image', content: 'https://pp.io/share.png'}],
     ['link', { rel: 'icon', href: '/favicon.png'}],
     ['link', { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css' }],
+    ['link', { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=IBM+Plex+Sans|Roboto' }],
     ['link', { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.10.0/github-markdown.min.css' }]
   ],
   markdown: {
@@ -49,8 +50,8 @@ module.exports = {
     activeHeaderLinks: true,
     nav: [
       { text: 'Guide', link: '/guide/' },
-      { text: 'API', link: '/api/' },
-      { text: 'Projects', internal: true, link: 'https://pp.io/projects.html' },
+      { text: 'Docs', link: '/' },
+      { text: 'Projects', internal: true, link: 'https://www.pp.io/projects.html' },
       { text: 'Blog', link: 'https://blog.pp.io' },
       { text: 'Github', link: 'https://github.com/ppio' },
     ],
@@ -78,6 +79,11 @@ module.exports = {
      ],
      '/cli/':[
        ''
+     ],
+     '/sdk/': [
+       '',
+       'Nodejs',
+       'Android',
      ]
     },
     sidebarDepth: 1,

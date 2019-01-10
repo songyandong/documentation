@@ -1,3 +1,6 @@
+---
+home: true
+---
 # Documentation of PPIO
 
 This is a document that gives you a deeper understanding of PPIO.
