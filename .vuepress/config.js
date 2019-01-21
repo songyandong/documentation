@@ -7,7 +7,7 @@ console.log(base_site)
 
 module.exports = {
   base: base_site,
-  title: '',
+  title: 'Documentation of PPIO and POSS',
   port: 8001,
   description: 'The documentation, system design guide, api reference and command line tool reference of PPIO. PPIO is a private, stable and affordable programmable decentralized cloud storage.',
   ga: 'UA-128641089-2',
@@ -49,10 +49,10 @@ module.exports = {
     displayAllHeaders: false,
     activeHeaderLinks: true,
     nav: [
-      { text: 'Guide', link: '/guide/' },
-      { text: 'Docs', link: '/' },
-      { text: 'Projects', internal: true, link: 'https://www.pp.io/projects.html' },
-      { text: 'Blog', link: 'https://blog.pp.io' },
+      { text: 'Docs', class: 'active', link: '/' },
+      { text: 'Download', internal: true, link: 'https://www.pp.io/projects.html' },
+      { text: 'Blog', internal: true, link: 'https://blog.pp.io' },
+      { text: 'Forum', link: 'https://www.reddit.com/r/ppio' },
       { text: 'Github', link: 'https://github.com/ppio' },
     ],
     sidebar: {
@@ -63,8 +63,6 @@ module.exports = {
        'Four_Proof_Algorithms',
        'Five_Kinds_of_Attacks',
        'Architecture',
-       'Command_Line_Tool',
-       'PPIO_SDK',
        {
           title: 'Others',
           collapsable: false,
@@ -74,11 +72,14 @@ module.exports = {
           ]
         },
      ],
+     '/concept/': [
+       ''
+     ],
      '/api/':[
        '',
      ],
      '/cli/':[
-       ''
+       '',
      ],
      '/sdk/': [
        '',

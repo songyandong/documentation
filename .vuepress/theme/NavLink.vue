@@ -1,6 +1,6 @@
 <template>
   <router-link
-    class="nav-link"
+    :class="'nav-link ' + item.class"
     :to="link"
     v-if="!isExternal(link)"
     :exact="exact"
@@ -8,7 +8,7 @@
   <a
     v-else
     :href="link"
-    class="nav-link external"
+    :class="'nav-link external ' + item.class"
     :target="isMailto(link) || isTel(link) || item.internal ? null : '_blank'"
     :rel="isMailto(link) || isTel(link) ? null : 'noopener noreferrer'"
   >

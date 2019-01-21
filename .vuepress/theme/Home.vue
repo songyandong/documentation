@@ -1,41 +1,53 @@
 <template>
   <div class="home">
     <div class="banner">
-      <h2 class="title">Documentation of PPIO</h2>
+      <h2 class="title">Documentation</h2>
     </div>
     <div class="guide-wrap">
       <a href="/guide/">
         <div class="guide-item">
           <h4 class="title">Get Started</h4>
-          <p>ntroduces you to PPIO, walks you through a simple example to use PPIO for the first time. Also provides tips and links to advanced product features and resources.</p>
+          <p>Introduces you to PPIO, walks you through a simple example to use PPIO for the first time. Also provides tips and links to advanced product features and resources.</p>
           <span class="more">detail ➡</span>
         </div>
       </a>
-      <a href="/api/">
+
+      <a href="/concept/">
         <div class="guide-item">
-          <h4 class="title">JSON-RPC APi Reference</h4>
-          <p>Describes all the PPIO API operations in detail. Also provides sample requests, responses, and errors for the supported web services protocols.</p>
+          <h4 class="title">PPIO and POSS</h4>
+          <p>PPIO is a decentralized programmable storage and delivery network. POSS stands for PPIO Object Storage Service. You can understand that their relationship is the same as AWS and AWS S3.</p>
           <span class="more">detail ➡</span>
         </div>
       </a>
+
       <a href="/cli/">
         <div class="guide-item">
-          <h4 class="title">Command Line User Guide</h4>
-          <p>Provides information to help you use PPIO with the POSS - the command line tool of PPIO.</p>
+          <h4 class="title">POSS Command Line Interface Guide</h4>
+          <p>Provides information to help you use POSS CLI - the command line interface of POSS.</p>
           <span class="more">detail ➡</span>
         </div>
       </a>
+
+      <a href="/api/">
+        <div class="guide-item">
+          <h4 class="title">POSS JSON-RPC APi Reference</h4>
+          <p>Describes all the POSS API operations in detail. Also provides sample requests, responses, and errors for the supported web services protocols.</p>
+          <span class="more">detail ➡</span>
+        </div>
+      </a>
+
       <a href="/sdk/">
         <div class="guide-item">
-          <h4 class="title">PPIO SDK Guide</h4>
+          <h4 class="title">POSS SDK Guide</h4>
           <p>Here are the installation and usage guides for all of our SDKs. Currently we only have nodeJS and Android SDK.</p>
           <span class="more">detail ➡</span>
         </div>
       </a>
+
       <a href="/tutorial/">
         <div class="guide-item">
-          <h4 class="title">Tutorial</h4>
-          <p>This is a tutorial that teaches you how to program a decentralized personal cloud storage app from 0 to 1 using Electron and PPIO</p>
+          <h4 class="title">Tutorial <Badge text="todo" type="warn" vertical=""/> </h4>
+          <p>This is a tutorial that teaches you how to program a decentralized personal cloud storage app from 0 to 1 using Electron and POSS.</p>
           <span class="more">detail ➡</span>
         </div>
       </a>
@@ -76,7 +88,7 @@ export default {
   padding $navbarHeight 2rem 0
   margin 0 auto
   .banner
-    padding 1rem
+    padding 3rem
     text-align: center
     .title
       font-size 2rem
@@ -93,7 +105,7 @@ export default {
       width 340px
       max-width 100%
       text-align left
-      height 200px
+      height 210px
       padding 20px 20px 30px 20px
       border 1px solid #eee
       margin-bottom 1.5rem
@@ -115,7 +127,7 @@ export default {
        margin 0
        line-height 1.5
        color #333
-       font-size 16px
+       font-size 15px
       .more
         font-size 14px
         color $accentColor
