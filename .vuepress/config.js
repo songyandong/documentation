@@ -3,7 +3,6 @@ if (process.env.SUB) {
 } else {
   var base_site = '/'
 }
-console.log(base_site)
 
 module.exports = {
   base: base_site,
@@ -50,7 +49,7 @@ module.exports = {
     activeHeaderLinks: true,
     nav: [
       { text: 'Docs', class: 'active', link: '/' },
-      { text: 'Download', internal: true, link: 'https://www.pp.io/projects.html' },
+      { text: 'Download', internal: true, link: 'https://www.pp.io/download.html' },
       { text: 'Blog', internal: true, link: 'https://blog.pp.io' },
       { text: 'Forum', link: 'https://www.reddit.com/r/ppio' },
       { text: 'Github', link: 'https://github.com/ppio' },
@@ -73,7 +72,10 @@ module.exports = {
         },
      ],
      '/concept/': [
-       ''
+       '',
+     ],
+     '/wallet/': [
+       '',
      ],
      '/api/':[
        '',

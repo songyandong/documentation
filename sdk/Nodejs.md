@@ -1,47 +1,70 @@
-# Node.js SDK
-This is the [POSS](https://www.pp.io/docs/guide/) SDK for Javascript.
+# poss-sdk-js
 
 ## Introduction
-Poss.js is an JSON-RPC wrapper for [POSS](https://www.pp.io/docs/guide/) intended for Javascript developers. It can be used in both Node.js and browsers environments.
+Poss-sdk-js provides a node.js SDK that encapsulates the JSON-RPC services provided by poss. Developers who want to use the SDK need to download the [poss executable](https://www.pp.io/download.html) and start the poss service in the background fisrt.
 
 ## Getting started
+### Prepared your PPIO wallet account
+You must have a PPIO wallet account first. Make sure this account has PPcoin. And you need to recharge some PPcoin to POSS. This is a [guide](../wallet/) to teach you how to generate a PPIO wallet account and get some of our test coins for free.
 
-### Install poss.js
+### Install poss-sdk-js
 ```
 npm install poss
 ```
 
-### innitialize
-You need to initialize a config for the POSS daemon to start, which can be done with our cmd tool ([cmd documentation](../cli/))
+### Download poss
+Since poss-sdk-js does not provide poss executable. You need to download it first.
+- **Windows:**  
+  Download the binary from [here](https://resource.testnet.pp.io/poss/release/windows-amd64/0.4.15/poss.exe).
+  ``` powershell
+    poss.exe --help
+  ```
+
+- **Mac OsX**  
+    ``` bash
+      wget https://resource.testnet.pp.io/poss/release/macos/0.4.15/poss
+      chmod -x poss
+      ./poss --help
+    ```
+
+- Linux:  
+    ``` bash
+      wget https://resource.testnet.pp.io/poss/release/linux-amd64/0.4.15/poss
+      chmod -x poss
+      ./poss --help
+    ```
+
+
+### Initialize POSS and start a POSS service in the background
+You can do these by [POSS CLI](../cli/#init).
+```bash
+# import your walllet user credentials into POSS CLI
+./poss init --keystorepath=[your keystore file absolute path]
+
+# start the poss service background
+./poss start --daemon --passphrase=[your wallet password]
 ```
-./poss init
+or
+```bash
+# import your walllet user credentials into POSS CLI and start the poss service background
+./poss start --daemon --keystorepath=[your keystore file absolute path] --passphrase=[your wallet password]
 ```
-or by this SDK(only in Node.js environment):
+
+Or you can do these by this SDK(only in Node.js environment):
 ```javascript
 const Poss = require('poss')
 const poss = new Poss({
   possExecutablePath: 'path/to/poss/executable',
   ...otherOptions
 })
-
 poss.initDaemon([options])
-```
-Check available Poss constructor options in [Configuration](#usage/configuration) and init daemon options in [initDaemon](#usage/init-daemon)
-
-### start daemon
-Then you can start a POSS daemon manually in terminal ([cmd documentation](../cli/))
-```
-./poss start-daemon --wallet-key=[your private key] --datadir=[data directory]
-```
-or by this SDK(only in Node.js environment):
-```javascript
 poss.startDaemon({
-  datadir: [data directory],
-  'wallet-key': [your private key],
+  'keystore': [your keystore file],
+  'passphrase': [your passphrase],
   ...otherOptions
 })
 ```
-Available start options are listed in [startDaemon](#usage/start-daemon)
+Check available Poss constructor options in [Configuration](#usage/configuration) and init daemon options in [initDaemon](../cli/#init)
 
 ### create a bucket
 You need to create a bucket first to upload objects.
@@ -148,76 +171,6 @@ poss.setDefaultBucket('test-bucket')
 ```
 This will create a bucket with the bucket name you specified and set it as the default bucket so you do not have to provide it every time you want to modify an object. You can use this method if you want the user to use only one bucket in your app.
 
-### setCpool
-```
-poss.setCpool({
-  address: 'ppio1NkZvLjCvJkN5789MFzsn4cNSQkc3JWd2J',
-  host: 'http://api.ppool.pp.io',
-  datadir: 'path/to/poss-dir'
-})
-```
-| Param | Type | Description |
-| :------: | :------: | :------ |
-| [cpoolData] | `object` | The data of the coin pool. |
-| [cpoolData.address] | `string` | The address of the coin pool. |
-| [cpoolData.host] | `string` | The host of the coin pool. |
-| [cpoolData.datadir] | `string` | The data directory you want to set coin pool config to. |
-
-This will set the [coin pool](https://www.pp.io/docs/guide/) config to 'poss.conf', including `CPoolUrl` and `CPoolAccount` fields. If set, every operation will go through the coin pool service after restarting daemon.
-
-### clearCpool
-```javascript
-poss.clearCpool('path/to/poss-dir')
-```
-| key | data type | description |
-| :------: | :------: | :------ |
-| [datadir] | `string` | The data directory you want to set coin pool config to. |
-
-This will clear the coin pool part of the `poss.conf` in `datadir`.
-
-### initCpoolServices([cpoolData]) => Promise
-<span id="initCpoolServices"></span>
-```javascript
-poss.initCpoolServices([{
-  host: 'http://api.ppool.pp.io',
-  site: 'http://ppool.pp.io/',
-}])
-```
-
-| Param | Type | Description |
-| :------: | :------: | :------ |
-| [cpoolData] | `object` | The data of the coin pool. |
-| [cpoolData.site] | `string` | The website of the coin pool. |
-| [cpoolData.host] | `string` | The host of the coin pool. |
-
-This method will request `[cpoolhost]/api` of every coin pool service you provided, and set the response data into `poss.cpoolServices[cpoolHost]`, you can get it with `getCpoolService`. The array of `cpoolServices` will be set to Poss property `cpoolList`.
-
-### getCpoolService(cpoolHost) => CpoolServiceData
-```javascript
-const cpoolData = poss.getCpoolService('http://api.ppool.pp.io')
-```
-| Param | Type | Description |
-| :------: | :------: | :------ |
-| [cpoolHost] | `string` | The host of the coin pool. |
-
-This method will return `CpoolServiceData` with the host `cpoolHost`.
-
-#### CpoolServiceData
-| Param | Type | Description |
-| :------: | :------: | :------ |
-| [CpoolServiceData.host] | `string` | The host of the coin pool. |
-| [CpoolServiceData.address] | `string` | The address of the coin pool. |
-| [CpoolServiceData.description] | `string` | The description of the coin pool. |
-| [CpoolServiceData.apiList] | `string` | An api list provided by the coin pool. |
-| [CpoolServiceData.site] | `string` | The website url of the coin pool. |
-
-#### CpoolServiceData.getSubscriptionInfo(address) => Promise
-| Param | Type | Description |
-| :------: | :------: | :------ |
-| [address] | `string` | The user's PPIO address. |
-
-Get the subscription info of the address.
-
 ## Properties
 
 ### possPath[string]
@@ -232,10 +185,3 @@ Some base parameters of Poss. May include:
 - netport: The TCP & UDP port used by the daemon, set after the daemon is started.
 - bucket: The default bucket name, will be merged in `call` method params.
 - indexerUrl: The indexer url, will be set after `init`
--
-
-### cpoolList[Array]
-Set by method [`initCpoolCervices`](#initCpoolServices)
-
-### cpoolServices[Array]
-Set by method [`initCpoolCervices`](#initCpoolServices)

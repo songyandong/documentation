@@ -2,17 +2,17 @@
 sidebarDepth: 2
 displayAllHeaders: true
 ---
-# POSS RPC API Reference
-## About POSS RPC API
-In addition to the `cmd` method (see: [POSS CLI Reference](../cli/)), POSS also provides the rpc calling method in json format.
+# PPIO JSON-RPC API Reference
+## About PPIO RPC API
+In addition to the `cmd` method (see: [PPIO CLI Reference](../cli/)), PPIO also provides the rpc calling method in json format.
 
-This manual will use the tool **curl** as an example to illustrate the RPC call method of POSS. The developer can refer to this protocol to implement RPC access to POSS through other languages or tools.
+This manual will use the tool **curl** as an example to illustrate the RPC call method of PPIO. The developer can refer to this protocol to implement RPC access to PPIO through other languages or tools.
 
-In general, a POSS command corresponds to an RPC request (except for `poss start`, `poss init`, etc.)
+In general, a PPIO command corresponds to an RPC request (except for `poss start`, `poss init`, etc.)
 
-The **--rpchost** and **--rpcport** options in the POSS command line correspond to the Host and Port specified in the RPC request.
+The **--rpchost** and **--rpcport** options in the PPIO command line correspond to the Host and Port specified in the RPC request.
 
-Other options and parameters in the POSS command line are passed as parameters in the RPC call. They are passed through params. **The order is strictly specified in this document. The parameter name is ignored. If the value is undefined, you still need to enter an empty string ("").**
+Other options and parameters in the PPIO command line are passed as parameters in the RPC call. They are passed through params. **The order is strictly specified in this document. The parameter name is ignored. If the value is undefined, you still need to enter an empty string ("").**
 
 **Method**
 |Parameters|Default|Description|
@@ -41,17 +41,12 @@ Take the API version as an example:
 {"id":1,"jsonrpc":"2.0","result":"0.1"}
 ```
 The value corresponding to the `result` field is "0.1", which is the API version number that was successfully obtained.
-
-::: warning About price
-The concept of `chiprice` is very similar to the `gasprice` in Ethereum. And the units of all prices in the following documents are `wei`. `wei` is a basic unit of PPIO coin. The conversion relationship between wei and ppcoin is as follows:
- **1 PPcoin = 10<sup>18</sup>wei = 10<sup>15</sup>Kwei = 10<sup>12</sup>Mwei = 10<sup>9</sup>Gwei = 10<sup>6</sup>Twei = 10<sup>3</sup>Pwei**
-:::
 ---
 
 ## **StopDaemon**
 
 **Description**
-Stop the POSS service process.
+Stop the PPIO service process.
 
 **Parameters**
 None.
@@ -72,7 +67,7 @@ Empty reply from server
 ## **APIVersion**
 
 **Description**
-Get the POSS rpc version
+Get the PPIO rpc version
 
 **Parameters**
 None.
@@ -91,7 +86,7 @@ curl -X POST -H 'content-type:text/json;' -d '{"id":1,"jsonrpc":"2.0","method":"
 
 ## **GetJobProgress**
 **Description**
-Get the progress of a task. In the POSS interface, there are some methods that are asynchronous, returning a Task id after the call, and then the user can use this method to get the progress of the task.
+Get the progress of a task. In the PPIO interface, there are some methods that are asynchronous, returning a Task id after the call, and then the user can use this method to get the progress of the task.
 
 **Parameters**
 |Parameters|Type|Default|Description|
@@ -235,7 +230,7 @@ curl -X POST -H 'content-type:text/json;' -d '{"id":1,"jsonrpc":"2.0","method":"
 ```
 
 **Response**
-Return a task id:
+Return a permanent task id:
 ```json
 {"id":1,"jsonrpc":"2.0","result":"7aed1b84-41a1-46d6-944d-19b128999322"}
 ```
@@ -267,7 +262,7 @@ curl -X POST -H 'content-type:text/json;' -d '{"id":1,"jsonrpc":"2.0","method":"
 ```
 
 **Response**
-Return a task id:
+Return a permanent task id:
 ```json
 {"id":1,"jsonrpc":"2.0","result":"ef9f52f8-3bb8-431e-889b-c17858b979d4"}
 ```
@@ -314,7 +309,7 @@ curl -X POST -H 'content-type:text/json;' -d '{"id":1,"jsonrpc":"2.0","method":"
 ```
 
 **Response**
-Return a task id:
+Return a temporary task id:
 
 ```json
 {"id":1,"jsonrpc":"2.0","result":"8ce81fc4-56ba-45ee-b373-c2315a50cae9"}
@@ -343,7 +338,7 @@ curl -X POST -H 'content-type:text/json;' -d '{"id":1,"jsonrpc":"2.0","method":"
 ```
 
 **Response**
-Return a task id:
+Return a temporary task id:
 
 ```json
 {"id":1,"jsonrpc":"2.0","result":"e1668a78-f4c4-4ba5-b2f6-ccb8581426b5"}
@@ -404,7 +399,7 @@ curl -X POST -H 'content-type:text/json;' -d '{"id":1,"jsonrpc":"2.0","method":"
 ```
 
 **Response**
-Return a task id:
+Return a permanent task id:
 
 ```json
 {"id":1,"jsonrpc":"2.0","result":"41c13eac-49b5-46bc-93ff-6da1d52bbfae"}
@@ -429,7 +424,7 @@ curl -X POST -H 'content-type:text/json;' -d '{"id":1,"jsonrpc":"2.0","method":"
 ```
 
 **Response**
-Return a task id:
+Return a temporary task id:
 
 ```json
 {"id":1,"jsonrpc":"2.0","result":"9e59fecc-daf8-46ec-8139-291658982c09"}
@@ -626,7 +621,7 @@ curl -X POST -H 'content-type:text/json;' -d '{"id":1,"jsonrpc":"2.0","method":"
 ### **ResumeTask**
 
 **Description**
-Resume a suspended state task.
+Resume a paused state task.
 
 **Parameters**
 |Parameters|Type|Default|Description|
@@ -775,7 +770,7 @@ curl -X POST -H 'content-type:text/json;' -d '{"id":1,"jsonrpc":"2.0","method":"
 ### **NetID**
 
 **Description**
-Get the id of the current POSS node.
+Get the id of the current PPIO node.
 
 **Parameters**
 None.
@@ -795,7 +790,7 @@ curl -X POST -H 'content-type:text/json;' -d '{"id":1,"jsonrpc":"2.0","method":"
 ### **NetPeers**
 
 **Description**
-Obtain the node connection status of the current POSS node in the PPIO network.
+Obtain the node connection status of the current PPIO node in the PPIO network.
 
 **Parameters**
 None.
@@ -815,7 +810,7 @@ curl -X POST -H 'content-type:text/json;' -d '{"id":1,"jsonrpc":"2.0","method":"
 ### **NetServers**
 
 **Description**
-Obtain the service node information corresponding to the current POSS node.
+Obtain the service node information corresponding to the current PPIO node.
 
 **Parameters**
 None.
@@ -832,30 +827,10 @@ url -X POST -H 'content-type:text/json;' -d '{"id":1,"jsonrpc":"2.0","method":"N
 
 ---
 ## Wallet
-### **WalletKey**
-
-**Description**
-Get the wallet private key of the current POSS node.
-
-**Parameters**
-None.
-
-**Examples**
-```bash
-curl -X POST -H 'content-type:text/json;' -d '{"id":1,"jsonrpc":"2.0","method":"WalletKey","params":[""]}' http://127.0.0.1:18060/rpc
-```
-
-**Response**
-```json
-{"id":1,"jsonrpc":"2.0","result":"ac03744c7f1f01842024025eb13ab49cb2bfd62bb677bc6ada7a00233214bc42"}
-```
-
----
-
 ### **WalletAccount**
 
 **Description**
-Get the account of the current POSS node.
+Get the account of the current PPIO node.
 
 **Parameters**
 None.

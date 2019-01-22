@@ -8,11 +8,11 @@ Whether you are an Android client or a computer client, you must register a PPIO
 ## Step1: Generate a PPIO wallet account and get the keystore file
 > PPIO wallet is a blockchain wallet. And if you don't understand the concept of blockchain wallet, there will be a lot of articles on Google.
 
-Go to [PPIO wallet](https://wallet.testnet.pp.io) to generate a PPIO wallet account. And this account can be used not only in the demo app but also [POSS CLI](./cli/) and [POSS SDK](./sdk/).
+Go to [PPIO wallet](https://wallet.testnet.pp.io/#/new/create) to generate a PPIO wallet account. And this account can be used not only in the demo app but also [PPIO CLI](./cli/) and [PPIO SDK](./sdk/).
 
 **create a PPIO wallet account**  
 
-![generate PPIO wallet](./Images/guide/create-wallet.png)  
+![generate PPIO wallet](./Images/generate-wallet.png)  
 
 **get your PPIO wallet address**  
 
@@ -20,7 +20,7 @@ Go to [PPIO wallet](https://wallet.testnet.pp.io) to generate a PPIO wallet acco
 
 **get the keystore file and private key of the account**  
 
-![generate PPIO wallet](./Images/wallet-keystore.png)  
+![generate PPIO wallet](./Images/get-keystore.png)  
 
 Now you have got your wallet keystore file.
 
@@ -35,9 +35,9 @@ Now there is no coin in your PPIO wallet. You need to go to [our faucet](https:/
 
 
 ## Step3: Send test coins to ppio demo app
-Although you already have test coins in your PPIO wallet, if you want to really experience the POSS or PPIO demo app, you need to go back to [PPIO wallet page](https://wallet.testnet.pp.io) to recharge some PPIO coins. This involves our underlying system architecture. We will introduce these details in a later article.   
+Although you already have test coins in your PPIO wallet, but you also need to go back to [PPIO wallet page](https://wallet.testnet.pp.io) to recharge some PPIO coins. This involves our underlying system architecture. We will introduce these details in a later article.   
 
-![get coins from faucet](./Images/recharge-to-poss.png)
+![get coins from faucet](./Images/recharge-ppio-service.png)
 
 ## Step4: Import your keystore file or private key to log in PPIO demo app
 **log in desktop client**
@@ -60,3 +60,7 @@ It should be noted that since this demo is completely decentralized. There are s
 
 **log in Android client**
 ![android](./Images/android.png)
+
+::: wanring NOTE
+Due to our decentralized architecture, even with the same account, their file information cannot be synchronized when logging in to different clients.We will optimize this in later versions.
+:::

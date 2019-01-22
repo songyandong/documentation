@@ -4,50 +4,58 @@
       <h2 class="title">Documentation</h2>
     </div>
     <div class="guide-wrap">
-      <a href="/guide/">
+      <a href="./guide/">
         <div class="guide-item">
-          <h4 class="title">Get Started</h4>
-          <p>Introduces you to PPIO, walks you through a simple example to use PPIO for the first time. Also provides tips and links to advanced product features and resources.</p>
+          <h4 class="title">Getting Started</h4>
+          <p>PPIO is a decentralized programmable storage and delivery network. This guide introduces you to PPIO, walks you through a simple example to use PPIO for the first time.</p>
           <span class="more">detail ➡</span>
         </div>
       </a>
 
-      <a href="/concept/">
+      <a href="./concept/">
         <div class="guide-item">
-          <h4 class="title">PPIO and POSS</h4>
-          <p>PPIO is a decentralized programmable storage and delivery network. POSS stands for PPIO Object Storage Service. You can understand that their relationship is the same as AWS and AWS S3.</p>
+          <h4 class="title">Some Concepts in PPIO</h4>
+          <p>Provides a conceptual overview of PPIO and includes detailed instructions for using the various features..</p>
           <span class="more">detail ➡</span>
         </div>
       </a>
 
-      <a href="/cli/">
+      <a href="./wallet/">
         <div class="guide-item">
-          <h4 class="title">POSS Command Line Interface Guide</h4>
-          <p>Provides information to help you use POSS CLI - the command line interface of POSS.</p>
+          <h4 class="title">PPIO Wallet</h4>
+          <p>PPIO wallet is a decentralized blockchain-based wallet. And PPIO wallet account is your user credentials for using PPIO services.</p>
           <span class="more">detail ➡</span>
         </div>
       </a>
 
-      <a href="/api/">
+      <a href="./cli/">
         <div class="guide-item">
-          <h4 class="title">POSS JSON-RPC APi Reference</h4>
-          <p>Describes all the POSS API operations in detail. Also provides sample requests, responses, and errors for the supported web services protocols.</p>
+          <h4 class="title">PPIO Command Line Interface Reference</h4>
+          <p>Provides information to help you use PPIO CLI - the command line interface of PPIO.</p>
           <span class="more">detail ➡</span>
         </div>
       </a>
 
-      <a href="/sdk/">
+      <a href="./api/">
         <div class="guide-item">
-          <h4 class="title">POSS SDK Guide</h4>
+          <h4 class="title">PPIO JSON-RPC APi Reference</h4>
+          <p>Describes all the PPIO API operations in detail. Also provides sample requests, responses, and errors for the supported web services protocols.</p>
+          <span class="more">detail ➡</span>
+        </div>
+      </a>
+
+      <a href="./sdk/">
+        <div class="guide-item">
+          <h4 class="title">PPIO SDK Guide</h4>
           <p>Here are the installation and usage guides for all of our SDKs. Currently we only have nodeJS and Android SDK.</p>
           <span class="more">detail ➡</span>
         </div>
       </a>
 
-      <a href="/tutorial/">
+      <a href="./tutorial/">
         <div class="guide-item">
           <h4 class="title">Tutorial <Badge text="todo" type="warn" vertical=""/> </h4>
-          <p>This is a tutorial that teaches you how to program a decentralized personal cloud storage app from 0 to 1 using Electron and POSS.</p>
+          <p>This is a tutorial that teaches you how to program a decentralized personal cloud storage app from 0 to 1 using Electron and PPIO.</p>
           <span class="more">detail ➡</span>
         </div>
       </a>
@@ -88,7 +96,7 @@ export default {
   padding $navbarHeight 2rem 0
   margin 0 auto
   .banner
-    padding 3rem
+    padding 1.5rem
     text-align: center
     .title
       font-size 2rem
