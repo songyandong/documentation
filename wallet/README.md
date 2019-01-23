@@ -4,14 +4,14 @@ PPIO wallet is a decentralized blockchain-based wallet. And PPIO wallet account 
 
 Now that PPIO's testnet is just online, you can go to [here](https://faucet.testnet.pp.io) to get some test coins for your PPIO wallet account.
 
+And you can find the transaction records of all PPIO wallet accounts [here](https://explorer.testnet.pp.io).
+
 > If you don't understand the concept of blockchain wallet, there will be a lot of articles on Google.
 
-## One thing to Notice
-One thing to notice is that even if you have [PPcoin](#unit-in-ppio-wallet) in your PPIO wallet account, it doesn't mean you can use PPIO's service immediately. You need to recharge the money for a specific PPIO wallet address before you can use it. We call the specific PPIO wallet address **holder account**.
+## PPIO Official Account
+PPIO wallet is your digital wallet. But if you want to use PPIO's storage service, you must recharge some [PPcoin](#unit-in-ppio-wallet) to a PPIO Afficial Account to purchase these services. And this process can only be operated by you.This kind of processing is troublesome, but it is more in line with the idea of decentralization, and even if the PPIO service is attacked, it will not affect your wallet.
 
-**For example: If you want to use PPIO CLI, you must first recharge the money into the PPIO wallet and then recharge the money to holder account.**
-
-This kind of processing is troublesome, but it is more in line with the idea of decentralization, and even if the PPIO service is attacked, it will not affect your wallet.
+> PPIO Official Account is a specific PPIO account. Its address is `ppio1RrvoTasB3n96sFFxBUr4dbVheATVrrPYZ`.
 
 ## Generate a PPIO wallet account
 Go to [PPIO wallet](https://wallet.testnet.pp.io/#/new/create) to generate a PPIO wallet account.
@@ -38,8 +38,9 @@ PPIO wallet currently supports importing keystore files and importing private ke
 You can transfer to any PPIO wallet address.
 ![wallet transfer](../Images/wallet-transfer.png)
 
-## Recharge PPIO Service
-You have to recharge some PPcoin to holder account to use PPIO services.
+## Recharge to Use PPIO Services
+You have to recharge some PPcoin to **PPIO Official account** => `ppio1RrvoTasB3n96sFFxBUr4dbVheATVrrPYZ` to use PPIO services.
+
 ![import wallet](../Images/recharge-ppio-service.png)
 
 ## Unit in PPIO wallet

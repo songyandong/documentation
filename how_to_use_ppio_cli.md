@@ -5,21 +5,21 @@
 
 ## Step1: Install PPIO CLI
 - **Windows:**  
-  Download the binary from [here](https://resource.testnet.pp.io/poss/release/windows-amd64/0.4.15/poss.exe).
+  Download the binary from [here](https://resource.testnet.pp.io/poss/release/windows-amd64/latest/poss.exe).
   ``` powershell
     poss.exe --help
   ```
 
 - **Mac OsX**  
     ``` bash
-      wget https://resource.testnet.pp.io/poss/release/macos/0.4.15/poss
+      wget https://resource.testnet.pp.io/poss/release/macos/latestla/poss
       chmod -x poss
       ./poss --help
     ```
 
 - Linux:  
     ``` bash
-      wget https://resource.testnet.pp.io/poss/release/linux-amd64/0.4.15/poss
+      wget https://resource.testnet.pp.io/poss/release/linux-amd64/latest/poss
       chmod -x poss
       ./poss --help
     ```

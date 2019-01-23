@@ -1,11 +1,11 @@
-# poss-sdk-js
+# Node.js SDK
 
 ## Introduction
 Poss-sdk-js provides a node.js SDK that encapsulates the JSON-RPC services provided by poss. Developers who want to use the SDK need to download the [poss executable](https://www.pp.io/download.html) and start the poss service in the background fisrt.
 
 ## Getting started
 ### Prepared your PPIO wallet account
-You must have a PPIO wallet account first. Make sure this account has PPcoin. And you need to recharge some PPcoin to POSS. This is a [guide](../wallet/) to teach you how to generate a PPIO wallet account and get some of our test coins for free.
+You must have a PPIO wallet account first. Make sure this account has PPcoin. And you need to recharge some PPcoin to PPIO. This is a [guide](../wallet/) to teach you how to generate a PPIO wallet account and get some of our test coins for free.
 
 ### Install poss-sdk-js
 ```
@@ -15,38 +15,38 @@ npm install poss
 ### Download poss
 Since poss-sdk-js does not provide poss executable. You need to download it first.
 - **Windows:**  
-  Download the binary from [here](https://resource.testnet.pp.io/poss/release/windows-amd64/0.4.15/poss.exe).
+  Download the binary from [here](https://resource.testnet.pp.io/poss/release/windows-amd64/latest/poss.exe).
   ``` powershell
     poss.exe --help
   ```
 
 - **Mac OsX**  
     ``` bash
-      wget https://resource.testnet.pp.io/poss/release/macos/0.4.15/poss
+      wget https://resource.testnet.pp.io/poss/release/macos/latest/poss
       chmod -x poss
       ./poss --help
     ```
 
 - Linux:  
     ``` bash
-      wget https://resource.testnet.pp.io/poss/release/linux-amd64/0.4.15/poss
+      wget https://resource.testnet.pp.io/poss/release/linux-amd64/latest/poss
       chmod -x poss
       ./poss --help
     ```
 
 
-### Initialize POSS and start a POSS service in the background
-You can do these by [POSS CLI](../cli/#init).
+### Initialize PPIO and start a PPIO service in the background
+You can do these by [PPIO CLI](../cli/#init).
 ```bash
-# import your walllet user credentials into POSS CLI
+# import your walllet user credentials into PPIO CLI
 ./poss init --keystorepath=[your keystore file absolute path]
 
-# start the poss service background
+# start the PPIO service background
 ./poss start --daemon --passphrase=[your wallet password]
 ```
 or
 ```bash
-# import your walllet user credentials into POSS CLI and start the poss service background
+# import your walllet user credentials into PPIO CLI and start the PPIO service background
 ./poss start --daemon --keystorepath=[your keystore file absolute path] --passphrase=[your wallet password]
 ```
 
@@ -115,7 +115,7 @@ const poss = new Poss({
 | :------: | :------: | :------ |
 | [options] | `object` | The options of poss instance |
 | [options.possExecutablePath] (optional) | `string` | The path of the poss executable, will take no effect in browsers. |
-| [options.rpcport] (optional) | `number` | The RPC port of a running POSS daemon. If you are running POSS daemon from the terminal, use this config to indicate the RPC port the daemon is listening. |
+| [options.rpcport] (optional) | `number` | The RPC port of a running PPIO daemon. If you are running PPIO daemon from the terminal, use this config to indicate the RPC port the daemon is listening. |
 
 ### Initialize a data directory
 ```javascript
@@ -128,34 +128,34 @@ This will create a folder(`path/to/poss-dir`) in which poss will store user's da
 ::: warning NOTE:
 this method only works in Node.js environment, and `possExecutablePath` must be provided when creating the Poss instance.
 :::
-Complete configuration can be found in [POSS cmd documentation](https://www.pp.io/docs/api/).
+Complete configuration can be found in [PPIO JSON-RPC API Reference](https://www.pp.io/docs/api/).
 
-### Start a POSS daemon
+### Start a PPIO daemon
 ```javascript
 poss.startDaemon({
   'datadir': '.ppio-demo'
   'wallet-key': 'your private key',
 })
 ```
-This will start a POSS daemon. If you do not specify the RPC port or TCP/UDP port, poss.js will find an available port automatically.
+This will start a PPIO daemon. If you do not specify the RPC port or TCP/UDP port, poss.js will find an available port automatically.
 
 ::: warning NOTE:
 this method only works in Node.js environment, and `possExecutablePath` must be provided when creating the Poss instance.
 :::
 
-Complete configuration can be found in [POSS cmd documentation](https://www.pp.io/docs/api/).
+Complete configuration can be found in [PPIO JSON-RPC API Reference](https://www.pp.io/docs/api/).
 
 ### Stop the daemon
 ```javascript
 poss.stopDaemon()
 ```
-This will stop a POSS daemon. If you do not specify the RPC port or TCP/UDP port, poss.js will find an available port automatically.
+This will stop a PPIO daemon. If you do not specify the RPC port or TCP/UDP port, poss.js will find an available port automatically.
 
 ::: warning NOTE:
 this method only works in Node.js environment, and `possExecutablePath` must be provided when creating the Poss instance.
 :::
 
-Complete configuration can be found in [POSS cmd documentation](https://www.pp.io/docs/api/).
+Complete configuration can be found in [PPIO JSON-RPC API Reference](https://www.pp.io/docs/api/).
 
 ## Other methods
 
@@ -163,7 +163,7 @@ Complete configuration can be found in [POSS cmd documentation](https://www.pp.i
 ```javascript
 poss.setPossExecutablePath('path/to/poss')
 ```
-Set the POSS executable path. It then can be accessed via `poss.possPath`
+Set the PPIO executable path. It then can be accessed via `poss.possPath`
 
 ### setDefaultBucket
 ```javascript
@@ -174,7 +174,7 @@ This will create a bucket with the bucket name you specified and set it as the d
 ## Properties
 
 ### possPath[string]
-The path of the POSS executable.
+The path of the PPIO executable.
 
 ### runningDaemonPort[number]
 The RPC port that the current running daemon is listening. If you create a Poss instance with `rpcport` option, that port will be set to this property. When starting daemon, if `runningDaemonPort` is not `0`, POSS daemon will not be started for there is already a daemon running. And [stopping a daemon](#stop-the-daemon) will set `runningDaemonPort` to 0.

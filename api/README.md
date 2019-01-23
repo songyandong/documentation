@@ -35,12 +35,12 @@ Initiate an rpc request to the local port 18060 to obtain the API version. The c
 |jsonrpc|"2.0"|jsonrpc version|
 |result|None|If the rpc request is executed successfully, result is a string indicating that the message is returned or `null` indicates no message|
 |error|None|If the rpc request fails, error is a json object. `error.code` indicates the error code, `error.message` indicates the error message|
-
 Take the API version as an example:
-```json
+```
 {"id":1,"jsonrpc":"2.0","result":"0.1"}
 ```
 The value corresponding to the `result` field is "0.1", which is the API version number that was successfully obtained.
+
 ---
 
 ## **StopDaemon**
