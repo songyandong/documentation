@@ -86,7 +86,6 @@ module.exports = {
      '/sdk/': [
        '',
        'Nodejs',
-       'Android',
      ]
     },
     sidebarDepth: 1,
