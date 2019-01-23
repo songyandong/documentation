@@ -13,14 +13,14 @@
 - **Mac OsX**  
     ``` bash
       wget https://resource.testnet.pp.io/poss/release/macos/latestla/poss
-      chmod -x poss
+      chmod +x poss
       ./poss --help
     ```
 
 - Linux:  
     ``` bash
       wget https://resource.testnet.pp.io/poss/release/linux-amd64/latest/poss
-      chmod -x poss
+      chmod +x poss
       ./poss --help
     ```
 ## Step2: Generate a PPIO wallet account and get the keystore file
@@ -59,10 +59,10 @@ Although you already have test coins in your PPIO wallet, if you want to really 
 ### Step5: Import your user credentials to PPIO CLI and start PPIO service background
 ```bash
 # import your walllet user credentials into PPIO CLI
-./poss init --keystorepath=[your keystore file absolute path]
+./poss init --keystore=[your keystore file absolute path]
 
 # start the PPIO service background
-./poss start --daemon --passphrase=[your wallet password]
+./poss init --key-passphrase=[passphrase of your keystore]
 ```
 or
 ```bash

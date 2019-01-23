@@ -5,7 +5,9 @@ Poss-sdk-js provides a node.js SDK that encapsulates the JSON-RPC services provi
 
 ## Getting started
 ### Prepared your PPIO wallet account
-You must have a PPIO wallet account first. Make sure this account has PPcoin. And you need to recharge some PPcoin to PPIO. This is a [guide](../wallet/) to teach you how to generate a PPIO wallet account and get some of our test coins for free.
+You must have a **[PPIO wallet account](../wallet/)** first. Because PPIO wallet account is your user credentials for using PPIO services. You have to get `keystore file` and `passphrase` from your PPIO wallet account.
+
+This is a [guide](../wallet/) to teach you how to generate a PPIO wallet account and get `keystore file` and `passphrase` from your PPIO wallet account
 
 ### Install poss-sdk-js
 ```
@@ -23,14 +25,14 @@ Since poss-sdk-js does not provide poss executable. You need to download it firs
 - **Mac OsX**  
     ``` bash
       wget https://resource.testnet.pp.io/poss/release/macos/latest/poss
-      chmod -x poss
+      chmod +x poss
       ./poss --help
     ```
 
 - Linux:  
     ``` bash
       wget https://resource.testnet.pp.io/poss/release/linux-amd64/latest/poss
-      chmod -x poss
+      chmod +x poss
       ./poss --help
     ```
 
@@ -39,16 +41,17 @@ Since poss-sdk-js does not provide poss executable. You need to download it firs
 You can do these by [PPIO CLI](../cli/#init).
 ```bash
 # import your walllet user credentials into PPIO CLI
-./poss init --keystorepath=[your keystore file absolute path]
+./poss init --keystore=[your keystore file absolute path]
 
 # start the PPIO service background
-./poss start --daemon --passphrase=[your wallet password]
+./poss init --key-passphrase=[passphrase of your keystore]
 ```
 or
 ```bash
 # import your walllet user credentials into PPIO CLI and start the PPIO service background
 ./poss start --daemon --keystorepath=[your keystore file absolute path] --passphrase=[your wallet password]
 ```
+> You can get `keystore file` and `passphrase` from your PPIO wallet. This is the [guide](../wallet/#generate-a-ppio-wallet-account)
 
 Or you can do these by this SDK(only in Node.js environment):
 ```javascript

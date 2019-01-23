@@ -16,45 +16,50 @@ If you are interested in knowing why we want to design PPIO, check out the artic
 ## Try PPIO CLI
 The command of PPIO CLI starts with `poss`.
 
-### Step0: Prepared your PPIO wallet account
-You must have a PPIO wallet account first. Make sure this account has PPcoin. And you need to recharge some PPcoin. This is a [guide](../wallet/) to teach you how to generate a PPIO wallet account and get some of our test coins for free.
+### Step1: Prepared your PPIO wallet account
+You must have a **[PPIO wallet account](../wallet/)** first. Because PPIO wallet account is your user credentials for using PPIO services.
 
-### Step1: Install
+**You have to get `keystore file` and `passphrase` from your PPIO wallet account.**
+
+This is a [guide](../wallet/) to teach you how to generate a PPIO wallet account and get `keystore file` and `passphrase` from your PPIO wallet account. Also, you can get some test coins from this guide.
+
+### Step2: Install
 - **Windows:**  
-  Download the binary from [here](https://resource.testnet.pp.io/poss/release/windows-amd64/0.4.15/poss.exe).
+  Download the binary from [here](https://resource.testnet.pp.io/poss/release/windows-amd64/latest/poss.exe).
   ``` powershell
     poss.exe --help
   ```
 
 - **Mac OsX**  
     ``` bash
-      wget https://resource.testnet.pp.io/poss/release/macos/0.4.15/poss
-      chmod -x poss
+      wget https://resource.testnet.pp.io/poss/release/macos/latest/poss
+      chmod +x poss
       ./poss --help
     ```
 
 - Linux:  
     ``` bash
-      wget https://resource.testnet.pp.io/poss/release/linux-amd64/0.4.15/poss
-      chmod -x poss
+      wget https://resource.testnet.pp.io/poss/release/linux-amd64/latest/poss
+      chmod +x poss
       ./poss --help
     ```
 
-### Step2: Import the user credentials to PPIO CLI and start PPIO service background
+### Step3: Import the user credentials to PPIO CLI and start PPIO service background
 ```bash
 # import your walllet user credentials into PPIO CLI
-./poss init --keystorepath=[your keystore file absolute path]
+./poss init --keystore=[your keystore file absolute path]
 
 # start the PPIO service background
-./poss start --daemon --passphrase=[your wallet password]
+./poss init --key-passphrase=[passphrase of your keystore]
 ```
 or
 ```bash
 # import your walllet user credentials into PPIO CLI and start the PPIO service background
 ./poss start --daemon --keystorepath=[your keystore file absolute path] --passphrase=[your wallet password]
 ```
+> You can get `keystore file` and `passphrase` from your PPIO wallet. This is the [guide](../wallet/#generate-a-ppio-wallet-account)
 
-### Step3: Upload and download a file using PPIO CLI
+### Step4: Upload and download a file using PPIO CLI
 Run the following commands in order on your command line terminal.
 ```bash
 # create a bucket

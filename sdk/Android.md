@@ -4,7 +4,9 @@ Android sdk is a Binary archive of Android library project for [PPIO CLI](https:
 
 ## Getting started
 ### Prepared your PPIO wallet account
-You must have a PPIO wallet account first. Make sure this account has PPcoin. And you need to recharge some PPcoin to PPIO. This is a [guide](../wallet/) to teach you how to generate a PPIO wallet account and get some of our test coins for free.
+You must have a **[PPIO wallet account](../wallet/)** first. Because PPIO wallet account is your user credentials for using PPIO services. You have to get `keystore file` and `passphrase` from your PPIO wallet account.
+
+This is a [guide](../wallet/) to teach you how to generate a PPIO wallet account and get `keystore file` and `passphrase` from your PPIO wallet account
 
 ### Install
 download `ppio.aar` from [here](https://github.com/ppio/ppio-sdk-android), and put it in the libs directory of your android project. then deploy app build.gradle.
