@@ -12,14 +12,14 @@
 
 - **Mac OsX**  
     ``` bash
-      wget https://resource.testnet.pp.io/poss/release/macos/latestla/poss
+      curl -o poss https://resource.testnet.pp.io/poss/release/macos/latestla/poss
       chmod +x poss
       ./poss --help
     ```
 
 - Linux:  
     ``` bash
-      wget https://resource.testnet.pp.io/poss/release/linux-amd64/latest/poss
+      curl -o poss https://resource.testnet.pp.io/poss/release/linux-amd64/latest/poss
       chmod +x poss
       ./poss --help
     ```
@@ -49,7 +49,7 @@ Now there is no coin in your PPIO wallet. You need to go to [our faucet](https:/
 - Enter your PPIO address to generate the content you may post.
 - Post the content to Twitter.
 - Copy-paste the posts URL of the tweet.
-- Click the “Give me PPIO coin” button to get 5 free PPIO coins for testnet!
+- Click the “Give me PPIO coin” button to get 1 free PPIO coin for testnet!
 
 ## Step4: Send test coins to PPIO
 Although you already have test coins in your PPIO wallet, if you want to really experience the PPIO CLI, you need to go back to [PPIO wallet page](https://wallet.testnet.pp.io) to recharge some PPIO coins. This involves our underlying system architecture. We will introduce these details in a later article.   
@@ -57,30 +57,55 @@ Although you already have test coins in your PPIO wallet, if you want to really 
 ![get coins from faucet](./Images/recharge-ppio-service.png)
 
 ### Step5: Import your user credentials to PPIO CLI and start PPIO service background
-```bash
-# import your walllet user credentials into PPIO CLI
-./poss init --keystore=[your keystore file absolute path]
+- **macOS**  or **Linux**
+    ```bash
+    # import your wallet user credentials into PPIO CLI
+    ./poss init --keystore=[your keystore file absolute path]
 
-# start the PPIO service background
-./poss init --key-passphrase=[passphrase of your keystore]
-```
-or
-```bash
-# import your walllet user credentials into PPIO CLI and start the PPIO service background
-./poss start --daemon --keystorepath=[your keystore file absolute path] --passphrase=[your wallet password]
-```
+    # start the PPIO service background
+    ./poss start --daemon --key-passphrase=[passphrase of your keystore]
+    ```
+    or
+    ```bash
+    # import your wallet user credentials into PPIO CLI and start the PPIO service background
+    ./poss start --daemon --keystore=[your keystore file absolute path] --key-passphrase=[passphrase of your keystore]
+    ```
+- **Windows**
+    ```powershell
+    # import your wallet user credentials into PPIO CLI
+    poss.exe init --keystore=[your keystore file absolute path]
+
+    # start the PPIO service background
+    poss.exe start --daemon --key-passphrase=[passphrase of your keystore]
+    ```
+    or
+    ```powershell
+    # import your wallet user credentials into PPIO CLI and start the PPIO service background
+    poss.exe start --daemon --keystore=[your keystore file absolute path] --key-passphrase=[passphrase of your keystore]
+    ```
 
 ### Step6: Upload and download a file using PPIO CLI
 Run the following commands in order on your command line terminal.
-```bash
-# create a bucket
-./poss create-bucket --bucket=test
+- **macOS**  or **Linux**
+    ```bash
+    # create a bucket
+    ./poss create-bucket --bucket=test
 
-# upload a file to PPIO
-./poss put-object --bucket=test --chiprice=100 --key=/test.png  --expires=2019-04-01 --body=/home/u/test.png
+    # upload a file to PPIO
+    ./poss put-object --bucket=test --chiprice=100 --key=/test  --expires=2019-04-01 --body=[your file absolute path]
 
-# get a file from PPIO
-./poss get-object --bucket=test --key=/test.png --chiprice=100 --outfile=/home/u/test-poss.png
-```
+    # get a file from PPIO
+    ./poss get-object --bucket=test --key=/test --chiprice=100 --outfile=[Get file to local path]
+    ```
+- **Windows**
+    ```bash
+    # create a bucket
+    poss.exe create-bucket --bucket=test
+
+    # upload a file to PPIO
+    poss.exe put-object --bucket=test --chiprice=100 --key=/test  --expires=2019-04-01 --body=[your file absolute path]
+
+    # get a file from PPIO
+    poss.exe get-object --bucket=test --key=/test --chiprice=100 --outfile=[Get file to local path]
 
 Well! Now that you have completed the uploading and downloading of a file with PPIO. Of course, PPIO can do much more than that. Go to [PPIO CLI Reference](./cli/)

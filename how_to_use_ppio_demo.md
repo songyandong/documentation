@@ -31,7 +31,7 @@ Now there is no coin in your PPIO wallet. You need to go to [our faucet](https:/
 - Enter your PPIO address to generate the content you may post.
 - Post the content to Twitter.
 - Copy-paste the posts URL of the tweet.
-- Click the “Give me PPIO coin” button to get 5 free PPIO coins for testnet!
+- Click the “Give me PPIO coin” button to get 1 free PPIO coin for testnet!
 
 
 ## Step3: Send test coins to ppio demo app

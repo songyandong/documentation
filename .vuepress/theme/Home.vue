@@ -6,7 +6,7 @@
     <div class="guide-wrap">
       <a href="./guide/">
         <div class="guide-item">
-          <h4 class="title">Getting Started</h4>
+          <h4 class="title">Get Started</h4>
           <p>PPIO is a decentralized programmable storage and delivery network. This guide introduces you to PPIO, walks you through a simple example to use PPIO for the first time.</p>
           <span class="more">detail ➡</span>
         </div>

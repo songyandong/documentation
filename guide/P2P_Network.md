@@ -12,7 +12,7 @@ Summary of the PPIO scheduling algorithm:
 1. Multiple virtual connections(Tunnels) are established between the user and each peer with proven resource, in order to improve transmission efficiency. UDP based protocols such as KCP or UDT[2] are attempted first to make the connection. If it fails, TCP based protocols will be used instead to adapt to different types of heterogeneous networks.
 2. For each peer, an expected download speed $V_{conn}$ is calculated based on its transmission history. If no history is found, a default empirical value is used.
 3. The number of virtual connections on each peer varies, the peer with a higher $V_{conn}$ can have a larger number of initial virtual connections.
-4. Based on the partition of the segment, user first sends a download request to a given peer for an arbitrary piece, and the peer responds accordingly by sending user the pice upon receiving the request.
+4. Based on the partition of the segment, user first sends a download request to a given peer for an arbitrary piece, and the peer responds accordingly by sending user the piece upon receiving the request.
 5. When a piece is received from a virtual connection, the estimated download speed $V_{conn}$ is updated, and another remaining arbitrary piece will be requested from the connection immediately, until all the data is downloaded.
 6. When a download request times out, the request is cancelled and all connections to the non-responding peer will be closed. The download requests of the remaining pieces will be re-routed to other peers. In this case, the non-responding peer will also be penalized, and the number of connections that can be established from the peer in future downloads is reduced.
 
