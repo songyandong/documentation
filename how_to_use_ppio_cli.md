@@ -30,21 +30,21 @@ Go to [PPIO wallet](https://wallet.testnet.pp.io/#/new/create) to generate a PPI
 
 **create a PPIO wallet account**  
 
-![generate PPIO wallet](./Images/generate-wallet.png)  
+![generate PPIO wallet](./images/generate-wallet.png)  
 
 **get your PPIO wallet address**  
 
-![generate PPIO wallet](./Images/wallet-address.png)  
+![generate PPIO wallet](./images/wallet-address.png)  
 
 **get the keystore file and private key of the account**  
 
-![generate PPIO wallet](./Images/get-keystore.png)  
+![generate PPIO wallet](./images/get-keystore.png)  
 
 Now you have got your wallet keystore file.
 
 ## Step3: Get some test coins for free
 Now there is no coin in your PPIO wallet. You need to go to [our faucet](https://faucet.testnet.pp.io) to get some of our test coins for free.
-![get coins from faucet](./Images/faucet.png)  
+![get coins from faucet](./images/faucet.png)  
 
 - Enter your PPIO address to generate the content you may post.
 - Post the content to Twitter.
@@ -54,7 +54,7 @@ Now there is no coin in your PPIO wallet. You need to go to [our faucet](https:/
 ## Step4: Send test coins to PPIO
 Although you already have test coins in your PPIO wallet, if you want to really experience the PPIO CLI, you need to go back to [PPIO wallet page](https://wallet.testnet.pp.io) to recharge some PPIO coins. This involves our underlying system architecture. We will introduce these details in a later article.   
 
-![get coins from faucet](./Images/recharge-ppio-service.png)
+![get coins from faucet](./images/recharge-ppio-service.png)
 
 ### Step5: Import your user credentials to PPIO CLI and start PPIO service background
 - **macOS**  or **Linux**
