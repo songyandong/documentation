@@ -6,7 +6,7 @@ PPIO demo is our official decentralized personal cloud storage application based
 Before using the app, you must generate a PPIO wallet account, save the keystore file and passphrase. These are the credentials for your PPIO wallet account and the app.
 
 ## Step1: Generate a PPIO wallet account and get the keystore file
-> PPIO wallet is a blockchain wallet. And if you don't understand the concept of blockchain wallet, there will be a lot of articles on Google.
+> PPIO wallet is a blockchain wallet. Also, if you don't understand the concept of blockchain wallet, there will be many articles on Google.
 
 Go to [PPIO wallet](https://wallet.testnet.pp.io/#/new/create) to generate a PPIO wallet account. And this account can be used not only in the demo app but also [PPIO CLI](./cli/) and [PPIO SDK](./sdk/).
 
@@ -35,7 +35,7 @@ Now there is no coin in your PPIO wallet. You need to go to [our faucet](https:/
 
 
 ## Step3: Send test coins to ppio demo app
-Although you already have test coins in your PPIO wallet, but you also need to go back to [PPIO wallet page](https://wallet.testnet.pp.io) to recharge some PPIO coins. This involves our underlying system architecture. We will introduce these details in a later article.   
+Although you already have test coins in your PPIO wallet,  you also need to go back to [PPIO wallet page](https://wallet.testnet.pp.io) to recharge some PPIO coins. This involves our underlying system architecture. We will introduce these details in a later article.   
 
 ![get coins from faucet](./images/recharge-ppio-service.png)
 
@@ -51,9 +51,9 @@ PPIO demo app has the following features.
 - upload & download file (Support breakpoint transmission)
 - drag & drop file upload
 - share file
-- get file by share code
+- get the file by share code
 
-It should be noted that since this demo is completely decentralized. There are some differences between the use and the cloud storage you have used before. If you encounter some problems, you can give feedback to this email **(feedbacks@pplabs.org)**.
+It should be noted that since this demo is entirely decentralized. There are some differences between the use and the cloud storage you have used before. If you encounter some problems, you can give feedback to this email **(feedbacks@pplabs.org)**.
 
 **desktop client**
 ![desktop](./images/desktop.png)
@@ -61,6 +61,6 @@ It should be noted that since this demo is completely decentralized. There are s
 **log in Android client**
 ![android](./images/android.png)
 
-::: wanring NOTE
-Due to our decentralized architecture, even with the same account, their file information cannot be synchronized when logging in to different clients.We will optimize this in later versions.
+::: warning NOTE
+Due to our decentralized architecture, even with the same account, their file information cannot be synchronized when logging in to different clients. We will optimize this in later versions.
 :::

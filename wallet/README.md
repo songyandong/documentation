@@ -1,8 +1,8 @@
 # PPIO wallet
 ## Introduction
-PPIO wallet is a decentralized blockchain-based wallet. And PPIO wallet account is your user credential for using PPIO services. PPIO wallet does not have a centralized organization and your wallet can only be transferred with your own private key.
+PPIO wallet is a decentralized blockchain-based wallet. Also, PPIO wallet account is your user credential for using PPIO services. PPIO wallet does not have a centralized organization and your wallet can only be transferred with your own private key.
 
-> If you don't understand the concept of blockchain wallet, there are a lot of articles on Google.
+> If you don't understand the concept of blockchain wallet, there are many articles on Google.
 
 ## Generate a PPIO wallet account
 Go to [PPIO wallet](https://wallet.testnet.pp.io/#/new/create) to generate a PPIO wallet account.
@@ -15,7 +15,7 @@ Your **keystore file** and **passphrase** is your user credential to use all PPI
 Go to [Here](https://wallet.testnet.pp.io/)
 ![import wallet](../images/import-wallet.png)
 PPIO wallet currently supports importing keystore files and private keys, but will soon support mnemonic words login.
-> These concepts are concepts in some common blockchain techniques that you can google to understand. Or just follow our tutorial.
+> These concepts are concepts in some common blockchain techniques that you can google to understand. Alternatively,  follow our tutorial.
 
 ## Get wallet address  
 ![get wallet address](../images/wallet-address.png)
@@ -23,7 +23,7 @@ If someone wants to transfer money to your PPIO wallet, you can send this addres
 
 ## Get private key & keystore file
 ![get private key](../images/get-keystore.png)
-This private key and the keystore file are very important and cannot be made public. Once the private key is compromised, your account is very dangerous.
+This private key and the keystore file are essential and cannot be made public. Once the private key is compromised, your account is very dangerous.
 
 ## Get Some Test Coins
 Now that PPIO's testnet is just online, you can go to [our faucet](https://faucet.testnet.pp.io) to get some test coins for free.
@@ -34,7 +34,7 @@ Now that PPIO's testnet is just online, you can go to [our faucet](https://fauce
 - Click the “Give me PPIO coin” button to get 1 free PPIO coin for testnet!
 
 ## PPIO Official Account
-PPIO wallet is your digital wallet. But if you want to use PPIO's storage service, you must recharge some PPcoin to a PPIO Official Account to purchase these services. This kind of processing is troublesome, but it is more in line with the idea of decentralization, and even if the PPIO service is attacked, it will not affect your wallet.
+PPIO wallet is your digital wallet. However, if you want to use PPIO's storage service, you must recharge some PPcoin to a PPIO Official Account to purchase these services. This kind of processing is troublesome, but it is more in line with the idea of decentralization, and even if the PPIO service is attacked, it will not affect your wallet.
 
 ::: warning IMPORTANT
 PPIO Official Account is a specific PPIO account. You have to recharge some PPcoin to **PPIO Official account** => `ppio1RrvoTasB3n96sFFxBUr4dbVheATVrrPYZ` to use PPIO services.
@@ -50,4 +50,4 @@ You can transfer to any PPIO wallet address.
 
 ## Find All Your Transaction Records
 ![get coins from faucet](../images/explorer.png)
-And you can find the transaction records of all PPIO wallet accounts [here](https://explorer.testnet.pp.io).
+Also, you can find the transaction records of all PPIO wallet accounts [here](https://explorer.testnet.pp.io).

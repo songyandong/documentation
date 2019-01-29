@@ -1,7 +1,7 @@
 # How to use PPIO CLI
 
 ## Overview
-**PPIO** stands for PPIO Object Storage Service. The PPIO Command Line Interface (CLI) is a unified tool to manage your PPIO services. With just one tool to download and configure, you can control multiple PPIO services from the command line and automate them through scripts.And the command of PPIO CLI starts with `poss`.
+**PPIO** stands for PPIO Object Storage Service. The PPIO Command Line Interface (CLI) is a unified tool to manage your PPIO services. With just one tool to download and configure, you can control multiple PPIO services from the command line and automate them through scripts. Also, the command of PPIO CLI starts with `poss`.
 
 ## Step1: Install PPIO CLI
 - **Windows:**  
@@ -24,7 +24,7 @@
       ./poss --help
     ```
 ## Step2: Generate a PPIO wallet account and get the keystore file
-> PPIO wallet is a blockchain wallet. And if you don't understand the concept of blockchain wallet, there will be a lot of articles on Google.
+> PPIO wallet is a blockchain wallet. Moreover, if you don't understand the concept of blockchain wallet, there will be many articles on Google.
 
 Go to [PPIO wallet](https://wallet.testnet.pp.io/#/new/create) to generate a PPIO wallet account. And this account can be used not only in the PPIO CLI but also [PPIO demo app](https://github.com/ppio/ppio-demo-desktop) and [PPIO SDK](./sdk/).
 
@@ -52,7 +52,7 @@ Now there is no coin in your PPIO wallet. You need to go to [our faucet](https:/
 - Click the “Give me PPIO coin” button to get 1 free PPIO coin for testnet!
 
 ## Step4: Send test coins to PPIO
-Although you already have test coins in your PPIO wallet, if you want to really experience the PPIO CLI, you need to go back to [PPIO wallet page](https://wallet.testnet.pp.io) to recharge some PPIO coins. This involves our underlying system architecture. We will introduce these details in a later article.   
+Although you already have test coins in your PPIO wallet, if you want to experience the PPIO CLI, you need to go back to [PPIO wallet page](https://wallet.testnet.pp.io) to recharge some PPIO coins. This involves our underlying system architecture. We will introduce these details in a later article.   
 
 ![get coins from faucet](./images/recharge-ppio-service.png)
 

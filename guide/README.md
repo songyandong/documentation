@@ -5,9 +5,9 @@
 
 You can use PPIO to store and retrieve any amount of data at any time, from anywhere on the web. You can accomplish these tasks using the [PPIO SDK](../sdk/) or [PPIO Command Line Interface](../cli/) (abbreviated as CLI in the following content).
 
-PPIO is similar to the existing cloud-based storage services such as AWS S3 in terms of usage and function. But it is more robust, efficient and offers better privacy protection. It also reduces cost significantly. PPIO's well-designed blockchain-based incentives allow it to make use of the vast amount of unused bandwidth and storage resources on the Internet, and to provide robust storage service at much lower cost.
+PPIO is similar to the existing cloud-based storage services such as AWS S3 regarding usage and function. However, it is more robust, efficient and offers better privacy protection. It also reduces cost significantly. PPIO's well-designed blockchain-based incentives allow it to make use of the vast amount of unused bandwidth and storage resources on the Internet, and to provide robust storage service at much lower cost.
 
-PPIO's unique decentralized file system prevents unauthorized access and ensures that all the data can be stored in secure and private manner.
+PPIO's unique decentralized file system prevents unauthorized access and ensures that all the data can be stored securely and privately.
 
 PPIO is designed from the ground up to perform efficiently on a global scale, by leveraging the experience of the [founding team - PPLabs](./others/About_PPLabs.md). The team designed and ran decentralized network with experience of managing hundreds of millions of users before. PPIO meets the storage needs of both today's Internet businesses and services, and the emerging decentralized applications (DApps).
 
@@ -26,7 +26,7 @@ This is a [guide](../wallet/) to teach you how to generate a PPIO wallet account
 ### Step2: Install
 - **Windows:**  
   Download the binary from [here](https://resource.testnet.pp.io/poss/release/windows-amd64/latest/poss.exe).
-  ``` powershell
+  ``` PowerShell
     poss.exe --help
   ```
 
@@ -59,7 +59,7 @@ This is a [guide](../wallet/) to teach you how to generate a PPIO wallet account
     ./poss start --daemon --keystore=[your keystore file absolute path] --key-passphrase=[passphrase of your keystore]
     ```
 - **Windows**
-    ```powershell
+    PowerShell
     # import your wallet user credentials into PPIO CLI
     poss.exe init --keystore=[your keystore file absolute path]
 
