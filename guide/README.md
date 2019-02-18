@@ -44,38 +44,72 @@ This is a [guide](../wallet/) to teach you how to generate a PPIO wallet account
       ./poss --help
     ```
 
-### Step3: Import the user credentials to PPIO CLI and start PPIO service background
-- **macOS**  or **Linux**
+### Step3: Import the user credentials to PPIO CLI and modify configuration file
+- **macOS** or **Linux**
     ```bash
     # import your wallet user credentials into PPIO CLI
     ./poss init --keystore=[your keystore file absolute path]
+    ```
+- **Windows**
+    ```powershell
+    # import your wallet user credentials into PPIO CLI
+    poss.exe init --keystore=[your keystore file absolute path]
+    ```
+> You can get `keystore file` from your PPIO wallet. This is the [guide](../wallet/#generate-a-ppio-wallet-account)
 
+Running the above command will generate some default configuration, some of which need to be modified.
+Modify the contents of the `~/.poss/poss.conf` file if you are using Mac OS or linux. Or modify the contents of the `C:\Users\You Name\.poss\poss.conf` file if you are using Windows.
+```bash
+ ...
+ "TestNet": "test",
+ ...
+ ...
+ "Bootstrap": [
+    {
+      "Name": "aws-bootstrap",
+      "IP": "35.160.24.147",
+      "UDPPort": 8020,
+      "TCPPort": 8020,
+      "HTTPPort": 0,
+      "RPCPort": 0
+    },
+    {
+      "Name": "ali-bootstrap",
+      "IP": "47.110.88.167",
+      "UDPPort": 8020,
+      "TCPPort": 8020,
+      "HTTPPort": 0,
+      "RPCPort": 0
+    }
+  ],
+  ...
+  ...
+  "Payment": {
+   "Name": "default-payment",
+   "IP": "indexrpc.testnet.pp.io",
+   "UDPPort": 0,
+   "TCPPort": 0,
+   "HTTPPort": 18030,
+   "RPCPort": 0
+ },
+ ...
+```
+### Step4: Start PPIO service background
+- **macOS** or **Linux**
+    ```bash
     # start the PPIO service background
     ./poss start --daemon --key-passphrase=[passphrase of your keystore]
     ```
-    or
-    ```bash
-    # import your wallet user credentials into PPIO CLI and start the PPIO service background
-    ./poss start --daemon --keystore=[your keystore file absolute path] --key-passphrase=[passphrase of your keystore]
-    ```
 - **Windows**
-    PowerShell
-    # import your wallet user credentials into PPIO CLI
-    poss.exe init --keystore=[your keystore file absolute path]
-
+    ```powershell
     # start the PPIO service background
     poss.exe start --daemon --key-passphrase=[passphrase of your keystore]
     ```
-    or
-    ```powershell
-    # import your wallet user credentials into PPIO CLI and start the PPIO service background
-    poss.exe start --daemon --keystore=[your keystore file absolute path] --key-passphrase=[passphrase of your keystore]
-    ```
-> You can get `keystore file` and `passphrase` from your PPIO wallet. This is the [guide](../wallet/#generate-a-ppio-wallet-account)
+> You can get `passphrase` from your PPIO wallet. This is the [guide](../wallet/#generate-a-ppio-wallet-account)
 
-### Step4: Upload and download a file using PPIO CLI
+### Step5: Upload and download a file using PPIO CLI
 Run the following commands sequentially in your command line terminal.
-- **macOS**  or **Linux**
+- **macOS** or **Linux**
     ```bash
     # create a bucket
     ./poss create-bucket --bucket=test

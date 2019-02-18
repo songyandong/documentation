@@ -3,16 +3,23 @@
 ## Overview
 **PPIO** stands for PPIO Object Storage Service. The PPIO Command Line Interface (CLI) is a unified tool to manage your PPIO services. With just one tool to download and configure, you can control multiple PPIO services from the command line and automate them through scripts. Also, the command of PPIO CLI starts with `poss`.
 
-## Step1: Install PPIO CLI
+### Step1: Prepare your PPIO wallet account
+You must have a **[PPIO wallet account](../wallet/)** first. Because PPIO wallet account is your user credentials for using PPIO services.
+
+**You have to get `keystore file` and `passphrase` from your PPIO wallet account.**
+
+This is a [guide](../wallet/) to teach you how to generate a PPIO wallet account and get `keystore file` and `passphrase` from your PPIO wallet account. Also, you can get some test coins from this guide.
+
+### Step2: Install
 - **Windows:**  
   Download the binary from [here](https://resource.testnet.pp.io/poss/release/windows-amd64/latest/poss.exe).
-  ``` powershell
+  ``` PowerShell
     poss.exe --help
   ```
 
-- **Mac OsX**  
+- **macOS**  
     ``` bash
-      curl -o poss https://resource.testnet.pp.io/poss/release/macos/latestla/poss
+      curl -o poss https://resource.testnet.pp.io/poss/release/macos/latest/poss
       chmod +x poss
       ./poss --help
     ```
@@ -23,70 +30,73 @@
       chmod +x poss
       ./poss --help
     ```
-## Step2: Generate a PPIO wallet account and get the keystore file
-> PPIO wallet is a blockchain wallet. Moreover, if you don't understand the concept of blockchain wallet, there will be many articles on Google.
 
-Go to [PPIO wallet](https://wallet.testnet.pp.io/#/new/create) to generate a PPIO wallet account. And this account can be used not only in the PPIO CLI but also [PPIO demo app](https://github.com/ppio/ppio-demo-desktop) and [PPIO SDK](./sdk/).
-
-**create a PPIO wallet account**  
-
-![generate PPIO wallet](./images/generate-wallet.png)  
-
-**get your PPIO wallet address**  
-
-![generate PPIO wallet](./images/wallet-address.png)  
-
-**get the keystore file and private key of the account**  
-
-![generate PPIO wallet](./images/get-keystore.png)  
-
-Now you have got your wallet keystore file.
-
-## Step3: Get some test coins for free
-Now there is no coin in your PPIO wallet. You need to go to [our faucet](https://faucet.testnet.pp.io) to get some of our test coins for free.
-![get coins from faucet](./images/faucet.png)  
-
-- Enter your PPIO address to generate the content you may post.
-- Post the content to Twitter.
-- Copy-paste the posts URL of the tweet.
-- Click the “Give me PPIO coin” button to get 1 free PPIO coin for testnet!
-
-## Step4: Send test coins to PPIO
-Although you already have test coins in your PPIO wallet, if you want to experience the PPIO CLI, you need to go back to [PPIO wallet page](https://wallet.testnet.pp.io) to recharge some PPIO coins. This involves our underlying system architecture. We will introduce these details in a later article.   
-
-![get coins from faucet](./images/recharge-ppio-service.png)
-
-### Step5: Import your user credentials to PPIO CLI and start PPIO service background
-- **macOS**  or **Linux**
+### Step3: Import the user credentials to PPIO CLI and modify configuration file
+- **macOS** or **Linux**
     ```bash
     # import your wallet user credentials into PPIO CLI
     ./poss init --keystore=[your keystore file absolute path]
-
-    # start the PPIO service background
-    ./poss start --daemon --key-passphrase=[passphrase of your keystore]
-    ```
-    or
-    ```bash
-    # import your wallet user credentials into PPIO CLI and start the PPIO service background
-    ./poss start --daemon --keystore=[your keystore file absolute path] --key-passphrase=[passphrase of your keystore]
     ```
 - **Windows**
     ```powershell
     # import your wallet user credentials into PPIO CLI
     poss.exe init --keystore=[your keystore file absolute path]
+    ```
+> You can get `keystore file` from your PPIO wallet. This is the [guide](../wallet/#generate-a-ppio-wallet-account)
 
+Running the above command will generate some default configuration, some of which need to be modified.
+Modify the contents of the `~/.poss/poss.conf` file if you are using Mac OS or linux. Or modify the contents of the `C:\Users\You Name\.poss\poss.conf` file if you are using Windows.
+```bash
+ ...
+ "TestNet": "test",
+ ...
+ ...
+ "Bootstrap": [
+    {
+      "Name": "aws-bootstrap",
+      "IP": "35.160.24.147",
+      "UDPPort": 8020,
+      "TCPPort": 8020,
+      "HTTPPort": 0,
+      "RPCPort": 0
+    },
+    {
+      "Name": "ali-bootstrap",
+      "IP": "47.110.88.167",
+      "UDPPort": 8020,
+      "TCPPort": 8020,
+      "HTTPPort": 0,
+      "RPCPort": 0
+    }
+  ],
+  ...
+  ...
+  "Payment": {
+   "Name": "default-payment",
+   "IP": "indexrpc.testnet.pp.io",
+   "UDPPort": 0,
+   "TCPPort": 0,
+   "HTTPPort": 18030,
+   "RPCPort": 0
+ },
+ ...
+```
+### Step4: Start PPIO service background
+- **macOS** or **Linux**
+    ```bash
+    # start the PPIO service background
+    ./poss start --daemon --key-passphrase=[passphrase of your keystore]
+    ```
+- **Windows**
+    ```powershell
     # start the PPIO service background
     poss.exe start --daemon --key-passphrase=[passphrase of your keystore]
     ```
-    or
-    ```powershell
-    # import your wallet user credentials into PPIO CLI and start the PPIO service background
-    poss.exe start --daemon --keystore=[your keystore file absolute path] --key-passphrase=[passphrase of your keystore]
-    ```
+> You can get `passphrase` from your PPIO wallet. This is the [guide](../wallet/#generate-a-ppio-wallet-account)
 
-### Step6: Upload and download a file using PPIO CLI
-Run the following commands in order on your command line terminal.
-- **macOS**  or **Linux**
+### Step5: Upload and download a file using PPIO CLI
+Run the following commands sequentially in your command line terminal.
+- **macOS** or **Linux**
     ```bash
     # create a bucket
     ./poss create-bucket --bucket=test
@@ -107,5 +117,6 @@ Run the following commands in order on your command line terminal.
 
     # get a file from PPIO
     poss.exe get-object --bucket=test --key=/test --chiprice=100 --outfile=[Get file to local path]
+    ```
 
-Well! Now that you have completed the uploading and downloading of a file with PPIO. Of course, PPIO can do much more than that. Go to [PPIO CLI Reference](./cli/)
+Well! Now you have completed the uploading and downloading of a file with PPIO. Of course, PPIO can do much more than that. Go to [Command Line Interface Reference of PPIO](../cli/)
