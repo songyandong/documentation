@@ -51,7 +51,7 @@ module.exports = {
       { text: 'Docs', class: 'active', link: '/' },
       { text: 'Download', internal: true, link: 'https://www.pp.io/download.html' },
       { text: 'Blog', internal: true, link: 'https://blog.pp.io' },
-      { text: 'Forum', link: 'https://www.reddit.com/r/ppio' },
+      { text: 'Discrod', link: 'https://discord.gg/wAUED89' },
       { text: 'Github', link: 'https://github.com/ppio' },
     ],
     sidebar: {
