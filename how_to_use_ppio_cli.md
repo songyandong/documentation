@@ -62,7 +62,7 @@ Modify the contents of the `~/.poss/poss.conf` file if you are using Mac OS or l
     },
     {
       "Name": "ali-bootstrap",
-      "IP": "47.110.88.167",
+      "IP": "47.110.91.131",
       "UDPPort": 8020,
       "TCPPort": 8020,
       "HTTPPort": 0,
